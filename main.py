@@ -20,7 +20,8 @@ import pytz
 load_dotenv()
 
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
-FEISHU_WEBHOOK_URL = os.getenv("FEISHU_WEBHOOK_URL")
+# 飞书 Webhook（直接从环境变量获取）
+FEISHU_WEBHOOK_URL = os.getenv("FEISHU_WEBHOOK_URL") or "https://open.feishu.cn/open-apis/bot/v2/hook/2ab18ec8-6c48-4c73-b24d-6d73b78b1b81"
 
 RSS_FEEDS = [
     {"name": "36Kr 科技", "url": "https://36kr.com/feed", "category": "IT"},
