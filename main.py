@@ -144,9 +144,9 @@ def fetch_article_thumbnail(url):
         if not img_url or not img_url.startswith('http'):
             return False
         lower_url = img_url.lower()
-        # 过滤 logo、icon、小图等
-        skip_words = ['logo', 'icon', 'avatar', 'header', 'nav', 'thumb', 'button', 'bg-', 'sponsor', 'ad', 'banner']
-        if any(x in lower_url for x in skip_words):
+        # 过滤 logo、icon、小图等（使用 / 分隔，避免误匹配）
+        skip_patterns = ['/logo', '/icon', '/avatar', '/header', '/nav', '/thumb', '/button', '/bg-', '/sponsor', '/ad/', '/banner']
+        if any(x in lower_url for x in skip_patterns):
             return False
         # 过滤 Base64
         if img_url.startswith('data:'):
