@@ -200,40 +200,73 @@ def call_deepseek(prompt):
         print(f"   ❌ DeepSeek API 调用失败: {e}")
         raise
 
-def parse_summary_with_links(summary_text):
-    """解析AI总结，提取每条新闻和链接"""
+def parse_summary_with_links(summary_text, all_articles):
+    """解析AI总结，提取每条新闻和链接
+    关键：使用真实URL匹配 - 将AI总结的标题与实际获取的新闻进行匹配
+    """
+    from difflib import SequenceMatcher
+    
     news_items = []
     current_category = ""
+    
+    # 构建真实链接映射 - 按标题关键词匹配
+    def find_best_match(title, articles):
+        """从实际新闻中找到最匹配的链接"""
+        title_lower = title.lower()
+        best_match = None
+        best_ratio = 0
+        
+        for article in articles:
+            article_title = article['title'].lower()
+            # 计算相似度
+            ratio = SequenceMatcher(None, title_lower, article_title).ratio()
+            # 也检查关键词匹配
+            title_words = set(title_lower.split())
+            article_words = set(article_title.split())
+            if title_words & article_words:
+                word_ratio = len(title_words & article_words) / max(len(title_words), len(article_words))
+                ratio = max(ratio, word_ratio)
+            
+            if ratio > best_ratio and ratio > 0.3:  # 阈值0.3
+                best_ratio = ratio
+                best_match = article
+        
+        return best_match
     
     lines = summary_text.split('\n')
     for line in lines:
         line = line.strip()
         # 检测分类标题
-        if '🤖' in line or 'AI' in line:
+        if '🤖' in line or ('AI' in line and '大模型' in line):
             current_category = "AI"
             continue
         elif '💻' in line or '科技' in line:
             current_category = "科技"
             continue
-        elif '💰' in line or '创投' in line:
+        elif '💰' in line or '创投' in line or '金融' in line:
             current_category = "创投"
             continue
         
         # 提取新闻和链接
         if line.startswith('- ') or line.startswith('• '):
             content = line[2:].strip()
-            # 查找原文链接
-            link = ""
+            # 查找原文链接（AI提供的可能是假的）
+            ai_link = ""
             if '原文:' in content:
                 parts = content.rsplit('原文:', 1)
                 content = parts[0].strip()
-                link = parts[1].strip() if len(parts) > 1 else ""
+                ai_link = parts[1].strip() if len(parts) > 1 else ""
             
             if content and current_category:
+                # 尝试从真实新闻中找到匹配
+                matched_article = find_best_match(content, all_articles)
+                real_link = matched_article['link'] if matched_article else ai_link
+                
                 news_items.append({
                     'category': current_category,
                     'title': content,
-                    'link': link
+                    'link': real_link,  # 优先使用真实链接
+                    'source': matched_article['source'] if matched_article else ''
                 })
     
     return news_items
@@ -488,8 +521,8 @@ def main():
             prompt = build_prompt(articles)
             summary = call_deepseek(prompt)
             
-            # 解析出新闻和链接
-            news_items = parse_summary_with_links(summary)
+            # 解析出新闻和链接（传入all_articles用于匹配真实URL）
+            news_items = parse_summary_with_links(summary, all_articles)
             
             # 保存简报
             save_report(date_str, summary, news_items, articles)
