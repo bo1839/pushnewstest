@@ -704,21 +704,18 @@ def generate_index_html(history, latest_news_items, all_articles):
         }}
         
         .news-card {{
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.03);
             border-radius: 8px;
             overflow: hidden;
             transition: all 0.2s;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.08);
             display: flex;
             flex-direction: row;
-            align-items: center;
-            padding: 8px;
-            gap: 10px;
+            padding: 0;
         }}
         .news-card:hover {{
-            transform: translateY(-2px);
             border-color: rgba(0,210,255,0.3);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.06);
         }}
         .news-card a {{
             text-decoration: none;
@@ -726,42 +723,48 @@ def generate_index_html(history, latest_news_items, all_articles):
             display: flex;
             flex: 1;
             flex-direction: row;
-            align-items: center;
-            gap: 10px;
         }}
         .news-card .thumbnail {{
-            width: 80px;
-            height: 60px;
+            width: 100px;
+            height: 70px;
             object-fit: cover;
-            background: rgba(0,0,0,0.2);
-            border-radius: 4px;
+            background: rgba(0,0,0,0.3);
             flex-shrink: 0;
         }}
         .news-card .content {{
-            padding: 6px 10px;
+            padding: 8px 12px;
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            justify-content: center;
+        }}
+        .news-card .meta {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
         }}
         .news-card .category {{
             display: inline-block;
             padding: 2px 6px;
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
-            border-radius: 6px;
+            border-radius: 4px;
             font-size: 10px;
             color: white;
-            margin-bottom: 4px;
-            align-self: flex-start;
+        }}
+        .news-card .pub-date {{
+            font-size: 10px;
+            color: #666;
         }}
         .news-card .title {{
             font-size: 13px;
             color: white;
             line-height: 1.3;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             font-weight: 500;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }}
@@ -769,7 +772,6 @@ def generate_index_html(history, latest_news_items, all_articles):
             font-size: 11px;
             color: #888;
             line-height: 1.3;
-            margin-bottom: 4px;
             flex: 1;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -777,9 +779,7 @@ def generate_index_html(history, latest_news_items, all_articles):
             overflow: hidden;
         }}
         .news-card .source {{
-            font-size: 10px;
-            color: #666;
-            margin-top: auto;
+            display: none;
         }}
         
         .history-section {{
@@ -864,14 +864,34 @@ def generate_index_html(history, latest_news_items, all_articles):
                 summary = item.get('summary', '')
                 if len(summary) > 100:
                     summary = summary[:100] + '...'
+                pub_date = item.get('pub_date', '')
+                if pub_date:
+                    try:
+                        from datetime import datetime
+                        import pytz
+                        beijing_tz = pytz.timezone('Asia/Shanghai')
+                        for fmt in ['%a, %d %b %Y %H:%M:%S %z', '%Y-%m-%dT%H:%M:%S%z', '%Y-%m-%d %H:%M:%S', '%Y-%m-%d']:
+                            try:
+                                if '%z' in fmt:
+                                    parsed = datetime.strptime(pub_date, fmt)
+                                else:
+                                    parsed = beijing_tz.localize(datetime.strptime(pub_date, fmt))
+                                pub_date = parsed.strftime('%m-%d %H:%M')
+                                break
+                            except:
+                                continue
+                    except:
+                        pub_date = ''
                 index_html += f'''<div class="news-card">
                     <a href="{item['link']}" target="_blank">
                         <img class="thumbnail" src="{thumbnail}" alt="" onerror="this.src='{fallback}'">
                         <div class="content">
-                            <span class="category">{cat}</span>
+                            <div class="meta">
+                                <span class="category">{cat}</span>
+                                <span class="pub-date">{pub_date}</span>
+                            </div>
                             <div class="title">{item['title']}</div>
                             <div class="summary">{summary}</div>
-                            <div class="source">{item['source'] or ''}</div>
                         </div>
                     </a>
                 </div>'''
