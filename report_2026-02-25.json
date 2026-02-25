@@ -1,66 +1,66 @@
 {
   "date": "2026-02-25",
-  "summary": "### 🤖 AI & 大模型\n- 谷歌制裁OpenClaw，创始人指责其封号行为不如Anthropic。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-10\n- QVGen实现4bit视频扩散模型量化，性能接近无损。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-9\n- 阿里开源3款消费级显卡可跑的Qwen3.5新模型。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-7\n- 研究揭示大语言模型在结构性推理上存在系统性失败。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-6\n- AI能写COBOL代码，引发市场担忧致IBM股价大跌。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-3\n\n### 💻 科技前沿\n- 上海发布“沪七条”松绑楼市，调减非户籍限购政策。\n  原文: https://36kr.com/p/3698437434535817?f=rss\n- 世界人工智能大会学术会议WAICA 2026启动，姚期智任主席。\n  原文: https://36kr.com/p/3698417555976071?f=rss\n- 华为哈勃与中发展投资金属基热控材料公司一盛新材料。\n  原文: https://36kr.com/p/3697538397744775?f=rss\n- 艾睿铂调研：全球超40%汽车行业高管担心因转型失业。\n  原文: https://36kr.com/newsflashes/3698627925110405?f=rss\n- 鑫华科技科创板IPO获受理，成为马年首单受理项目。\n  原文: https://36kr.com/newsflashes/3698637625110146?f=rss\n\n### 💰 创投动态\n- 刘强东新创游艇品牌关联公司曝光，与多地政府签合作协议。\n  原文: http://\n- 机器人基础模型公司智平方完成超10亿元B轮融资，估值超百亿。\n  原文: http://www.cyzone.cn/article/825165.html\n- 具身智能企业千寻智能完成近20亿元融资，云锋基金等参投。\n  原文: http://www.cyzone.cn/article/825160.html\n- 静水湖创投新一期S接续基金超募设立并完成交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- AI光伏粉体材料商新川电子获近亿元pre-IPO轮融资。\n  原文: https://36kr.com/p/3698117482212997?f=rss",
+  "summary": "### 🤖 AI & 大模型\n- 谷歌制裁OpenClaw，创始人指责其封号行为不如Anthropic友好。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-10\n- 阿里云上线四大顶尖开源模型，推出最强Coding Plan。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-5\n- AI能写COBOL代码，引发市场担忧，IBM股价单日暴跌。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-3\n- DeepMind药物衍生公司发布新AI，专为药物设计打造。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-4\n- 研究质疑大语言模型的结构性推理能力，梳理其失败案例。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-6\n\n### 💻 科技前沿\n- QVGen将视频扩散模型量化至4bit，性能损失极小。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-9\n- ArcFlow实现推理加速，仅用5%参数，训练快4倍。\n  原文: https://www.jiqizhixin.com/articles/2026-02-24-8\n- 阿里开源3款消费级显卡可跑的Qwen3.5新模型。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-7\n- EmotionThinker让语音大模型学会解释情绪，而非简单分类。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25\n- 微软研究将人类文明信息刻入玻璃，目标保存万年。\n  原文: https://www.jiqizhixin.com/articles/2026-02-24-9\n\n### 💰 创投动态\n- 机器人基础模型公司智平方完成超10亿元B轮融资，估值超百亿。\n  原文: http://www.cyzone.cn/article/825165.html\n- 具身智能企业千寻智能完成近20亿元融资，云锋、红杉等参投。\n  原文: http://www.cyzone.cn/article/825160.html\n- 静水湖创投新一期S接续基金超募设立并完成交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- 刘强东游艇品牌关联公司曝光，与多地政府签署合作协议。\n  原文: http://\n- 2026电影经济促进年启动，预计投放超千亿资金支持产业。\n  原文: http://",
   "news_items": [
     {
       "category": "AI",
-      "title": "谷歌制裁OpenClaw，创始人指责其封号行为不如Anthropic。",
+      "title": "谷歌制裁OpenClaw，创始人指责其封号行为不如Anthropic友好。",
       "link": "https://www.jiqizhixin.com/articles/2026-02-25-10",
       "source": "机器之心"
     },
     {
       "category": "AI",
-      "title": "QVGen实现4bit视频扩散模型量化，性能接近无损。",
+      "title": "阿里云上线四大顶尖开源模型，推出最强Coding Plan。",
       "link": "",
       "source": ""
     },
     {
       "category": "AI",
+      "title": "AI能写COBOL代码，引发市场担忧，IBM股价单日暴跌。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-3",
+      "source": "机器之心"
+    },
+    {
+      "category": "AI",
+      "title": "DeepMind药物衍生公司发布新AI，专为药物设计打造。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-4",
+      "source": "机器之心"
+    },
+    {
+      "category": "AI",
+      "title": "研究质疑大语言模型的结构性推理能力，梳理其失败案例。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-6",
+      "source": "机器之心"
+    },
+    {
+      "category": "科技",
+      "title": "QVGen将视频扩散模型量化至4bit，性能损失极小。",
+      "link": "",
+      "source": ""
+    },
+    {
+      "category": "科技",
+      "title": "ArcFlow实现推理加速，仅用5%参数，训练快4倍。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-24-8",
+      "source": "机器之心"
+    },
+    {
+      "category": "科技",
       "title": "阿里开源3款消费级显卡可跑的Qwen3.5新模型。",
       "link": "https://www.jiqizhixin.com/articles/2026-02-25-7",
       "source": "机器之心"
     },
     {
-      "category": "AI",
-      "title": "研究揭示大语言模型在结构性推理上存在系统性失败。",
-      "link": "https://www.jiqizhixin.com/articles/2026-02-25-6",
-      "source": "机器之心"
-    },
-    {
-      "category": "AI",
-      "title": "AI能写COBOL代码，引发市场担忧致IBM股价大跌。",
-      "link": "https://www.jiqizhixin.com/articles/2026-02-25-3",
+      "category": "科技",
+      "title": "EmotionThinker让语音大模型学会解释情绪，而非简单分类。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25",
       "source": "机器之心"
     },
     {
       "category": "科技",
-      "title": "上海发布“沪七条”松绑楼市，调减非户籍限购政策。",
-      "link": "",
-      "source": ""
-    },
-    {
-      "category": "科技",
-      "title": "世界人工智能大会学术会议WAICA 2026启动，姚期智任主席。",
-      "link": "https://36kr.com/p/3698417555976071?f=rss",
-      "source": "36Kr科技"
-    },
-    {
-      "category": "科技",
-      "title": "华为哈勃与中发展投资金属基热控材料公司一盛新材料。",
-      "link": "https://36kr.com/p/3697538397744775?f=rss",
-      "source": "36Kr科技"
-    },
-    {
-      "category": "科技",
-      "title": "艾睿铂调研：全球超40%汽车行业高管担心因转型失业。",
-      "link": "https://36kr.com/newsflashes/3698627925110405?f=rss",
-      "source": "36Kr科技"
-    },
-    {
-      "category": "创投",
-      "title": "刘强东新创游艇品牌关联公司曝光，与多地政府签合作协议。",
-      "link": "http://",
-      "source": "创业邦"
+      "title": "微软研究将人类文明信息刻入玻璃，目标保存万年。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-24-9",
+      "source": "机器之心"
     },
     {
       "category": "创投",
@@ -70,17 +70,23 @@
     },
     {
       "category": "创投",
-      "title": "具身智能企业千寻智能完成近20亿元融资，云锋基金等参投。",
+      "title": "具身智能企业千寻智能完成近20亿元融资，云锋、红杉等参投。",
       "link": "http://www.cyzone.cn/article/825160.html",
       "source": "创业邦"
     },
     {
       "category": "创投",
-      "title": "AI光伏粉体材料商新川电子获近亿元pre-IPO轮融资。",
-      "link": "https://36kr.com/p/3698117482212997?f=rss",
-      "source": "36Kr科技"
+      "title": "刘强东游艇品牌关联公司曝光，与多地政府签署合作协议。",
+      "link": "http://",
+      "source": "创业邦"
+    },
+    {
+      "category": "创投",
+      "title": "2026电影经济促进年启动，预计投放超千亿资金支持产业。",
+      "link": "http://",
+      "source": "创业邦"
     }
   ],
-  "total_articles": 72,
-  "generated_at": "2026-02-25T19:59:35.473430+08:00"
+  "total_articles": 42,
+  "generated_at": "2026-02-25T21:03:43.783845+08:00"
 }
