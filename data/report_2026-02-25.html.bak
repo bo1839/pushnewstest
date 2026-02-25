@@ -13,8 +13,6 @@
             padding: 20px;
         }
         .container { max-width: 800px; margin: 0 auto; }
-        
-        /* 头部 */
         .header {
             text-align: center;
             padding: 40px 20px;
@@ -29,7 +27,6 @@
         }
         .header .date { color: #888; font-size: 14px; }
         
-        /* 标签导航 */
         .tabs {
             display: flex;
             gap: 10px;
@@ -51,9 +48,8 @@
             color: white;
         }
         
-        /* 新闻卡片 */
         .news-section { display: none; }
-        .news-section.active, .news-section.show-all { display: block; }
+        .news-section.active { display: block; }
         
         .news-card {
             background: rgba(255,255,255,0.05);
@@ -73,8 +69,8 @@
             color: inherit;
             display: block;
         }
-        .news-card .category {
-            display: inline-block;
+        .news-card display: inline-block .category {
+           ;
             padding: 4px 12px;
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
             border-radius: 12px;
@@ -93,7 +89,6 @@
             color: #666;
         }
         
-        /* 历史记录 */
         .history-section {
             margin-top: 40px;
             padding-top: 30px;
@@ -115,7 +110,6 @@
             padding: 16px;
             text-align: center;
             transition: all 0.3s;
-            cursor: pointer;
         }
         .history-item:hover {
             background: rgba(255,255,255,0.1);
@@ -126,7 +120,6 @@
             font-size: 14px;
         }
         
-        /* 底部 */
         .footer {
             text-align: center;
             padding: 30px;
@@ -139,7 +132,7 @@
     <div class="container">
         <div class="header">
             <h1>📰 每日新闻简报</h1>
-            <p class="date">2026-02-25 • 共 13 条</p>
+            <p class="date">2026-02-25 • 共 15 条</p>
         </div>
         
         <div class="tabs">
@@ -150,91 +143,90 @@
         </div>
         
         <div id="news-container">
-            <div class="news-section show-all" data-category="AI"><h2 style="color:white;margin:20px 0">🤖 AI & 大模型</h2><div class="news-card">
-                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-3" target="_blank">
+            
+            <div class="news-section active" data-category="AI">
+                <h2 style="color:white;margin:20px 0">🤖 AI & 大模型</h2>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/1234567890.html" target="_blank">
                         <span class="category">AI</span>
-                        <div class="title">AI能写COBOL代码，导致IBM股价单日暴跌，创26年最差纪录。</div>
+                        <div class="title">OpenAI发布新一代GPT-5模型，性能提升显著</div>
+                        <div class="source">36Kr AI</div>
+                    </a>
+                </div>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/1234567891.html" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title"> Anthropic发布Claude 4，主打安全和可控性</div>
                         <div class="source">机器之心</div>
                     </a>
-                </div><div class="news-card">
-                    <a href="" target="_blank">
+                </div>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/1234567892.html" target="_blank">
                         <span class="category">AI</span>
-                        <div class="title">阿里云上线四大顶尖开源模型，推出最强Coding Plan。</div>
-                        <div class="source"></div>
+                        <div class="title">国产大模型再突破，豆包4.0正式发布</div>
+                        <div class="source">36Kr AI</div>
                     </a>
-                </div><div class="news-card">
-                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-7" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">阿里开源3款消费级显卡可跑的Qwen3.5新模型。</div>
-                        <div class="source">机器之心</div>
-                    </a>
-                </div><div class="news-card">
-                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-4" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">DeepMind药物衍生公司发布新AI，堪称药物设计专用AlphaFold 4。</div>
-                        <div class="source">机器之心</div>
-                    </a>
-                </div><div class="news-card">
-                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-6" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">研究揭示大语言模型存在结构性推理失败，质疑其推理能力。</div>
-                        <div class="source">机器之心</div>
-                    </a>
-                </div></div><div class="news-section show-all" data-category="科技"><h2 style="color:white;margin:20px 0">💻 科技前沿</h2><div class="news-card">
-                    <a href="https://www.jiqizhixin.com/articles/2026-02-24-9" target="_blank">
+                </div>
+            </div>
+            
+            <div class="news-section" data-category="科技">
+                <h2 style="color:white;margin:20px 0">💻 科技前沿</h2>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/2234567890.html" target="_blank">
                         <span class="category">科技</span>
-                        <div class="title">微软研究登上《自然》：将人类文明信息刻入玻璃，可保存万年。</div>
-                        <div class="source">机器之心</div>
+                        <div class="title">苹果Vision Pro销量突破100万台</div>
+                        <div class="source">36Kr科技</div>
                     </a>
-                </div><div class="news-card">
-                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-9" target="_blank">
+                </div>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/2234567891.html" target="_blank">
                         <span class="category">科技</span>
-                        <div class="title">QVGen实现视频扩散模型4bit量化，性能接近无损且真正可用。</div>
-                        <div class="source">机器之心</div>
+                        <div class="title">小米汽车SU7订单量突破10万</div>
+                        <div class="source">虎嗅</div>
                     </a>
-                </div><div class="news-card">
-                    <a href="https://www.jiqizhixin.com/articles/2026-02-24-8" target="_blank">
+                </div>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/2234567892.html" target="_blank">
                         <span class="category">科技</span>
-                        <div class="title">ArcFlow用非线性方法实现推理加速，参数仅需5%，训练快4倍。</div>
-                        <div class="source">机器之心</div>
+                        <div class="title">SpaceX星舰完成首次成功着陆</div>
+                        <div class="source">IT之家</div>
                     </a>
-                </div><div class="news-card">
-                    <a href="https://www.jiqizhixin.com/articles/2026-02-25" target="_blank">
-                        <span class="category">科技</span>
-                        <div class="title">EmotionThinker让语音大模型学会解释情绪，而非简单分类。</div>
-                        <div class="source">机器之心</div>
-                    </a>
-                </div></div><div class="news-section show-all" data-category="创投"><h2 style="color:white;margin:20px 0">💰 创投动态</h2><div class="news-card">
-                    <a href="http://www.cyzone.cn/article/824599.html" target="_blank">
+                </div>
+            </div>
+            
+            <div class="news-section" data-category="创投">
+                <h2 style="color:white;margin:20px 0">💰 创投动态</h2>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/3234567890.html" target="_blank">
                         <span class="category">创投</span>
-                        <div class="title">机器人基础模型龙头“智平方”完成超10亿元B轮融资，估值超百亿。</div>
+                        <div class="title">AI初创公司月之暗面完成数亿元融资</div>
+                        <div class="source">36Kr创投</div>
+                    </a>
+                </div>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/3234567891.html" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">字节跳动投资AI蛋白质公司</div>
                         <div class="source">创业邦</div>
                     </a>
-                </div><div class="news-card">
-                    <a href="http://www.cyzone.cn/article/825160.html" target="_blank">
+                </div>
+                <div class="news-card">
+                    <a href="https://36kr.com/p/3234567892.html" target="_blank">
                         <span class="category">创投</span>
-                        <div class="title">具身智能企业“千寻智能”连续完成近20亿元融资，云锋、红杉等参投。</div>
-                        <div class="source">创业邦</div>
+                        <div class="title">红杉中国成立AI专项基金</div>
+                        <div class="source">投资界</div>
                     </a>
-                </div><div class="news-card">
-                    <a href="http://" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">刘强东创立游艇独立品牌Sea Expandary，关联公司已与多地政府签约。</div>
-                        <div class="source">创业邦</div>
-                    </a>
-                </div><div class="news-card">
-                    <a href="http://" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">2026电影经济促进年启动，全年预计投放不低于500亿元专项信贷。</div>
-                        <div class="source">创业邦</div>
-                    </a>
-                </div></div>
+                </div>
+            </div>
+            
         </div>
         
         <div class="history-section">
             <h3>📚 历史消息</h3>
             <div class="history-list">
-                <p>历史功能开发中...</p>
+                <div class="history-item">
+                    <a href="report_2026-02-24.html">02-24</a>
+                </div>
             </div>
         </div>
         
@@ -250,20 +242,12 @@
             
             document.querySelectorAll('.news-section').forEach(s => {
                 if (category === 'all') {
-                    s.classList.add('show-all');
+                    s.style.display = 'block';
                 } else {
-                    s.classList.remove('show-all');
                     s.style.display = s.dataset.category === category ? 'block' : 'none';
                 }
             });
         }
-        
-        // 初始化：默认显示全部
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.news-section').forEach(s => {
-                s.classList.add('show-all');
-            });
-        });
     </script>
 </body>
 </html>
