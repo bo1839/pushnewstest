@@ -1,0 +1,53 @@
+name: Daily News Bot
+
+on:
+  schedule:
+    # 每天 UTC 时间 0:00 (北京时间 8:00)
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  fetch-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Run news bot
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+        run: |
+          python main.py
+      
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # 切换到 gh-pages 分支
+          git checkout gh-pages
+          
+          # 从 main 分支更新数据
+          git checkout main -- data/
+          cp data/index.html ./index.html
+          
+          # 提交并推送
+          git add -A
+          git diff --staged --quiet || git commit -m "deploy: auto update $(date +%Y-%m-%d)"
+          git push origin gh-pages
+          
+          # 返回 main 分支
+          git checkout main
