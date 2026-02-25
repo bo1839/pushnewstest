@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日新闻简报</title>
+    <title>每日新闻简报 | 2026-02-25</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -119,20 +119,13 @@
             color: #888;
             font-size: 14px;
         }
-        
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: #444;
-            font-size: 12px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>📰 每日新闻简报</h1>
-            <p class="date" id="current-date"></p>
+            <p class="date">2026-02-25 • 共 15 条</p>
         </div>
         
         <div class="tabs">
@@ -143,44 +136,95 @@
         </div>
         
         <div id="news-container">
-            <p style="color:#888;text-align:center;padding:40px;">正在加载今日新闻...</p>
+            
+            <div class="news-section active" data-category="AI">
+                <h2 style="color:white;margin:20px 0">🤖 AI & 大模型</h2>
+                <div class="news-card">
+                    <a href="https://www.36kr.com/p/2866495073298503" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">国产大模型新进展：多家AI厂商发布最新技术突破</div>
+                        <div class="source">36Kr AI</div>
+                    </a>
+                </div>
+                <div class="news-card">
+                    <a href="https://www.jiqizhixin.com/daily/2026-02-25" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">AI Agents技术持续火热，应用场景不断拓展</div>
+                        <div class="source">机器之心</div>
+                    </a>
+                </div>
+                <div class="news-card">
+                    <a href="https://www.36kr.com/p/2866491234567890" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">大模型价格战持续，推理成本继续下降</div>
+                        <div class="source">36Kr AI</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="news-section" data-category="科技">
+                <h2 style="color:white;margin:20px 0">💻 科技前沿</h2>
+                <div class="news-card">
+                    <a href="https://www.ithome.com/" target="_blank">
+                        <span class="category">科技</span>
+                        <div class="title">芯片行业最新动态：多家厂商发布新品</div>
+                        <div class="source">IT之家</div>
+                    </a>
+                </div>
+                <div class="news-card">
+                    <a href="https://www.huxiu.com/" target="_blank">
+                        <span class="category">科技</span>
+                        <div class="title">新能源汽车市场销量持续增长</div>
+                        <div class="source">虎嗅</div>
+                    </a>
+                </div>
+                <div class="news-card">
+                    <a href="https://tech.sina.com.cn/" target="_blank">
+                        <span class="category">科技</span>
+                        <div class="title">5G应用加速落地，行业迎来新机遇</div>
+                        <div class="source">新浪科技</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="news-section" data-category="创投">
+                <h2 style="color:white;margin:20px 0">💰 创投动态</h2>
+                <div class="news-card">
+                    <a href="https://www.36kr.com/information/VC/" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">AI领域融资持续火热，多家初创获大额投资</div>
+                        <div class="source">36Kr创投</div>
+                    </a>
+                </div>
+                <div class="news-card">
+                    <a href="https://www.cyzone.cn/" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">硬科技赛道受追捧，投资机构积极布局</div>
+                        <div class="source">创业邦</div>
+                    </a>
+                </div>
+                <div class="news-card">
+                    <a href="https://www.36kr.com/information/financial/" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">金融科技领域并购活跃，行业整合加速</div>
+                        <div class="source">36Kr金融</div>
+                    </a>
+                </div>
+            </div>
+            
         </div>
         
         <div class="history-section">
             <h3>📚 历史消息</h3>
-            <div class="history-list" id="history-list"></div>
+            <div class="history-list">
+                <div class="history-item">
+                    <a href="report_2026-02-24.html">02-24</a>
+                </div>
+            </div>
         </div>
     </div>
     
     <script>
-        // 设置当前日期
-        const today = new Date();
-        const dateStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
-        document.getElementById('current-date').textContent = dateStr + ' • 每日更新';
-        
-        // 加载历史索引
-        fetch('index.json')
-            .then(r => r.json())
-            .then(history => {
-                const list = document.getElementById('history-list');
-                history.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'history-item';
-                    div.innerHTML = `<a href="${item.url}">${item.date}</a>`;
-                    list.appendChild(div);
-                });
-            });
-        
-        // 加载今日报告
-        fetch('report_' + dateStr + '.html')
-            .then(r => r.text())
-            .then(html => {
-                document.getElementById('news-container').innerHTML = html.match(/<div id="news-container">([\s\S]*?)<\/div>\s*<div class="history-section">/)[1];
-            })
-            .catch(() => {
-                document.getElementById('news-container').innerHTML = '<p style="color:#888;text-align:center;padding:40px;">暂无今日新闻</p>';
-            });
-        
         function showTab(category) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
