@@ -1,0 +1,86 @@
+{
+  "date": "2026-02-25",
+  "summary": "### 🤖 AI & 大模型\n- 谷歌制裁OpenClaw，创始人指责其封号行为粗暴。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-10\n- 阿里云上线四大顶尖开源模型，打造最强Coding Plan。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-5\n- AI能写COBOL代码，引发市场担忧致IBM股价大跌。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-3\n- DeepMind药物衍生公司发布新AI，专攻药物设计。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-4\n- 研究质疑大语言模型是否真会“推理”，梳理其结构性失败。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-6\n\n### 💻 科技前沿\n- QVGen实现4bit超低比特视频生成量化，效果接近无损。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-9\n- 阿里开源3款消费级显卡可跑的Qwen3.5新模型。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-7\n- ArcFlow实现推理40倍加速，仅需5%参数、训练快4倍。\n  原文: https://www.jiqizhixin.com/articles/2026-02-24-8\n- 微软研究登Nature：将人类文明信息刻入玻璃保存万年。\n  原文: https://www.jiqizhixin.com/articles/2026-02-24-9\n- 宇树科技在春晚后发布新品机器狗。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-2\n\n### 💰 创投动态\n- 机器人基础模型龙头智平方完成超10亿元B轮融资，估值超百亿。\n  原文: http://www.cyzone.cn/article/825165.html\n- 具身智能企业千寻智能连续完成近20亿元融资，多家顶级机构入局。\n  原文: http://www.cyzone.cn/article/825160.html\n- 静水湖创投新一期S接续基金超募设立并完成交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- 刘强东游艇品牌关联公司曝光，并与多地政府签署合作协议。\n  原文: http://\n- “2026电影经济促进年”启动，全年预计投放超千亿资金支持。\n  原文: http://",
+  "news_items": [
+    {
+      "category": "AI",
+      "title": "谷歌制裁OpenClaw，创始人指责其封号行为粗暴。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-10",
+      "source": "机器之心"
+    },
+    {
+      "category": "AI",
+      "title": "阿里云上线四大顶尖开源模型，打造最强Coding Plan。",
+      "link": "",
+      "source": ""
+    },
+    {
+      "category": "AI",
+      "title": "AI能写COBOL代码，引发市场担忧致IBM股价大跌。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-3",
+      "source": "机器之心"
+    },
+    {
+      "category": "AI",
+      "title": "DeepMind药物衍生公司发布新AI，专攻药物设计。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-4",
+      "source": "机器之心"
+    },
+    {
+      "category": "AI",
+      "title": "研究质疑大语言模型是否真会“推理”，梳理其结构性失败。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-6",
+      "source": "机器之心"
+    },
+    {
+      "category": "科技",
+      "title": "QVGen实现4bit超低比特视频生成量化，效果接近无损。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-9",
+      "source": "机器之心"
+    },
+    {
+      "category": "科技",
+      "title": "阿里开源3款消费级显卡可跑的Qwen3.5新模型。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-7",
+      "source": "机器之心"
+    },
+    {
+      "category": "科技",
+      "title": "ArcFlow实现推理40倍加速，仅需5%参数、训练快4倍。",
+      "link": "",
+      "source": ""
+    },
+    {
+      "category": "科技",
+      "title": "微软研究登Nature：将人类文明信息刻入玻璃保存万年。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-24-9",
+      "source": "机器之心"
+    },
+    {
+      "category": "创投",
+      "title": "机器人基础模型龙头智平方完成超10亿元B轮融资，估值超百亿。",
+      "link": "http://www.cyzone.cn/article/824599.html",
+      "source": "创业邦"
+    },
+    {
+      "category": "创投",
+      "title": "具身智能企业千寻智能连续完成近20亿元融资，多家顶级机构入局。",
+      "link": "http://www.cyzone.cn/article/825160.html",
+      "source": "创业邦"
+    },
+    {
+      "category": "创投",
+      "title": "刘强东游艇品牌关联公司曝光，并与多地政府签署合作协议。",
+      "link": "http://",
+      "source": "创业邦"
+    },
+    {
+      "category": "创投",
+      "title": "“2026电影经济促进年”启动，全年预计投放超千亿资金支持。",
+      "link": "http://",
+      "source": "创业邦"
+    }
+  ],
+  "total_articles": 42,
+  "generated_at": "2026-02-25T22:01:30.648053+08:00"
+}

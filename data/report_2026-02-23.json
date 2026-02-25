@@ -1,0 +1,157 @@
+{
+  "date": "2026-02-23",
+  "news_items": [
+    {
+      "title": "OpenAI 发布 GPT-4o 新功能，支持实时语音对话",
+      "link": "https://example.com/ai/2026/02/23/0",
+      "summary": "OpenAI 发布 GPT-4o 新功能，支持实时语音对话...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "AI",
+      "source": "机器之心",
+      "hash": "9fedde12cf555d57b0c23b138979cc98",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "谷歌 DeepMind 新突破：AI 系统可预测蛋白质结构",
+      "link": "https://example.com/ai/2026/02/23/1",
+      "summary": "谷歌 DeepMind 新突破：AI 系统可预测蛋白质结构...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "AI",
+      "source": "36KrAI",
+      "hash": "93300a795313975bfe4b93db90ddf88f",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "Meta 开源 Llama 3 模型，性能超越 GPT-4",
+      "link": "https://example.com/ai/2026/02/23/2",
+      "summary": "Meta 开源 Llama 3 模型，性能超越 GPT-4...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "AI",
+      "source": "机器之心",
+      "hash": "e04068d913f638974615b0b24b84b066",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "国内大模型价格战升级，阿里云宣布降价 90%",
+      "link": "https://example.com/ai/2026/02/23/3",
+      "summary": "国内大模型价格战升级，阿里云宣布降价 90%...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "AI",
+      "source": "36KrAI",
+      "hash": "6c24fba9f67a0fd1c8cc949564cfe27c",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "Anthropic 发布 Claude 3，长文本处理能力大幅提升",
+      "link": "https://example.com/ai/2026/02/23/4",
+      "summary": "Anthropic 发布 Claude 3，长文本处理能力大幅提升...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "AI",
+      "source": "机器之心",
+      "hash": "2503cbe729ed3c1b1272e2aefaa6e142",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "苹果 Vision Pro 国行版正式开售，售价 29999 元",
+      "link": "https://example.com/科技/2026/02/23/0",
+      "summary": "苹果 Vision Pro 国行版正式开售，售价 29999 元...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "科技",
+      "source": "36Kr 科技",
+      "hash": "5357d2287af13566b5f0c6058f79186a",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "小米 SU7 上市 24 小时大定 88898 台",
+      "link": "https://example.com/科技/2026/02/23/1",
+      "summary": "小米 SU7 上市 24 小时大定 88898 台...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "科技",
+      "source": "36Kr 科技",
+      "hash": "7c0635b0f7c0de5845644e4ad6102655",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "华为发布鸿蒙 HarmonyOS NEXT，不再兼容安卓应用",
+      "link": "https://example.com/科技/2026/02/23/2",
+      "summary": "华为发布鸿蒙 HarmonyOS NEXT，不再兼容安卓应用...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "科技",
+      "source": "IT 之家",
+      "hash": "040dc4523767d6edeaaa35be873ca8fd",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "特斯拉 FSD 入华加速，已在中国建立数据中心",
+      "link": "https://example.com/科技/2026/02/23/3",
+      "summary": "特斯拉 FSD 入华加速，已在中国建立数据中心...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "科技",
+      "source": "36Kr 科技",
+      "hash": "a2623db713ed411fdddf28b3ae0a5a70",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "英伟达发布 Blackwell 架构，GPU 性能提升 30 倍",
+      "link": "https://example.com/科技/2026/02/23/4",
+      "summary": "英伟达发布 Blackwell 架构，GPU 性能提升 30 倍...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "科技",
+      "source": "IT 之家",
+      "hash": "ea00fa729065a1e6c1bd757c04528fa6",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "月之暗面完成新一轮融资，估值达 30 亿美元",
+      "link": "https://example.com/创投/2026/02/23/0",
+      "summary": "月之暗面完成新一轮融资，估值达 30 亿美元...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "创投",
+      "source": "36Kr 创投",
+      "hash": "751b58319a01a12742ad9eb29bebb9d5",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "智谱 AI 获阿里腾讯联合投资，金额超 10 亿元",
+      "link": "https://example.com/创投/2026/02/23/1",
+      "summary": "智谱 AI 获阿里腾讯联合投资，金额超 10 亿元...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "创投",
+      "source": "36Kr 创投",
+      "hash": "c63984f5172417409116778117ee16ac",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "零一万物发布 Yi-Large 模型，启动商业化",
+      "link": "https://example.com/创投/2026/02/23/2",
+      "summary": "零一万物发布 Yi-Large 模型，启动商业化...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "创投",
+      "source": "创业邦",
+      "hash": "14cc1173d41199c1341f272ac9474e87",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "阶跃星辰完成 B 轮融资，估值突破 10 亿美元",
+      "link": "https://example.com/创投/2026/02/23/3",
+      "summary": "阶跃星辰完成 B 轮融资，估值突破 10 亿美元...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "创投",
+      "source": "36Kr 创投",
+      "hash": "2d0e2a3b28b08d77fd80b87c741e6ba5",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    },
+    {
+      "title": "MiniMax 获小米战略投资，加速大模型落地",
+      "link": "https://example.com/创投/2026/02/23/4",
+      "summary": "MiniMax 获小米战略投资，加速大模型落地...（这是2026-02-23的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）",
+      "pub_date": "2026-02-23T10:00:00+08:00",
+      "category": "创投",
+      "source": "36Kr 金融",
+      "hash": "12c5f75a61b38658feb483b4cfa0cbf0",
+      "thumbnail": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
+    }
+  ],
+  "total_articles": 15,
+  "generated_at": "2026-02-25T19:22:36.885966"
+}
