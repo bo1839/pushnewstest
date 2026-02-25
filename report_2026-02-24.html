@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日新闻简报 | 2026-02-24</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 16px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .date { color: #888; font-size: 14px; }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .tab {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 14px;
+        }
+        .tab.active {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: white;
+        }
+        .news-section { display: none; }
+        .news-section.active, .news-section.show-all { display: block; }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0,210,255,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .news-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card .thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: rgba(0,0,0,0.2);
+        }
+        .news-card .content {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card .category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            border-radius: 12px;
+            font-size: 12px;
+            color: white;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+        .news-card .title {
+            font-size: 16px;
+            color: white;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .news-card .summary {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .news-card .source {
+            font-size: 12px;
+            color: #666;
+            margin-top: auto;
+        }
+        .history-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .history-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .history-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+        .history-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .history-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .history-item a {
+            text-decoration: none;
+            color: #888;
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 每日新闻简报</h1>
+            <p class="date">2026-02-24 • 共 15 条</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('all')">全部</button>
+            <button class="tab" onclick="showTab('AI')">🤖 AI</button>
+            <button class="tab" onclick="showTab('科技')">💻 科技</button>
+            <button class="tab" onclick="showTab('创投')">💰 创投</button>
+        </div>
+        
+        <div id="news-container">
+            <div class="news-section show-all" data-category="AI"><h2 style="color:white;margin:20px 0">🤖 AI & 大模型</h2><div class="news-card">
+                    <a href="https://example.com/ai/2026/02/24/0" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">OpenAI 发布 GPT-4o 新功能，支持实时语音对话</div>
+                            <div class="summary">OpenAI 发布 GPT-4o 新功能，支持实时语音对话...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/ai/2026/02/24/1" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">谷歌 DeepMind 新突破：AI 系统可预测蛋白质结构</div>
+                            <div class="summary">谷歌 DeepMind 新突破：AI 系统可预测蛋白质结构...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36KrAI</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/ai/2026/02/24/2" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">Meta 开源 Llama 3 模型，性能超越 GPT-4</div>
+                            <div class="summary">Meta 开源 Llama 3 模型，性能超越 GPT-4...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/ai/2026/02/24/3" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">国内大模型价格战升级，阿里云宣布降价 90%</div>
+                            <div class="summary">国内大模型价格战升级，阿里云宣布降价 90%...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36KrAI</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/ai/2026/02/24/4" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">Anthropic 发布 Claude 3，长文本处理能力大幅提升</div>
+                            <div class="summary">Anthropic 发布 Claude 3，长文本处理能力大幅提升...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div></div><div class="news-section show-all" data-category="科技"><h2 style="color:white;margin:20px 0">💻 科技前沿</h2><div class="news-card">
+                    <a href="https://example.com/科技/2026/02/24/0" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">苹果 Vision Pro 国行版正式开售，售价 29999 元</div>
+                            <div class="summary">苹果 Vision Pro 国行版正式开售，售价 29999 元...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36Kr 科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/科技/2026/02/24/1" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">小米 SU7 上市 24 小时大定 88898 台</div>
+                            <div class="summary">小米 SU7 上市 24 小时大定 88898 台...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36Kr 科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/科技/2026/02/24/2" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">华为发布鸿蒙 HarmonyOS NEXT，不再兼容安卓应用</div>
+                            <div class="summary">华为发布鸿蒙 HarmonyOS NEXT，不再兼容安卓应用...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">IT 之家</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/科技/2026/02/24/3" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">特斯拉 FSD 入华加速，已在中国建立数据中心</div>
+                            <div class="summary">特斯拉 FSD 入华加速，已在中国建立数据中心...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36Kr 科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/科技/2026/02/24/4" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">英伟达发布 Blackwell 架构，GPU 性能提升 30 倍</div>
+                            <div class="summary">英伟达发布 Blackwell 架构，GPU 性能提升 30 倍...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">IT 之家</div>
+                        </div>
+                    </a>
+                </div></div><div class="news-section show-all" data-category="创投"><h2 style="color:white;margin:20px 0">💰 创投动态</h2><div class="news-card">
+                    <a href="https://example.com/创投/2026/02/24/0" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">月之暗面完成新一轮融资，估值达 30 亿美元</div>
+                            <div class="summary">月之暗面完成新一轮融资，估值达 30 亿美元...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36Kr 创投</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/创投/2026/02/24/1" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">智谱 AI 获阿里腾讯联合投资，金额超 10 亿元</div>
+                            <div class="summary">智谱 AI 获阿里腾讯联合投资，金额超 10 亿元...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36Kr 创投</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/创投/2026/02/24/2" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">零一万物发布 Yi-Large 模型，启动商业化</div>
+                            <div class="summary">零一万物发布 Yi-Large 模型，启动商业化...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/创投/2026/02/24/3" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">阶跃星辰完成 B 轮融资，估值突破 10 亿美元</div>
+                            <div class="summary">阶跃星辰完成 B 轮融资，估值突破 10 亿美元...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36Kr 创投</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://example.com/创投/2026/02/24/4" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">MiniMax 获小米战略投资，加速大模型落地</div>
+                            <div class="summary">MiniMax 获小米战略投资，加速大模型落地...（这是2026-02-24的新闻摘要，约 100 字左右的简介内容，用于在首页展示新闻的详细信息预览。）</div>
+                            <div class="source">36Kr 金融</div>
+                        </div>
+                    </a>
+                </div></div>
+        </div>
+        
+        <div class="history-section">
+            <h3>📚 历史消息</h3>
+            <div class="history-list">
+                <div class="history-item"><a href="index.html">返回首页</a></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(category) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.news-section').forEach(s => {
+                if (category === 'all') {
+                    s.classList.add('show-all');
+                } else {
+                    s.classList.remove('show-all');
+                    s.style.display = s.dataset.category === category ? 'block' : 'none';
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.news-section').forEach(s => {
+                s.classList.add('show-all');
+            });
+        });
+    </script>
+</body>
+</html>
