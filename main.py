@@ -145,7 +145,7 @@ def fetch_article_thumbnail(url):
             return False
         lower_url = img_url.lower()
         # 过滤 logo、icon、小图等
-        skip_words = ['logo', 'icon', 'avatar', 'header', 'nav', 'thumb', 'button', 'bg', 'cover', 'sponsor', 'ad', 'banner']
+        skip_words = ['logo', 'icon', 'avatar', 'header', 'nav', 'thumb', 'button', 'bg-', 'sponsor', 'ad', 'banner']
         if any(x in lower_url for x in skip_words):
             return False
         # 过滤 Base64
