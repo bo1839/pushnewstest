@@ -135,28 +135,13 @@ def fetch_feed(feed_info):
         return []
 
 def fetch_article_thumbnail(url):
-    """爬取文章网页，提取第一张图片"""
-    if url in THUMBNAIL_CACHE:
-        return THUMBNAIL_CACHE[url]
+    """爬取文章网页，提取第一张图片
     
-    # 特殊处理：有 API 的网站
-    # 机器之心: https://www.jiqizhixin.com/api/v1/articles/{slug}
-    if 'jiqizhixin.com/articles/' in url:
-        match = re.search(r'jiqizhixin\.com/articles/([\w-]+)', url)
-        if match:
-            article_slug = match.group(1)
-            try:
-                api_url = f'https://www.jiqizhixin.com/api/v1/articles/{article_slug}'
-                resp = requests.get(api_url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=10)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    cover_url = data.get('cover_image_url')
-                    if cover_url and cover_url.startswith('http'):
-                        THUMBNAIL_CACHE[url] = cover_url
-                        return cover_url
-            except:
-                pass
-    
+    注意：新闻网站图片有防盗链，返回 403，无法在网页显示
+    所以暂时不使用真实图片，统一使用默认图
+    """
+    return None
+
     try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
