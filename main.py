@@ -23,6 +23,14 @@ load_dotenv()
 # 缩略图缓存
 THUMBNAIL_CACHE = {}
 
+# 分类对应的默认图片（根据分类使用不同的图）
+CATEGORY_THUMBNAILS = {
+    'AI': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop',
+    '科技': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop',
+    '创投': 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop',
+}
+DEFAULT_THUMBNAIL = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'
+
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 FEISHU_WEBHOOK_URL = os.getenv("FEISHU_WEBHOOK_URL") or "https://open.feishu.cn/open-apis/bot/v2/hook/2ab18ec8-6c48-4c73-b24d-6d73b78b1b81"
 
@@ -482,9 +490,6 @@ def generate_index_html(history, latest_news_items, all_articles):
     """生成首页 index.html，瀑布流布局，带缩略图和简介"""
     category_names = {'AI': '🤖 AI', '科技': '💻 科技', '创投': '💰 创投'}
     
-    # 默认缩略图（使用 Unsplash 科技类图片）
-    default_thumbnail = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
-    
     # 生成历史记录 HTML
     history_html = ""
     for item in history[:10]:
@@ -691,15 +696,16 @@ def generate_index_html(history, latest_news_items, all_articles):
     
     for cat, items in grouped.items():
         if items:
+            cat_thumbnail = CATEGORY_THUMBNAILS.get(cat, DEFAULT_THUMBNAIL)
             index_html += f'<div class="news-section show-all" data-category="{cat}"><div class="news-grid">'
             for item in items[:20]:  # 每类最多 20 条
-                thumbnail = item.get('thumbnail') or default_thumbnail
+                thumbnail = item.get('thumbnail') or cat_thumbnail
                 summary = item.get('summary', '')
                 if len(summary) > 100:
                     summary = summary[:100] + '...'
                 index_html += f'''<div class="news-card">
                     <a href="{item['link']}" target="_blank">
-                        <img class="thumbnail" src="{thumbnail}" alt="" onerror="this.src='{default_thumbnail}'">
+                        <img class="thumbnail" src="{thumbnail}" alt="" onerror="this.src='{cat_thumbnail}'">
                         <div class="content">
                             <span class="category">{cat}</span>
                             <div class="title">{item['title']}</div>
