@@ -16,8 +16,12 @@ import feedparser
 import requests
 from dotenv import load_dotenv
 import pytz
+from urllib.parse import urlparse
 
 load_dotenv()
+
+# 缩略图缓存
+THUMBNAIL_CACHE = {}
 
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 FEISHU_WEBHOOK_URL = os.getenv("FEISHU_WEBHOOK_URL") or "https://open.feishu.cn/open-apis/bot/v2/hook/2ab18ec8-6c48-4c73-b24d-6d73b78b1b81"
@@ -122,6 +126,77 @@ def fetch_feed(feed_info):
         print(f"   ❌ 获取失败：{e}")
         return []
 
+def fetch_article_thumbnail(url):
+    """爬取文章网页，提取第一张图片"""
+    if url in THUMBNAIL_CACHE:
+        return THUMBNAIL_CACHE[url]
+    
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        }
+        response = requests.get(url, headers=headers, timeout=15, allow_redirects=True)
+        
+        # 检查是否被拦截
+        if response.status_code != 200:
+            return None
+            
+        # 尝试多种编码
+        response.encoding = response.apparent_encoding or 'utf-8'
+        html = response.text
+        
+        if len(html) < 1000:
+            return None
+        
+        # 优先提取 og:image (文章主图)
+        og_patterns = [
+            r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
+            r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
+            r'<meta[^>]+name=["\']twitter:image["\'][^>]+content=["\']([^"\']+)["\']',
+        ]
+        
+        for pattern in og_patterns:
+            og_match = re.search(pattern, html, re.IGNORECASE)
+            if og_match:
+                img_url = og_match.group(1)
+                if img_url and img_url.startswith('http') and 'logo' not in img_url.lower():
+                    THUMBNAIL_CACHE[url] = img_url
+                    return img_url
+        
+        # 提取文章内容中的图片
+        content_patterns = [
+            r'<article[^>]*>(.*?)</article>',
+            r'<main[^>]*>(.*?)</main>',
+            r'<div[^>]+class=["\'][^"\']*content[^"\']*["\'][^>]*>(.*?)</div>',
+        ]
+        
+        for pattern in content_patterns:
+            content_match = re.search(pattern, html, re.IGNORECASE | re.DOTALL)
+            if content_match:
+                content_html = content_match.group(1)
+                if len(content_html) > 500:
+                    img_pattern = r'<img[^>]+src=["\']([^"\']+)["\']'
+                    matches = re.findall(img_pattern, content_html, re.IGNORECASE)
+                    
+                    for match in matches:
+                        if match.startswith('http'):
+                            lower_url = match.lower()
+                            # 过滤 logo、icon、小图
+                            skip_words = ['logo', 'icon', 'avatar', 'header', 'nav', 'thumb', 'button', 'bg', 'cover']
+                            if any(x in lower_url for x in skip_words):
+                                continue
+                            # 过滤 Base64
+                            if match.startswith('data:'):
+                                continue
+                            THUMBNAIL_CACHE[url] = match
+                            return match
+        
+        return None
+    except Exception as e:
+        return None
+
 def fetch_all_news():
     all_articles = []
     seen_hashes = set()
@@ -132,6 +207,18 @@ def fetch_all_news():
                 seen_hashes.add(article['hash'])
                 if is_recent(article['pub_date'], 48):
                     all_articles.append(article)
+    
+    # 爬取每篇文章的第一张图片
+    print(f"\n🖼️ 正在获取文章缩略图...")
+    for i, article in enumerate(all_articles):
+        if not article.get('thumbnail'):
+            thumbnail = fetch_article_thumbnail(article['link'])
+            if thumbnail:
+                article['thumbnail'] = thumbnail
+            if (i + 1) % 10 == 0:
+                print(f"   已处理 {i + 1}/{len(all_articles)} 篇")
+            time.sleep(0.3)  # 避免请求过快
+    
     print(f"\n📊 共获取 {len(all_articles)} 篇新闻")
     return all_articles
 
