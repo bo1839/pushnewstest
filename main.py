@@ -485,12 +485,23 @@ def save_report(date_str, summary, news_items, all_articles):
     else:
         history = []
     
-    # 添加新记录
-    history.insert(0, {
+    # 检查是否已存在相同日期的记录，有则更新，无则添加
+    existing_idx = None
+    for i, h in enumerate(history):
+        if h.get('date') == date_str:
+            existing_idx = i
+            break
+    
+    new_record = {
         'date': date_str,
         'count': len(news_items),
         'url': f'report_{date_str}.html'
-    })
+    }
+    
+    if existing_idx is not None:
+        history[existing_idx] = new_record
+    else:
+        history.insert(0, new_record)
     
     # 保留最近30天
     history = history[:30]
