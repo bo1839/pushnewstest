@@ -23,10 +23,26 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 # 飞书 Webhook（直接从环境变量获取）
 FEISHU_WEBHOOK_URL = os.getenv("FEISHU_WEBHOOK_URL") or "https://open.feishu.cn/open-apis/bot/v2/hook/2ab18ec8-6c48-4c73-b24d-6d73b78b1b81"
 
+# 丰富的新闻源 - 全面覆盖
 RSS_FEEDS = [
-    {"name": "36Kr 科技", "url": "https://36kr.com/feed", "category": "IT"},
-    {"name": "IT之家", "url": "https://www.ithome.com/rss/rss_all.xml", "category": "IT"},
-    {"name": "虎嗅", "url": "https://www.huxiu.com/rss", "category": "IT"},
+    # 科技/IT (6个源)
+    {"name": "36Kr科技", "url": "https://36kr.com/feed", "category": "科技"},
+    {"name": "虎嗅", "url": "https://www.huxiu.com/rss", "category": "科技"},
+    {"name": "IT之家", "url": "https://www.ithome.com/rss/rss_all.xml", "category": "科技"},
+    {"name": "新浪科技", "url": "https://rss.sina.com.cn/tech/roll.xml", "category": "科技"},
+    {"name": "网易科技", "url": "https://tech.163.com/special/cm_yaowen20200513/", "category": "科技"},
+    {"name": "凤凰科技", "url": "https://tech.ifeng.com/rss.xml", "category": "科技"},
+    # 创投/金融 (5个源)
+    {"name": "36Kr创投", "url": "https://36kr.com/information/VC/feed", "category": "创投"},
+    {"name": "36Kr金融", "url": "https://36kr.com/information/financial/feed", "category": "创投"},
+    {"name": "创业邦", "url": "https://www.cyzone.cn/rss/", "category": "创投"},
+    {"name": "投资界", "url": "https://www.pedaily.cn/rss/", "category": "创投"},
+    {"name": "铅笔道", "url": "https://www.pencilnews.cn/rss/", "category": "创投"},
+    # AI (4个源)
+    {"name": "36KrAI", "url": "https://36kr.com/information/AI/feed", "category": "AI"},
+    {"name": "新智元", "url": "https://www.36kr.com/information/AI", "category": "AI"},
+    {"name": "机器之心", "url": "https://www.jiqizhixin.com/rss", "category": "AI"},
+    {"name": "AI科技大本营", "url": "https://www.36kr.com/information/AI", "category": "AI"},
 ]
 
 BEIJING_TZ = pytz.timezone('Asia/Shanghai')
@@ -73,7 +89,7 @@ def fetch_feed(feed_info):
         print(f"📥 正在获取: {feed_info['name']}...")
         feed = feedparser.parse(feed_info['url'])
         articles = []
-        for entry in feed.entries[:20]:
+        for entry in feed.entries[:30]:
             title = clean_html(entry.get('title', ''))
             link = entry.get('link', '')
             summary = clean_html(entry.get('summary', entry.get('description', '')))
@@ -112,13 +128,13 @@ def fetch_all_news():
 
 
 def categorize_news(articles):
-    categories = {'AI': [], 'IT': [], '金融': []}
+    categories = {'AI': [], '科技': [], '创投': []}
     for article in articles:
         cat = article.get('category', 'IT')
         if cat in categories:
             categories[cat].append(article)
         else:
-            categories['IT'].append(article)
+            categories['科技'].append(article)
     return categories
 
 
@@ -135,13 +151,46 @@ def build_prompt(articles):
     prompt = "".join(prompt_parts)
     prompt += """
 ---
-请筛选今天最重要的3条科技/AI/金融新闻，每条用一句话总结。
+请筛选今天最重要的10条科技/AI/创投新闻，每条用一句话总结，每条后面必须跟原文链接。
+
 输出格式:
-### 🤖 AI & 科技
+### 🤖 AI & 大模型
 - 总结1
+  原文: 链接1
 - 总结2
+  原文: 链接2
 - 总结3
-用中文，简洁，每条不超过30字。
+  原文: 链接3
+- 总结4
+  原文: 链接4
+- 总结5
+  原文: 链接5
+
+### 💻 科技前沿
+- 总结1
+  原文: 链接1
+- 总结2
+  原文: 链接2
+- 总结3
+  原文: 链接3
+- 总结4
+  原文: 链接4
+- 总结5
+  原文: 链接5
+
+### 💰 创投动态
+- 总结1
+  原文: 链接1
+- 总结2
+  原文: 链接2
+- 总结3
+  原文: 链接3
+- 总结4
+  原文: 链接4
+- 总结5
+  原文: 链接5
+
+要求：用中文，每条不超过40字，必须附原文链接
 """
     return prompt
 
@@ -159,7 +208,7 @@ def call_deepseek(prompt):
             {"role": "user", "content": prompt}
         ],
         "temperature": 0.7,
-        "max_tokens": 1000
+        "max_tokens": 4000
     }
     try:
         response = requests.post(url, headers=headers, json=data, timeout=60)
