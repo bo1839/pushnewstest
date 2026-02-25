@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日新闻简报 | 2026-02-25</title>
+    <title>每日新闻简报</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -49,7 +49,7 @@
         }
         
         .news-section { display: none; }
-        .news-section.active { display: block; }
+        .news-section.active, .news-section.show-all { display: block; }
         
         .news-card {
             background: rgba(255,255,255,0.05);
@@ -125,7 +125,7 @@
     <div class="container">
         <div class="header">
             <h1>📰 每日新闻简报</h1>
-            <p class="date">2026-02-25 • 共 15 条</p>
+            <p class="date">最新更新：2026-02-25 • 共 14 条</p>
         </div>
         
         <div class="tabs">
@@ -136,90 +136,103 @@
         </div>
         
         <div id="news-container">
-            
-            <div class="news-section active" data-category="AI">
-                <h2 style="color:white;margin:20px 0">🤖 AI & 大模型</h2>
-                <div class="news-card">
-                    <a href="https://www.36kr.com/p/2866495073298503" target="_blank">
+<div class="news-section show-all" data-category="AI"><h2 style="color:white;margin:20px 0">🤖 AI</h2><div class="news-card">
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-10" target="_blank">
                         <span class="category">AI</span>
-                        <div class="title">国产大模型新进展：多家AI厂商发布最新技术突破</div>
-                        <div class="source">36Kr AI</div>
-                    </a>
-                </div>
-                <div class="news-card">
-                    <a href="https://www.jiqizhixin.com/daily/2026-02-25" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">AI Agents技术持续火热，应用场景不断拓展</div>
+                        <div class="title">谷歌制裁OpenClaw，创始人指责其封号行为粗暴。</div>
                         <div class="source">机器之心</div>
                     </a>
-                </div>
-                <div class="news-card">
-                    <a href="https://www.36kr.com/p/2866491234567890" target="_blank">
+                </div><div class="news-card">
+                    <a href="" target="_blank">
                         <span class="category">AI</span>
-                        <div class="title">大模型价格战持续，推理成本继续下降</div>
-                        <div class="source">36Kr AI</div>
+                        <div class="title">QVGen实现4bit视频扩散模型量化，效果接近无损。</div>
+                        <div class="source"></div>
                     </a>
-                </div>
-            </div>
-            
-            <div class="news-section" data-category="科技">
-                <h2 style="color:white;margin:20px 0">💻 科技前沿</h2>
-                <div class="news-card">
-                    <a href="https://www.ithome.com/" target="_blank">
+                </div><div class="news-card">
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-3" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">AI能写COBOL代码，冲击IBM业务致其股价暴跌。</div>
+                        <div class="source">机器之心</div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">阿里云上线四大顶尖开源模型，推出最强编程计划。</div>
+                        <div class="source"></div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-24-8" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">ArcFlow实现推理加速40倍，仅用5%参数训练快4倍。</div>
+                        <div class="source">机器之心</div>
+                    </a>
+                </div></div><div class="news-section show-all" data-category="科技"><h2 style="color:white;margin:20px 0">💻 科技</h2><div class="news-card">
+                    <a href="" target="_blank">
                         <span class="category">科技</span>
-                        <div class="title">芯片行业最新动态：多家厂商发布新品</div>
-                        <div class="source">IT之家</div>
+                        <div class="title">上海发布“沪七条”楼市新政，调减限购优化公积金。</div>
+                        <div class="source"></div>
                     </a>
-                </div>
-                <div class="news-card">
-                    <a href="https://www.huxiu.com/" target="_blank">
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3698417555976071?f=rss" target="_blank">
                         <span class="category">科技</span>
-                        <div class="title">新能源汽车市场销量持续增长</div>
-                        <div class="source">虎嗅</div>
+                        <div class="title">世界人工智能大会学术会议WAICA 2026启动，姚期智任主席。</div>
+                        <div class="source">36Kr科技</div>
                     </a>
-                </div>
-                <div class="news-card">
-                    <a href="https://tech.sina.com.cn/" target="_blank">
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3697210914549632?f=rss" target="_blank">
                         <span class="category">科技</span>
-                        <div class="title">5G应用加速落地，行业迎来新机遇</div>
-                        <div class="source">新浪科技</div>
+                        <div class="title">九识智能获3亿美元融资，成自动驾驶物流车领域百亿独角兽。</div>
+                        <div class="source">36Kr科技</div>
                     </a>
-                </div>
-            </div>
-            
-            <div class="news-section" data-category="创投">
-                <h2 style="color:white;margin:20px 0">💰 创投动态</h2>
-                <div class="news-card">
-                    <a href="https://www.36kr.com/information/VC/" target="_blank">
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698569153867398?f=rss" target="_blank">
+                        <span class="category">科技</span>
+                        <div class="title">海光信息2025年净利润25.42亿元，同比增长31.66%。</div>
+                        <div class="source">36Kr科技</div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3697538397744775?f=rss" target="_blank">
+                        <span class="category">科技</span>
+                        <div class="title">华为哈勃与中发展投资热控材料公司一盛新材料。</div>
+                        <div class="source">36Kr科技</div>
+                    </a>
+                </div></div><div class="news-section show-all" data-category="创投"><h2 style="color:white;margin:20px 0">💰 创投</h2><div class="news-card">
+                    <a href="https://36kr.com/p/3697210914549632?f=rss" target="_blank">
                         <span class="category">创投</span>
-                        <div class="title">AI领域融资持续火热，多家初创获大额投资</div>
-                        <div class="source">36Kr创投</div>
+                        <div class="title">智平方完成超10亿元B轮融资，估值超百亿。</div>
+                        <div class="source">36Kr科技</div>
                     </a>
-                </div>
-                <div class="news-card">
-                    <a href="https://www.cyzone.cn/" target="_blank">
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/825160.html" target="_blank">
                         <span class="category">创投</span>
-                        <div class="title">硬科技赛道受追捧，投资机构积极布局</div>
+                        <div class="title">千寻智能完成近20亿元融资，云锋基金、红杉等参投。</div>
                         <div class="source">创业邦</div>
                     </a>
-                </div>
-                <div class="news-card">
-                    <a href="https://www.36kr.com/information/financial/" target="_blank">
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3698117482212997?f=rss" target="_blank">
                         <span class="category">创投</span>
-                        <div class="title">金融科技领域并购活跃，行业整合加速</div>
-                        <div class="source">36Kr金融</div>
+                        <div class="title">新川电子获近亿元pre-IPO轮融资，用于MLCC镍粉等项目。</div>
+                        <div class="source">36Kr科技</div>
                     </a>
-                </div>
-            </div>
-            
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3698026314870659?f=rss" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">神州普惠完成B轮融资，拓展水下感知装备民用市场。</div>
+                        <div class="source">36Kr科技</div>
+                    </a>
+                </div></div>
         </div>
         
         <div class="history-section">
             <h3>📚 历史消息</h3>
             <div class="history-list">
                 <div class="history-item">
-                    <a href="report_2026-02-24.html">02-24</a>
-                </div>
+            <a href="report_2026-02-25.html">2026-02-25 (14条)</a>
+        </div><div class="history-item">
+            <a href="report_2026-02-25.html">2026-02-25 (9条)</a>
+        </div><div class="history-item">
+            <a href="report_2026-02-24.html">2026-02-24 (12条)</a>
+        </div>
             </div>
         </div>
     </div>
@@ -231,12 +244,20 @@
             
             document.querySelectorAll('.news-section').forEach(s => {
                 if (category === 'all') {
-                    s.style.display = 'block';
+                    s.classList.add('show-all');
                 } else {
+                    s.classList.remove('show-all');
                     s.style.display = s.dataset.category === category ? 'block' : 'none';
                 }
             });
         }
+        
+        // 初始化：默认显示全部
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.news-section').forEach(s => {
+                s.classList.add('show-all');
+            });
+        });
     </script>
 </body>
 </html>

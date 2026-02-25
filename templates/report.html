@@ -53,7 +53,7 @@
         
         /* 新闻卡片 */
         .news-section { display: none; }
-        .news-section.active { display: block; }
+        .news-section.active, .news-section.show-all { display: block; }
         
         .news-card {
             background: rgba(255,255,255,0.05);
@@ -172,12 +172,20 @@
             
             document.querySelectorAll('.news-section').forEach(s => {
                 if (category === 'all') {
-                    s.style.display = 'block';
+                    s.classList.add('show-all');
                 } else {
+                    s.classList.remove('show-all');
                     s.style.display = s.dataset.category === category ? 'block' : 'none';
                 }
             });
         }
+        
+        // 初始化：默认显示全部
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.news-section').forEach(s => {
+                s.classList.add('show-all');
+            });
+        });
     </script>
 </body>
 </html>

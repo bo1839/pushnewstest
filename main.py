@@ -272,7 +272,7 @@ def parse_summary_with_links(summary_text, all_articles):
     return news_items
 
 def generate_html_report(date_str, news_items, all_articles):
-    """生成HTML简报"""
+    """生成 HTML 简报"""
     # 读取模板
     template_path = os.path.join(TEMPLATE_DIR, 'report.html')
     if os.path.exists(template_path):
@@ -290,7 +290,7 @@ a{color:#00d2ff}</style></head><body>
 {news_html}
 </body></html>"""
     
-    # 生成新闻HTML
+    # 生成新闻 HTML
     category_names = {'AI': '🤖 AI & 大模型', '科技': '💻 科技前沿', '创投': '💰 创投动态'}
     news_html = ""
     
@@ -302,18 +302,21 @@ a{color:#00d2ff}</style></head><body>
     
     for cat, items in grouped.items():
         if items:
-            news_html += f'<h2>{category_names.get(cat, cat)}</h2>'
+            news_html += f'<div class="news-section show-all" data-category="{cat}"><h2 style="color:white;margin:20px 0">{category_names.get(cat, cat)}</h2>'
             for item in items:
                 news_html += f'''<div class="news-card">
-                    <span class="category">{cat}</span>
-                    <h3><a href="{item['link']}" target="_blank">{item['title']}</a></h3>
+                    <a href="{item['link']}" target="_blank">
+                        <span class="category">{cat}</span>
+                        <div class="title">{item['title']}</div>
+                        <div class="source">{item['source'] or ''}</div>
+                    </a>
                 </div>'''
+            news_html += '</div>'
     
     # 填充模板
     html = template.replace('{date}', date_str)
     html = html.replace('{count}', str(len(news_items)))
     html = html.replace('{news_html}', news_html)
-    html = html.replace('{news_html}', news_items and news_html or '<p>暂无新闻</p>')
     html = html.replace('{history_html}', '<p>历史功能开发中...</p>')
     
     return html
@@ -362,8 +365,236 @@ def save_report(date_str, summary, news_items, all_articles):
     with open(index_path, 'w', encoding='utf-8') as f:
         json.dump(history, f, ensure_ascii=False, indent=2)
     
+    # 生成首页 index.html
+    generate_index_html(history, news_items, all_articles)
+    
     print(f"   💾 已保存简报到 {json_path}")
     return json_path, html_path
+
+def generate_index_html(history, latest_news_items, all_articles):
+    """生成首页 index.html，展示最新新闻和导航"""
+    category_names = {'AI': '🤖 AI', '科技': '💻 科技', '创投': '💰 创投'}
+    
+    # 读取最新报告的 HTML 内容
+    if history:
+        latest_report = history[0]['url']
+        latest_path = os.path.join(DATA_DIR, latest_report)
+        if os.path.exists(latest_path):
+            with open(latest_path, 'r', encoding='utf-8') as f:
+                latest_content = f.read()
+        else:
+            latest_content = ""
+    else:
+        latest_content = ""
+    
+    # 生成历史记录 HTML
+    history_html = ""
+    for item in history[:10]:  # 最近 10 条
+        history_html += f'''<div class="history-item">
+            <a href="{item['url']}">{item['date']} ({item['count']}条)</a>
+        </div>'''
+    
+    # 创建首页 HTML
+    index_html = f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日新闻简报</title>
+    <style>
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        body {{ 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }}
+        .container {{ max-width: 800px; margin: 0 auto; }}
+        .header {{
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }}
+        .header h1 {{
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        .header .date {{ color: #888; font-size: 14px; }}
+        
+        .tabs {{
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }}
+        .tab {{
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 14px;
+        }}
+        .tab.active {{
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: white;
+        }}
+        
+        .news-section {{ display: none; }}
+        .news-section.active, .news-section.show-all {{ display: block; }}
+        
+        .news-card {{
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }}
+        .news-card:hover {{
+            transform: translateY(-2px);
+            border-color: rgba(0,210,255,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }}
+        .news-card a {{
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }}
+        .news-card .category {{
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            border-radius: 12px;
+            font-size: 12px;
+            color: white;
+            margin-bottom: 12px;
+        }}
+        .news-card .title {{
+            font-size: 18px;
+            color: white;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }}
+        .news-card .source {{
+            font-size: 12px;
+            color: #666;
+        }}
+        
+        .history-section {{
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }}
+        .history-section h3 {{
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }}
+        .history-list {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }}
+        .history-item {{
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }}
+        .history-item:hover {{
+            background: rgba(255,255,255,0.1);
+        }}
+        .history-item a {{
+            text-decoration: none;
+            color: #888;
+            font-size: 14px;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 每日新闻简报</h1>
+            <p class="date">最新更新：{history[0]['date'] if history else '暂无'} • 共 {len(latest_news_items)} 条</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('all')">全部</button>
+            <button class="tab" onclick="showTab('AI')">🤖 AI</button>
+            <button class="tab" onclick="showTab('科技')">💻 科技</button>
+            <button class="tab" onclick="showTab('创投')">💰 创投</button>
+        </div>
+        
+        <div id="news-container">
+'''
+    
+    # 按分类分组最新新闻
+    grouped = {'AI': [], '科技': [], '创投': []}
+    for item in latest_news_items:
+        if item['category'] in grouped:
+            grouped[item['category']].append(item)
+    
+    for cat, items in grouped.items():
+        if items:
+            index_html += f'<div class="news-section show-all" data-category="{cat}"><h2 style="color:white;margin:20px 0">{category_names.get(cat, cat)}</h2>'
+            for item in items:
+                index_html += f'''<div class="news-card">
+                    <a href="{item['link']}" target="_blank">
+                        <span class="category">{cat}</span>
+                        <div class="title">{item['title']}</div>
+                        <div class="source">{item['source'] or ''}</div>
+                    </a>
+                </div>'''
+            index_html += '</div>'
+    
+    index_html += f'''
+        </div>
+        
+        <div class="history-section">
+            <h3>📚 历史消息</h3>
+            <div class="history-list">
+                {history_html}
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(category) {{
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.news-section').forEach(s => {{
+                if (category === 'all') {{
+                    s.classList.add('show-all');
+                }} else {{
+                    s.classList.remove('show-all');
+                    s.style.display = s.dataset.category === category ? 'block' : 'none';
+                }}
+            }});
+        }}
+        
+        // 初始化：默认显示全部
+        document.addEventListener('DOMContentLoaded', function() {{
+            document.querySelectorAll('.news-section').forEach(s => {{
+                s.classList.add('show-all');
+            }});
+        }});
+    </script>
+</body>
+</html>'''
+    
+    index_path = os.path.join(DATA_DIR, 'index.html')
+    with open(index_path, 'w', encoding='utf-8') as f:
+        f.write(index_html)
+    
+    print(f"   🏠 已更新首页 {index_path}")
 
 def send_to_feishu(summary, date_str, news_items):
     """发送到飞书 - 美化版本，去掉原文链接"""
@@ -517,12 +748,12 @@ def main():
         date_str = datetime.now(BEIJING_TZ).strftime('%Y-%m-%d')
         
         try:
-            # 获取AI总结
+            # 获取 AI 总结
             prompt = build_prompt(articles)
             summary = call_deepseek(prompt)
             
-            # 解析出新闻和链接（传入all_articles用于匹配真实URL）
-            news_items = parse_summary_with_links(summary, all_articles)
+            # 解析出新闻和链接（传入 articles 用于匹配真实 URL）
+            news_items = parse_summary_with_links(summary, articles)
             
             # 保存简报
             save_report(date_str, summary, news_items, articles)
