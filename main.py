@@ -135,12 +135,26 @@ def fetch_feed(feed_info):
         return []
 
 def fetch_article_thumbnail(url):
-    """爬取文章网页，提取第一张图片"""
+    """爬取文章网页，提取第一张或第二张有效图片作为缩略图"""
     if url in THUMBNAIL_CACHE:
         return THUMBNAIL_CACHE[url]
     
+    def is_valid_image(img_url):
+        """判断是否是有效的图片 URL"""
+        if not img_url or not img_url.startswith('http'):
+            return False
+        lower_url = img_url.lower()
+        # 过滤 logo、icon、小图等
+        skip_words = ['logo', 'icon', 'avatar', 'header', 'nav', 'thumb', 'button', 'bg', 'cover', 'sponsor', 'ad', 'banner']
+        if any(x in lower_url for x in skip_words):
+            return False
+        # 过滤 Base64
+        if img_url.startswith('data:'):
+            return False
+        return True
+    
     # 特殊处理：有 API 的网站
-    # 机器之心: https://www.jiqizhixin.com/api/v1/articles/{slug}
+    # 机器之心：https://www.jiqizhixin.com/api/v1/articles/{slug}
     if 'jiqizhixin.com/articles/' in url:
         match = re.search(r'jiqizhixin\.com/articles/([\w-]+)', url)
         if match:
@@ -151,7 +165,7 @@ def fetch_article_thumbnail(url):
                 if resp.status_code == 200:
                     data = resp.json()
                     cover_url = data.get('cover_image_url')
-                    if cover_url and cover_url.startswith('http'):
+                    if cover_url and is_valid_image(cover_url):
                         THUMBNAIL_CACHE[url] = cover_url
                         return cover_url
             except:
@@ -176,7 +190,14 @@ def fetch_article_thumbnail(url):
         if len(html) < 1000:
             return None
         
-        # 优先提取 og:image (文章主图)
+        all_images = []
+        data_src_patterns = [
+            r'data-src=["\']([^"\']+)["\']',
+            r'data-original=["\']([^"\']+)["\']',
+            r'data-img=["\']([^"\']+)["\']',
+        ]
+        
+        # 1. 优先提取 og:image (文章主图)
         og_patterns = [
             r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
             r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
@@ -187,65 +208,78 @@ def fetch_article_thumbnail(url):
             og_match = re.search(pattern, html, re.IGNORECASE)
             if og_match:
                 img_url = og_match.group(1)
-                if img_url and img_url.startswith('http') and 'logo' not in img_url.lower():
+                if is_valid_image(img_url):
                     THUMBNAIL_CACHE[url] = img_url
                     return img_url
         
-        # 提取 data-src 图片（腾讯新闻等常用）
-        data_src_patterns = [
-            r'data-src=["\']([^"\']+)["\']',
-            r'data-original=["\']([^"\']+)["\']',
-            r'data-img=["\']([^"\']+)["\']',
-        ]
-        
-        for pattern in data_src_patterns:
-            matches = re.findall(pattern, html, re.IGNORECASE)
-            for match in matches:
-                if match.startswith('http'):
-                    lower_url = match.lower()
-                    # 过滤 logo、icon
-                    if any(x in lower_url for x in ['logo', 'icon', 'avatar', 'header']):
-                        continue
-                    # 优先选择腾讯/微信图片（没有防盗链）
-                    if 'mmbiz.qpic.cn' in match or 'qpic.cn' in match or 'qq.com' in match:
-                        THUMBNAIL_CACHE[url] = match
-                        return match
-            if og_match:
-                img_url = og_match.group(1)
-                if img_url and img_url.startswith('http') and 'logo' not in img_url.lower():
-                    THUMBNAIL_CACHE[url] = img_url
-                    return img_url
-        
-        # 提取文章内容中的图片
+        # 2. 提取文章内容区域的所有图片
         content_patterns = [
             r'<article[^>]*>(.*?)</article>',
             r'<main[^>]*>(.*?)</main>',
             r'<div[^>]+class=["\'][^"\']*content[^"\']*["\'][^>]*>(.*?)</div>',
+            r'<div[^>]+id=["\'][^"\']*content[^"\']*["\'][^>]*>(.*?)</div>',
+            r'<section[^>]+class=["\'][^"\']*article[^"\']*["\'][^>]*>(.*?)</section>',
         ]
         
+        content_html = ""
         for pattern in content_patterns:
             content_match = re.search(pattern, html, re.IGNORECASE | re.DOTALL)
             if content_match:
                 content_html = content_match.group(1)
-                if len(content_html) > 500:
-                    img_pattern = r'<img[^>]+src=["\']([^"\']+)["\']'
-                    matches = re.findall(img_pattern, content_html, re.IGNORECASE)
-                    
-                    for match in matches:
-                        if match.startswith('http'):
-                            lower_url = match.lower()
-                            # 过滤 logo、icon、小图
-                            skip_words = ['logo', 'icon', 'avatar', 'header', 'nav', 'thumb', 'button', 'bg', 'cover']
-                            if any(x in lower_url for x in skip_words):
-                                continue
-                            # 过滤 Base64
-                            if match.startswith('data:'):
-                                continue
-                            THUMBNAIL_CACHE[url] = match
-                            return match
+                break
+        
+        # 从内容区域提取图片 (src 和 data-src)
+        if content_html:
+            # 提取普通 src
+            img_pattern = r'<img[^>]+src=["\']([^"\']+)["\'][^>]*>'
+            matches = re.findall(img_pattern, content_html, re.IGNORECASE)
+            for match in matches:
+                if is_valid_image(match):
+                    all_images.append(match)
+            
+            # 提取 data-src, data-original 等
+            for pattern in data_src_patterns:
+                matches = re.findall(pattern, content_html, re.IGNORECASE)
+                for match in matches:
+                    if is_valid_image(match):
+                        all_images.append(match)
+        
+        # 如果内容区域没有找到，从整个页面提取
+        if not all_images:
+            img_pattern = r'<img[^>]+src=["\']([^"\']+)["\'][^>]*>'
+            matches = re.findall(img_pattern, html, re.IGNORECASE)
+            for match in matches:
+                if is_valid_image(match):
+                    all_images.append(match)
+            
+            # 提取 data-src
+            for pattern in data_src_patterns:
+                matches = re.findall(pattern, html, re.IGNORECASE)
+                for match in matches:
+                    if is_valid_image(match):
+                        all_images.append(match)
+        
+        # 3. 去重，保持顺序
+        if all_images:
+            seen = set()
+            unique_images = []
+            for img in all_images:
+                if img not in seen:
+                    seen.add(img)
+                    unique_images.append(img)
+            
+            # 返回第一张或第二张图片
+            if len(unique_images) >= 2:
+                # 对于某些网站，第一张可能是 logo，尝试第二张
+                selected = unique_images[1]
+                THUMBNAIL_CACHE[url] = selected
+                return selected
+            elif unique_images:
+                THUMBNAIL_CACHE[url] = unique_images[0]
+                return unique_images[0]
         
         return None
-    except Exception as e:
+    except Exception:
         return None
 
 def fetch_all_news():
