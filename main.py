@@ -54,7 +54,7 @@ BEIJING_TZ = pytz.timezone('Asia/Shanghai')
 
 # 存储目录
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
-THUMBNAIL_DIR = os.path.join(DATA_DIR, 'thumbnails')
+THUMBNAIL_DIR = os.path.join(os.path.dirname(__file__), 'img')
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), 'templates')
 
 def ensure_dir(path):
@@ -145,7 +145,7 @@ def download_thumbnail(img_url, article_hash):
         for ext in ['.jpg', '.png', '.webp', '.jpeg']:
             local_path = os.path.join(THUMBNAIL_DIR, f"{article_hash}{ext}")
             if os.path.exists(local_path):
-                return f"thumbnails/{article_hash}{ext}"
+                return f"img/{article_hash}{ext}"
         
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
@@ -164,7 +164,7 @@ def download_thumbnail(img_url, article_hash):
             local_path = os.path.join(THUMBNAIL_DIR, f"{article_hash}{ext}")
             with open(local_path, 'wb') as f:
                 f.write(resp.content)
-            return f"thumbnails/{article_hash}{ext}"
+            return f"img/{article_hash}{ext}"
     except:
         pass
     return None
@@ -844,9 +844,8 @@ def generate_index_html(history, latest_news_items, all_articles):
             index_html += f'<div class="news-section show-all" data-category="{cat}"><div class="news-grid">'
             for item in items[:20]:  # 每类最多 20 条
                 thumbnail = item.get('thumbnail')
-                # 如果是本地路径，加上 data 目录前缀
-                if thumbnail and thumbnail.startswith('thumbnails/'):
-                    thumbnail = 'data/' + thumbnail
+                # img/ 目录已经是相对路径，直接使用
+                if thumbnail and thumbnail.startswith('img/'):
                     fallback = cat_thumbnail
                 else:
                     fallback = thumbnail or cat_thumbnail
