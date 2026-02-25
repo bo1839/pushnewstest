@@ -1,54 +1,54 @@
 {
   "date": "2026-02-25",
-  "summary": "### 🤖 AI & 大模型\n- AI能写COBOL代码，导致IBM股价单日暴跌，创26年最差纪录。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-3\n- 阿里云上线四大顶尖开源模型，推出最强Coding Plan。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-5\n- 阿里开源3款消费级显卡可跑的Qwen3.5新模型。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-7\n- DeepMind药物衍生公司发布新AI，堪称药物设计专用AlphaFold 4。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-4\n- 研究揭示大语言模型存在结构性推理失败，质疑其推理能力。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-6\n\n### 💻 科技前沿\n- 微软研究登上《自然》：将人类文明信息刻入玻璃，可保存万年。\n  原文: https://www.jiqizhixin.com/articles/2026-02-24-9\n- 宇树科技在春晚后，迅速发布了其新款机器狗产品。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-2\n- QVGen实现视频扩散模型4bit量化，性能接近无损且真正可用。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-9\n- ArcFlow用非线性方法实现推理加速，参数仅需5%，训练快4倍。\n  原文: https://www.jiqizhixin.com/articles/2026-02-24-8\n- EmotionThinker让语音大模型学会解释情绪，而非简单分类。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25\n\n### 💰 创投动态\n- 机器人基础模型龙头“智平方”完成超10亿元B轮融资，估值超百亿。\n  原文: http://www.cyzone.cn/article/825165.html\n- 具身智能企业“千寻智能”连续完成近20亿元融资，云锋、红杉等参投。\n  原文: http://www.cyzone.cn/article/825160.html\n- 静水湖创投新一期S接续基金超募设立并完成全部实缴与投资交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- 刘强东创立游艇独立品牌Sea Expandary，关联公司已与多地政府签约。\n  原文: http://\n- 2026电影经济促进年启动，全年预计投放不低于500亿元专项信贷。\n  原文: http://",
+  "summary": "### 🤖 AI & 大模型\n- 谷歌制裁OpenClaw，创始人指责其封号行为不当。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-10\n- 阿里开源三款消费级显卡可跑的Qwen3.5新模型。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-7\n- 研究揭示大语言模型在结构性推理上存在系统性失败。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-6\n- DeepMind药物公司推出专有AI药物设计引擎，媲美AlphaFold 4。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-4\n- AI能编写COBOL代码，导致IBM股价单日暴跌310亿美元。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-3\n\n### 💻 科技前沿\n- QVGen将视频扩散模型量化至4bit，性能损失极小。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-9\n- 仅用1100美元tokens，一周内可重写Next.js框架。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-8\n- 阿里云上线四大顶尖开源模型，打造最强编程计划。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-5\n- EmotionThinker让语音大模型学会解释情绪，而非简单分类。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25\n- ArcFlow仅用5%参数，实现FLUX/Qwen推理速度40倍提升。\n  原文: https://www.jiqizhixin.com/articles/2026-02-24-8\n\n### 💰 创投动态\n- 机器人基础模型公司智平方完成超10亿元B轮融资，估值过百亿。\n  原文: http://www.cyzone.cn/article/825165.html\n- 具身智能企业千寻智能连续完成近20亿元融资，云锋、红杉等参投。\n  原文: http://www.cyzone.cn/article/825160.html\n- 静水湖创投新一期S接续基金超募设立并完成交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- 刘强东游艇品牌关联公司曝光，与多地政府签署合作协议。\n  原文: http://\n- “2026电影经济促进年”启动，预计全年投放超千亿资金支持。\n  原文: http://",
   "news_items": [
     {
       "category": "AI",
-      "title": "AI能写COBOL代码，导致IBM股价单日暴跌，创26年最差纪录。",
-      "link": "https://www.jiqizhixin.com/articles/2026-02-25-3",
+      "title": "谷歌制裁OpenClaw，创始人指责其封号行为不当。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-10",
       "source": "机器之心"
     },
     {
       "category": "AI",
-      "title": "阿里云上线四大顶尖开源模型，推出最强Coding Plan。",
-      "link": "",
-      "source": ""
-    },
-    {
-      "category": "AI",
-      "title": "阿里开源3款消费级显卡可跑的Qwen3.5新模型。",
+      "title": "阿里开源三款消费级显卡可跑的Qwen3.5新模型。",
       "link": "https://www.jiqizhixin.com/articles/2026-02-25-7",
       "source": "机器之心"
     },
     {
       "category": "AI",
-      "title": "DeepMind药物衍生公司发布新AI，堪称药物设计专用AlphaFold 4。",
+      "title": "研究揭示大语言模型在结构性推理上存在系统性失败。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-6",
+      "source": "机器之心"
+    },
+    {
+      "category": "AI",
+      "title": "DeepMind药物公司推出专有AI药物设计引擎，媲美AlphaFold 4。",
       "link": "https://www.jiqizhixin.com/articles/2026-02-25-4",
       "source": "机器之心"
     },
     {
       "category": "AI",
-      "title": "研究揭示大语言模型存在结构性推理失败，质疑其推理能力。",
-      "link": "https://www.jiqizhixin.com/articles/2026-02-25-6",
+      "title": "AI能编写COBOL代码，导致IBM股价单日暴跌310亿美元。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-3",
       "source": "机器之心"
     },
     {
       "category": "科技",
-      "title": "微软研究登上《自然》：将人类文明信息刻入玻璃，可保存万年。",
-      "link": "https://www.jiqizhixin.com/articles/2026-02-24-9",
+      "title": "QVGen将视频扩散模型量化至4bit，性能损失极小。",
+      "link": "",
+      "source": ""
+    },
+    {
+      "category": "科技",
+      "title": "仅用1100美元tokens，一周内可重写Next.js框架。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-8",
       "source": "机器之心"
     },
     {
       "category": "科技",
-      "title": "QVGen实现视频扩散模型4bit量化，性能接近无损且真正可用。",
-      "link": "https://www.jiqizhixin.com/articles/2026-02-25-9",
-      "source": "机器之心"
-    },
-    {
-      "category": "科技",
-      "title": "ArcFlow用非线性方法实现推理加速，参数仅需5%，训练快4倍。",
-      "link": "https://www.jiqizhixin.com/articles/2026-02-24-8",
-      "source": "机器之心"
+      "title": "阿里云上线四大顶尖开源模型，打造最强编程计划。",
+      "link": "",
+      "source": ""
     },
     {
       "category": "科技",
@@ -57,30 +57,36 @@
       "source": "机器之心"
     },
     {
+      "category": "科技",
+      "title": "ArcFlow仅用5%参数，实现FLUX/Qwen推理速度40倍提升。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-24-8",
+      "source": "机器之心"
+    },
+    {
       "category": "创投",
-      "title": "机器人基础模型龙头“智平方”完成超10亿元B轮融资，估值超百亿。",
+      "title": "机器人基础模型公司智平方完成超10亿元B轮融资，估值过百亿。",
       "link": "http://www.cyzone.cn/article/824599.html",
       "source": "创业邦"
     },
     {
       "category": "创投",
-      "title": "具身智能企业“千寻智能”连续完成近20亿元融资，云锋、红杉等参投。",
+      "title": "具身智能企业千寻智能连续完成近20亿元融资，云锋、红杉等参投。",
       "link": "http://www.cyzone.cn/article/825160.html",
       "source": "创业邦"
     },
     {
       "category": "创投",
-      "title": "刘强东创立游艇独立品牌Sea Expandary，关联公司已与多地政府签约。",
+      "title": "刘强东游艇品牌关联公司曝光，与多地政府签署合作协议。",
       "link": "http://",
       "source": "创业邦"
     },
     {
       "category": "创投",
-      "title": "2026电影经济促进年启动，全年预计投放不低于500亿元专项信贷。",
+      "title": "“2026电影经济促进年”启动，预计全年投放超千亿资金支持。",
       "link": "http://",
       "source": "创业邦"
     }
   ],
   "total_articles": 42,
-  "generated_at": "2026-02-25T22:06:54.989724+08:00"
+  "generated_at": "2026-02-25T22:21:52.913361+08:00"
 }
