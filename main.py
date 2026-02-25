@@ -699,74 +699,85 @@ def generate_index_html(history, latest_news_items, all_articles):
         /* 瀑布流布局 */
         .news-grid {{
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 16px;
         }}
         
         .news-card {{
             background: rgba(255,255,255,0.05);
-            border-radius: 16px;
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.3s;
+            transition: all 0.2s;
             border: 1px solid rgba(255,255,255,0.1);
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
+            padding: 8px;
+            gap: 10px;
         }}
         .news-card:hover {{
-            transform: translateY(-4px);
+            transform: translateY(-2px);
             border-color: rgba(0,210,255,0.3);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }}
         .news-card a {{
             text-decoration: none;
             color: inherit;
-            display: block;
-            flex: 1;
             display: flex;
-            flex-direction: column;
+            flex: 1;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
         }}
         .news-card .thumbnail {{
-            width: 100%;
-            height: 180px;
+            width: 80px;
+            height: 60px;
             object-fit: cover;
             background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+            flex-shrink: 0;
         }}
         .news-card .content {{
-            padding: 16px;
+            padding: 6px 10px;
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }}
         .news-card .category {{
             display: inline-block;
-            padding: 4px 12px;
+            padding: 2px 6px;
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
-            border-radius: 12px;
-            font-size: 12px;
+            border-radius: 6px;
+            font-size: 10px;
             color: white;
-            margin-bottom: 12px;
+            margin-bottom: 4px;
             align-self: flex-start;
         }}
         .news-card .title {{
-            font-size: 16px;
+            font-size: 13px;
             color: white;
-            line-height: 1.5;
-            margin-bottom: 12px;
+            line-height: 1.3;
+            margin-bottom: 4px;
             font-weight: 500;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }}
         .news-card .summary {{
-            font-size: 14px;
-            color: #aaa;
-            line-height: 1.6;
-            margin-bottom: 12px;
+            font-size: 11px;
+            color: #888;
+            line-height: 1.3;
+            margin-bottom: 4px;
             flex: 1;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }}
         .news-card .source {{
-            font-size: 12px;
+            font-size: 10px;
             color: #666;
             margin-top: auto;
         }}
