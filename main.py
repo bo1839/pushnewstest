@@ -191,6 +191,31 @@ def fetch_article_thumbnail(url):
                     THUMBNAIL_CACHE[url] = img_url
                     return img_url
         
+        # 提取 data-src 图片（腾讯新闻等常用）
+        data_src_patterns = [
+            r'data-src=["\']([^"\']+)["\']',
+            r'data-original=["\']([^"\']+)["\']',
+            r'data-img=["\']([^"\']+)["\']',
+        ]
+        
+        for pattern in data_src_patterns:
+            matches = re.findall(pattern, html, re.IGNORECASE)
+            for match in matches:
+                if match.startswith('http'):
+                    lower_url = match.lower()
+                    # 过滤 logo、icon
+                    if any(x in lower_url for x in ['logo', 'icon', 'avatar', 'header']):
+                        continue
+                    # 优先选择腾讯/微信图片（没有防盗链）
+                    if 'mmbiz.qpic.cn' in match or 'qpic.cn' in match or 'qq.com' in match:
+                        THUMBNAIL_CACHE[url] = match
+                        return match
+            if og_match:
+                img_url = og_match.group(1)
+                if img_url and img_url.startswith('http') and 'logo' not in img_url.lower():
+                    THUMBNAIL_CACHE[url] = img_url
+                    return img_url
+        
         # 提取文章内容中的图片
         content_patterns = [
             r'<article[^>]*>(.*?)</article>',
