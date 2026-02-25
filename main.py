@@ -23,7 +23,7 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 FEISHU_WEBHOOK_URL = os.getenv("FEISHU_WEBHOOK_URL") or "https://open.feishu.cn/open-apis/bot/v2/hook/2ab18ec8-6c48-4c73-b24d-6d73b78b1b81"
 
 # 简报网页地址（用户需要自己部署，可以GitHub Pages）
-REPORT_URL = os.getenv("REPORT_URL") or "https://bo1839.github.io/pushnewstest/data/"
+REPORT_URL = os.getenv("REPORT_URL") or "https://bo1839.github.io/pushnewstest/"
 
 # 新闻源
 RSS_FEEDS = [
