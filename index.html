@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日新闻简报</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container { text-align: center; color: white; max-width: 600px; }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .loading {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(0,210,255,0.3);
+            border-top-color: #00d2ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .error { color: #ff6b6b; }
+    </style>
+    <script>
+        // 自动跳转到最新简报
+        const reports = [
+            {date: '2026-02-25', url: 'data/report_2026-02-25.html'},
+            {date: '2026-02-24', url: 'data/report_2026-02-24.html'},
+        ];
+        
+        // 尝试加载最新简报
+        async function loadLatestReport() {
+            const container = document.getElementById('content');
+            
+            for (const report of reports) {
+                try {
+                    const response = await fetch(report.url);
+                    if (response.ok) {
+                        document.write(await response.text());
+                        document.close();
+                        return;
+                    }
+                } catch(e) {}
+            }
+            
+            // 如果没有找到简报，显示说明
+            container.innerHTML = `
+                <div class="spinner"></div>
+                <div class="loading">正在准备简报...</div>
+                <p style="color:#666;margin-top:20px">每日8:00自动生成</p>
+            `;
+        }
+        
+        loadLatestReport();
+    </script>
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="spinner"></div>
+        <div class="loading">正在加载...</div>
+    </div>
+</body>
+</html>
