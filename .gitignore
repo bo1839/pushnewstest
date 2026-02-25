@@ -1,4 +1,3 @@
-data/thumbnails/
 *.pyc
 __pycache__/
 .env
