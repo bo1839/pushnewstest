@@ -76,7 +76,7 @@ def is_recent(pub_date, hours=48):
 
 def fetch_feed(feed_info):
     try:
-        print(f"📥 正在获取: {feed_info['name']}...")
+        print(f"📥 正在获取：{feed_info['name']}...")
         feed = feedparser.parse(feed_info['url'])
         articles = []
         for entry in feed.entries[:30]:
@@ -86,6 +86,25 @@ def fetch_feed(feed_info):
             pub_date = entry.get('published', '')
             if not title or not link:
                 continue
+            
+            # 获取缩略图
+            thumbnail = None
+            try:
+                if hasattr(entry, 'media_thumbnail') and entry.media_thumbnail:
+                    thumbnail = entry.media_thumbnail[0]['url']
+                elif hasattr(entry, 'media_content') and entry.media_content:
+                    thumbnail = entry.media_content[0]['url']
+                elif 'image' in entry and entry.image:
+                    thumbnail = entry.image
+                elif 'enclosures' in entry and entry.enclosures:
+                    for enc in entry.enclosures:
+                        enc_type = str(enc.get('type', ''))
+                        if enc_type and 'image' in enc_type.lower():
+                            thumbnail = str(enc.get('href', ''))
+                            break
+            except:
+                thumbnail = None
+            
             article = {
                 'title': title,
                 'link': link,
@@ -93,13 +112,14 @@ def fetch_feed(feed_info):
                 'pub_date': pub_date,
                 'category': feed_info['category'],
                 'source': feed_info['name'],
-                'hash': get_news_hash(title, link)
+                'hash': get_news_hash(title, link),
+                'thumbnail': thumbnail
             }
             articles.append(article)
         print(f"   ✅ 获取到 {len(articles)} 条")
         return articles
     except Exception as e:
-        print(f"   ❌ 获取失败: {e}")
+        print(f"   ❌ 获取失败：{e}")
         return []
 
 def fetch_all_news():
@@ -372,24 +392,15 @@ def save_report(date_str, summary, news_items, all_articles):
     return json_path, html_path
 
 def generate_index_html(history, latest_news_items, all_articles):
-    """生成首页 index.html，展示最新新闻和导航"""
+    """生成首页 index.html，瀑布流布局，带缩略图和简介"""
     category_names = {'AI': '🤖 AI', '科技': '💻 科技', '创投': '💰 创投'}
     
-    # 读取最新报告的 HTML 内容
-    if history:
-        latest_report = history[0]['url']
-        latest_path = os.path.join(DATA_DIR, latest_report)
-        if os.path.exists(latest_path):
-            with open(latest_path, 'r', encoding='utf-8') as f:
-                latest_content = f.read()
-        else:
-            latest_content = ""
-    else:
-        latest_content = ""
+    # 默认缩略图（使用 Unsplash 科技类图片）
+    default_thumbnail = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop"
     
     # 生成历史记录 HTML
     history_html = ""
-    for item in history[:10]:  # 最近 10 条
+    for item in history[:10]:
         history_html += f'''<div class="history-item">
             <a href="{item['url']}">{item['date']} ({item['count']}条)</a>
         </div>'''
@@ -407,16 +418,16 @@ def generate_index_html(history, latest_news_items, all_articles):
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 16px;
         }}
-        .container {{ max-width: 800px; margin: 0 auto; }}
+        .container {{ max-width: 1200px; margin: 0 auto; }}
         .header {{
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             color: white;
         }}
         .header h1 {{
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 10px;
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
             -webkit-background-clip: text;
@@ -427,11 +438,12 @@ def generate_index_html(history, latest_news_items, all_articles):
         .tabs {{
             display: flex;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
+            justify-content: center;
         }}
         .tab {{
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: rgba(255,255,255,0.1);
             border-radius: 20px;
             color: #888;
@@ -448,16 +460,24 @@ def generate_index_html(history, latest_news_items, all_articles):
         .news-section {{ display: none; }}
         .news-section.active, .news-section.show-all {{ display: block; }}
         
+        /* 瀑布流布局 */
+        .news-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }}
+        
         .news-card {{
             background: rgba(255,255,255,0.05);
             border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
+            overflow: hidden;
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
         }}
         .news-card:hover {{
-            transform: translateY(-2px);
+            transform: translateY(-4px);
             border-color: rgba(0,210,255,0.3);
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }}
@@ -465,6 +485,21 @@ def generate_index_html(history, latest_news_items, all_articles):
             text-decoration: none;
             color: inherit;
             display: block;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }}
+        .news-card .thumbnail {{
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: rgba(0,0,0,0.2);
+        }}
+        .news-card .content {{
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }}
         .news-card .category {{
             display: inline-block;
@@ -474,16 +509,30 @@ def generate_index_html(history, latest_news_items, all_articles):
             font-size: 12px;
             color: white;
             margin-bottom: 12px;
+            align-self: flex-start;
         }}
         .news-card .title {{
-            font-size: 18px;
+            font-size: 16px;
             color: white;
             line-height: 1.5;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }}
+        .news-card .summary {{
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }}
         .news-card .source {{
             font-size: 12px;
             color: #666;
+            margin-top: auto;
         }}
         
         .history-section {{
@@ -516,13 +565,22 @@ def generate_index_html(history, latest_news_items, all_articles):
             color: #888;
             font-size: 14px;
         }}
+        
+        @media (max-width: 768px) {{
+            .news-grid {{
+                grid-template-columns: 1fr;
+            }}
+            .header h1 {{
+                font-size: 24px;
+            }}
+        }}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>📰 每日新闻简报</h1>
-            <p class="date">最新更新：{history[0]['date'] if history else '暂无'} • 共 {len(latest_news_items)} 条</p>
+            <p class="date">最新更新：{history[0]['date'] if history else '暂无'} • 共 {len(all_articles)} 条</p>
         </div>
         
         <div class="tabs">
@@ -537,22 +595,33 @@ def generate_index_html(history, latest_news_items, all_articles):
     
     # 按分类分组最新新闻
     grouped = {'AI': [], '科技': [], '创投': []}
-    for item in latest_news_items:
-        if item['category'] in grouped:
-            grouped[item['category']].append(item)
+    for article in all_articles:
+        cat = article.get('category', '科技')
+        if cat in grouped:
+            grouped[cat].append(article)
+        else:
+            grouped['科技'].append(article)
     
     for cat, items in grouped.items():
         if items:
-            index_html += f'<div class="news-section show-all" data-category="{cat}"><h2 style="color:white;margin:20px 0">{category_names.get(cat, cat)}</h2>'
-            for item in items:
+            index_html += f'<div class="news-section show-all" data-category="{cat}"><div class="news-grid">'
+            for item in items[:20]:  # 每类最多 20 条
+                thumbnail = item.get('thumbnail') or default_thumbnail
+                summary = item.get('summary', '')
+                if len(summary) > 100:
+                    summary = summary[:100] + '...'
                 index_html += f'''<div class="news-card">
                     <a href="{item['link']}" target="_blank">
-                        <span class="category">{cat}</span>
-                        <div class="title">{item['title']}</div>
-                        <div class="source">{item['source'] or ''}</div>
+                        <img class="thumbnail" src="{thumbnail}" alt="" onerror="this.src='{default_thumbnail}'">
+                        <div class="content">
+                            <span class="category">{cat}</span>
+                            <div class="title">{item['title']}</div>
+                            <div class="summary">{summary}</div>
+                            <div class="source">{item['source'] or ''}</div>
+                        </div>
                     </a>
                 </div>'''
-            index_html += '</div>'
+            index_html += '</div></div>'
     
     index_html += f'''
         </div>
@@ -580,7 +649,6 @@ def generate_index_html(history, latest_news_items, all_articles):
             }});
         }}
         
-        // 初始化：默认显示全部
         document.addEventListener('DOMContentLoaded', function() {{
             document.querySelectorAll('.news-section').forEach(s => {{
                 s.classList.add('show-all');
@@ -596,47 +664,32 @@ def generate_index_html(history, latest_news_items, all_articles):
     
     print(f"   🏠 已更新首页 {index_path}")
 
-def send_to_feishu(summary, date_str, news_items):
-    """发送到飞书 - 美化版本，去掉原文链接"""
+def send_to_feishu(summary, date_str, news_items, all_articles):
+    """发送到飞书 - 使用真实新闻标题"""
     if not FEISHU_WEBHOOK_URL:
         raise ValueError("未配置 FEISHU_WEBHOOK_URL")
     print("📤 正在推送到飞书...")
     
-    # 转换总结为飞书卡片格式（不带链接）
-    content_lines = []
-    current_section = ""
+    # 按分类选取重要新闻（使用真实标题）
+    categories = categorize_news(all_articles)
     
-    for line in summary.split('\n'):
-        line = line.strip()
-        if not line:
-            continue
-        
-        # 检测分类
-        if 'AI' in line and '大模型' in line:
-            current_section = 'AI'
-            content_lines.append("**🤖 AI & 大模型**\n")
-            continue
-        elif '科技' in line:
-            current_section = '科技'
-            content_lines.append("**💻 科技前沿**\n")
-            continue
-        elif '创投' in line or '金融' in line:
-            current_section = '创投'
-            content_lines.append("**💰 创投动态**\n")
-            continue
-        
-        # 提取新闻内容，去掉"原文:"部分
-        if line.startswith('- ') or line.startswith('• '):
-            content = line[2:].strip()
-            # 去掉原文链接部分
-            if '原文:' in content:
-                content = content.split('原文:')[0].strip()
-            if content:
-                content_lines.append(f"• {content}")
+    content_lines = [f"📰 **每日新闻简报** | {date_str}\n"]
     
-    content = "\n".join(content_lines)
+    category_icons = {'AI': '🤖', '科技': '💻', '创投': '💰'}
+    category_names = {'AI': 'AI', '科技': '科技', '创投': '创投'}
     
-    # 构建飞书卡片 - 带按钮
+    for cat_name, cat_articles in categories.items():
+        if cat_articles:
+            icon = category_icons.get(cat_name, '📌')
+            name = category_names.get(cat_name, cat_name)
+            content_lines.append(f"**{icon} {name}**")
+            for article in cat_articles[:5]:  # 每类最多 5 条
+                content_lines.append(f"• {article['title']}")
+            content_lines.append("")
+    
+    content = "\n".join(content_lines[:30])
+    
+    # 构建飞书卡片
     card = {
         "msg_type": "interactive",
         "card": {
@@ -659,7 +712,7 @@ def send_to_feishu(summary, date_str, news_items):
                         {
                             "tag": "button",
                             "text": {
-                                "content": "🔗 查看完整简报（含原文链接）",
+                                "content": "🔗 查看完整简报",
                                 "tag": "plain_text"
                             },
                             "url": REPORT_URL,
@@ -667,7 +720,7 @@ def send_to_feishu(summary, date_str, news_items):
                         }
                     ]
                 },
-                {"tag": "div", "text": {"content": f"🤖 Powered by DeepSeek • {len(RSS_FEEDS)}个新闻源", "tag": "lark_md"}}
+                {"tag": "div", "text": {"content": f"共 {len(all_articles)}条新闻 • 点击查看详情", "tag": "lark_md"}}
             ]
         }
     }
@@ -758,8 +811,8 @@ def main():
             # 保存简报
             save_report(date_str, summary, news_items, articles)
             
-            # 发送飞书（不带链接）
-            send_to_feishu(summary, date_str, news_items)
+            # 发送飞书（使用真实标题）
+            send_to_feishu(summary, date_str, news_items, articles)
             
         except Exception as e:
             print(f"⚠️ AI总结失败: {e}")

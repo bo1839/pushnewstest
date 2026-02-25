@@ -1,40 +1,40 @@
 {
   "date": "2026-02-25",
-  "summary": "### 🤖 AI & 大模型\n- OpenAI创始人因谷歌封号公开指责，称Anthropic会先沟通。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-10\n- QVGen技术将视频扩散模型量化至4bit，性能损失极小。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-9\n- 阿里开源3款消费级显卡可运行的Qwen3.5新模型。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-7\n- 研究揭示大语言模型在结构性推理任务上存在系统性失败。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-6\n- AI能编写COBOL代码，引发市场对IBM业务担忧致其股价大跌。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-3\n\n### 💻 科技前沿\n- 上海出台“沪七条”楼市新政，大幅松绑限购与公积金政策。\n  原文: https://36kr.com/p/3698437434535817?f=rss\n- 世界人工智能大会学术会议WAICA 2026启动，姚期智任主席。\n  原文: https://36kr.com/p/3698417555976071?f=rss\n- 华为哈勃与中发展投资金属基热管理材料公司一盛新材料。\n  原文: https://36kr.com/p/3697538397744775?f=rss\n- 中建系密集接手多座万达广场，全面接盘相关资产与运营。\n  原文: https://36kr.com/p/3698430014762633?f=rss\n- 水下感知企业神州普惠完成B轮融资，加速民用市场拓展。\n  原文: https://36kr.com/p/3698026314870659?f=rss\n\n### 💰 创投动态\n- 机器人基础模型公司智平方完成超10亿元B轮融资，估值超百亿。\n  原文: http://www.cyzone.cn/article/825165.html\n- 具身智能企业千寻智能连续完成近20亿元融资，云锋基金等参投。\n  原文: http://www.cyzone.cn/article/825160.html\n- 静水湖创投新一期S接续基金超募设立并完成全部实缴与交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- AI光伏粉体材料商新川电子获近亿元pre-IPO轮融资。\n  原文: https://36kr.com/p/3698117482212997?f=rss\n- 刘强东新创游艇品牌关联公司曝光，并与深圳、珠海政府签约。\n  原文: http://",
+  "summary": "### 🤖 AI & 大模型\n- 谷歌制裁OpenClaw，创始人指责其封号行为不如Anthropic友好。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-10\n- QVGen实现4bit超低比特视频生成量化，效果接近无损。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-9\n- 阿里开源Qwen3.5三款新模型，消费级显卡即可运行。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-7\n- 研究揭示大语言模型在结构性推理上存在系统性失败。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-6\n- AI能写COBOL代码，引发市场担忧致IBM股价暴跌。\n  原文: https://www.jiqizhixin.com/articles/2026-02-25-3\n\n### 💻 科技前沿\n- 上海发布“沪七条”楼市新政，大幅松绑限购与公积金政策。\n  原文: https://36kr.com/p/3698437434535817?f=rss\n- 世界人工智能大会学术会议WAICA 2026启动，姚期智任主席。\n  原文: https://36kr.com/p/3698417555976071?f=rss\n- 华为哈勃与中发展投资热控材料公司一盛新材料。\n  原文: https://36kr.com/p/3697538397744775?f=rss\n- 水下感知企业神州普惠完成B轮融资，加速民用市场拓展。\n  原文: https://36kr.com/p/3698026314870659?f=rss\n- 中建系密集接手多座万达广场，全面接管资产与运营。\n  原文: https://36kr.com/p/3698430014762633?f=rss\n\n### 💰 创投动态\n- 具身智能企业智平方完成超10亿元B轮融资，估值超百亿。\n  原文: http://www.cyzone.cn/article/825165.html\n- 具身智能公司千寻智能完成近20亿元融资，云锋基金等参投。\n  原文: http://www.cyzone.cn/article/825160.html\n- 静水湖创投新一期S接续基金超募设立并完成交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- 刘强东游艇品牌关联公司曝光，与深珠等地签合作协议。\n  原文: http://\n- AI光伏粉体材料商新川电子获近亿元pre-IPO轮融资。\n  原文: https://36kr.com/p/3698117482212997?f=rss",
   "news_items": [
     {
       "category": "AI",
-      "title": "OpenAI创始人因谷歌封号公开指责，称Anthropic会先沟通。",
+      "title": "谷歌制裁OpenClaw，创始人指责其封号行为不如Anthropic友好。",
       "link": "https://www.jiqizhixin.com/articles/2026-02-25-10",
       "source": "机器之心"
     },
     {
       "category": "AI",
-      "title": "QVGen技术将视频扩散模型量化至4bit，性能损失极小。",
-      "link": "",
-      "source": ""
+      "title": "QVGen实现4bit超低比特视频生成量化，效果接近无损。",
+      "link": "https://www.jiqizhixin.com/articles/2026-02-25-9",
+      "source": "机器之心"
     },
     {
       "category": "AI",
-      "title": "阿里开源3款消费级显卡可运行的Qwen3.5新模型。",
+      "title": "阿里开源Qwen3.5三款新模型，消费级显卡即可运行。",
       "link": "https://www.jiqizhixin.com/articles/2026-02-25-7",
       "source": "机器之心"
     },
     {
       "category": "AI",
-      "title": "研究揭示大语言模型在结构性推理任务上存在系统性失败。",
+      "title": "研究揭示大语言模型在结构性推理上存在系统性失败。",
       "link": "https://www.jiqizhixin.com/articles/2026-02-25-6",
       "source": "机器之心"
     },
     {
       "category": "AI",
-      "title": "AI能编写COBOL代码，引发市场对IBM业务担忧致其股价大跌。",
+      "title": "AI能写COBOL代码，引发市场担忧致IBM股价暴跌。",
       "link": "https://www.jiqizhixin.com/articles/2026-02-25-3",
       "source": "机器之心"
     },
     {
       "category": "科技",
-      "title": "上海出台“沪七条”楼市新政，大幅松绑限购与公积金政策。",
+      "title": "上海发布“沪七条”楼市新政，大幅松绑限购与公积金政策。",
       "link": "",
       "source": ""
     },
@@ -46,14 +46,8 @@
     },
     {
       "category": "科技",
-      "title": "华为哈勃与中发展投资金属基热管理材料公司一盛新材料。",
+      "title": "华为哈勃与中发展投资热控材料公司一盛新材料。",
       "link": "https://36kr.com/p/3697538397744775?f=rss",
-      "source": "36Kr科技"
-    },
-    {
-      "category": "科技",
-      "title": "中建系密集接手多座万达广场，全面接盘相关资产与运营。",
-      "link": "https://36kr.com/p/3698430014762633?f=rss",
       "source": "36Kr科技"
     },
     {
@@ -63,15 +57,27 @@
       "source": "36Kr科技"
     },
     {
+      "category": "科技",
+      "title": "中建系密集接手多座万达广场，全面接管资产与运营。",
+      "link": "https://36kr.com/p/3698430014762633?f=rss",
+      "source": "36Kr科技"
+    },
+    {
       "category": "创投",
-      "title": "机器人基础模型公司智平方完成超10亿元B轮融资，估值超百亿。",
+      "title": "具身智能企业智平方完成超10亿元B轮融资，估值超百亿。",
       "link": "http://www.cyzone.cn/article/824599.html",
       "source": "创业邦"
     },
     {
       "category": "创投",
-      "title": "具身智能企业千寻智能连续完成近20亿元融资，云锋基金等参投。",
+      "title": "具身智能公司千寻智能完成近20亿元融资，云锋基金等参投。",
       "link": "http://www.cyzone.cn/article/825160.html",
+      "source": "创业邦"
+    },
+    {
+      "category": "创投",
+      "title": "刘强东游艇品牌关联公司曝光，与深珠等地签合作协议。",
+      "link": "http://",
       "source": "创业邦"
     },
     {
@@ -79,14 +85,8 @@
       "title": "AI光伏粉体材料商新川电子获近亿元pre-IPO轮融资。",
       "link": "https://36kr.com/p/3698117482212997?f=rss",
       "source": "36Kr科技"
-    },
-    {
-      "category": "创投",
-      "title": "刘强东新创游艇品牌关联公司曝光，并与深圳、珠海政府签约。",
-      "link": "http://",
-      "source": "创业邦"
     }
   ],
   "total_articles": 72,
-  "generated_at": "2026-02-25T19:03:44.562530+08:00"
+  "generated_at": "2026-02-25T19:23:06.705126+08:00"
 }

@@ -10,16 +10,16 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 16px;
         }
-        .container { max-width: 800px; margin: 0 auto; }
+        .container { max-width: 1200px; margin: 0 auto; }
         .header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             color: white;
         }
         .header h1 {
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 10px;
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
             -webkit-background-clip: text;
@@ -30,11 +30,12 @@
         .tabs {
             display: flex;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         .tab {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: rgba(255,255,255,0.1);
             border-radius: 20px;
             color: #888;
@@ -51,16 +52,24 @@
         .news-section { display: none; }
         .news-section.active, .news-section.show-all { display: block; }
         
+        /* 瀑布流布局 */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        
         .news-card {
             background: rgba(255,255,255,0.05);
             border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
+            overflow: hidden;
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
         }
         .news-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px);
             border-color: rgba(0,210,255,0.3);
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
@@ -68,6 +77,21 @@
             text-decoration: none;
             color: inherit;
             display: block;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card .thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: rgba(0,0,0,0.2);
+        }
+        .news-card .content {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .news-card .category {
             display: inline-block;
@@ -77,16 +101,30 @@
             font-size: 12px;
             color: white;
             margin-bottom: 12px;
+            align-self: flex-start;
         }
         .news-card .title {
-            font-size: 18px;
+            font-size: 16px;
             color: white;
             line-height: 1.5;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .news-card .summary {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .news-card .source {
             font-size: 12px;
             color: #666;
+            margin-top: auto;
         }
         
         .history-section {
@@ -119,13 +157,22 @@
             color: #888;
             font-size: 14px;
         }
+        
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>📰 每日新闻简报</h1>
-            <p class="date">最新更新：2026-02-25 • 共 14 条</p>
+            <p class="date">最新更新：2026-02-25 • 共 72 条</p>
         </div>
         
         <div class="tabs">
@@ -136,91 +183,527 @@
         </div>
         
         <div id="news-container">
-<div class="news-section show-all" data-category="AI"><h2 style="color:white;margin:20px 0">🤖 AI</h2><div class="news-card">
+<div class="news-section show-all" data-category="AI"><div class="news-grid"><div class="news-card">
                     <a href="https://www.jiqizhixin.com/articles/2026-02-25-10" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">OpenAI创始人因谷歌封号公开指责，称Anthropic会先沟通。</div>
-                        <div class="source">机器之心</div>
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">遭谷歌制裁，OpenClaw创始人怒怼：Anthropic会先打电话，你们直接封号</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">QVGen技术将视频扩散模型量化至4bit，性能损失极小。</div>
-                        <div class="source"></div>
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-9" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">ICLR 2026 | 把视频扩散模型压到4bit，还能接近满血效果？ QVGen让「超低比特视频生成量化」真正可用</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-8" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">只要1100美元tokens，一周重写 Next.js！</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://www.jiqizhixin.com/articles/2026-02-25-7" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">阿里开源3款消费级显卡可运行的Qwen3.5新模型。</div>
-                        <div class="source">机器之心</div>
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">消费级显卡可跑！刚刚，阿里Qwen3.5又开源3款新模型</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://www.jiqizhixin.com/articles/2026-02-25-6" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">研究揭示大语言模型在结构性推理任务上存在系统性失败。</div>
-                        <div class="source">机器之心</div>
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">大语言模型真的会「推理」吗？一项系统性研究梳理 LLM 的结构性推理失败</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-5" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">最强Coding Plan上线！阿里云上线Qwen3.5、GLM-5、MiniMax M2.5、Kimi K2.5四大顶尖开源模型</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-4" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">DeepMind药物衍生公司的独家新AI，堪称AlphaFold 4的专有药物设计引擎</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://www.jiqizhixin.com/articles/2026-02-25-3" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">AI能编写COBOL代码，引发市场对IBM业务担忧致其股价大跌。</div>
-                        <div class="source">机器之心</div>
-                    </a>
-                </div></div><div class="news-section show-all" data-category="科技"><h2 style="color:white;margin:20px 0">💻 科技</h2><div class="news-card">
-                    <a href="" target="_blank">
-                        <span class="category">科技</span>
-                        <div class="title">上海出台“沪七条”楼市新政，大幅松绑限购与公积金政策。</div>
-                        <div class="source"></div>
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">AI能写COBOL代码，砸崩IBM股价，单日蒸发310亿美元，创26年最惨纪录</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/p/3698417555976071?f=rss" target="_blank">
-                        <span class="category">科技</span>
-                        <div class="title">世界人工智能大会学术会议WAICA 2026启动，姚期智任主席。</div>
-                        <div class="source">36Kr科技</div>
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-25-2" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">刚上完春晚，宇树新品机器狗就亮相了</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/p/3697538397744775?f=rss" target="_blank">
-                        <span class="category">科技</span>
-                        <div class="title">华为哈勃与中发展投资金属基热管理材料公司一盛新材料。</div>
-                        <div class="source">36Kr科技</div>
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-25" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">ICLR2026 Oral | 当情感识别不再是分类题：EmotionThinker 让 SpeechLLM 学会“解释情绪”</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-24-9" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">微软研究登上Nature：把人类文明刻在玻璃里保存一万年</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://www.jiqizhixin.com/articles/2026-02-24-8" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">AI</span>
+                            <div class="title">又快又省？仅5%参数、训练快4倍！ArcFlow用「非线性」魔法实现FLUX/Qwen推理40倍加速</div>
+                            <div class="summary"></div>
+                            <div class="source">机器之心</div>
+                        </div>
+                    </a>
+                </div></div></div><div class="news-section show-all" data-category="科技"><div class="news-grid"><div class="news-card">
+                    <a href="https://36kr.com/p/3698569046667142?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">一个做户外的人，开始怀疑户外</div>
+                            <div class="summary">撰文｜王利 编辑｜薇薇子、王小坤 2022年夏末，推土机开进米兰东南部一片废墟，履带碾过碎石杂草，停在几栋低矮旧厂房前。 厂房砖墙斑驳，圆窗大多破了，墙上爬着枯藤。这里曾是座货运站，昔日机油味弥漫，工...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3698580039085698?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">氪星晚报｜英特尔与SambaNova达成多年战略合作；宗馥莉任浙江娃哈哈管理咨询公司董事；特斯拉指控法国饮料公司恶意抢注Cybercab商标</div>
+                            <div class="summary">大公司： 横店影视：连续2日收盘价跌幅偏离值累计超20% 36氪获悉，横店影视公告，公司股票于2026年2月24日、25日连续2个交易日内日收盘价格跌幅偏离值累计超20%，属异常波动。经自查及向控股股...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3698430014762633?f=rss" target="_blank">
-                        <span class="category">科技</span>
-                        <div class="title">中建系密集接手多座万达广场，全面接盘相关资产与运营。</div>
-                        <div class="source">36Kr科技</div>
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">中建系密集接手多座万达广场</div>
+                            <div class="summary">近日常州新北万达广场投资有限公司发生股权变更，原股东大连万达商业管理集团股份有限公司退出，中国建筑第二工程局有限公司（中建二局）成为新的控股股东，持股比例100%。 同时，万达系管理层吴华、唐天宗等人...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/p/3698026314870659?f=rss" target="_blank">
-                        <span class="category">科技</span>
-                        <div class="title">水下感知企业神州普惠完成B轮融资，加速民用市场拓展。</div>
-                        <div class="source">36Kr科技</div>
-                    </a>
-                </div></div><div class="news-section show-all" data-category="创投"><h2 style="color:white;margin:20px 0">💰 创投</h2><div class="news-card">
-                    <a href="http://www.cyzone.cn/article/824599.html" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">机器人基础模型公司智平方完成超10亿元B轮融资，估值超百亿。</div>
-                        <div class="source">创业邦</div>
+                    <a href="https://36kr.com/p/3698437434535817?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">“沪七条”落地，上海或成一线城市“企稳第一城”</div>
+                            <div class="summary">春节假期刚结束，上海楼市迎来重磅利好。 2月25日，上海市住房城乡建设管理委等五部门联合印发《关于进一步优化调整本市房地产政策的通知》（以下简称《通知》），围绕调减限购、优化公积金贷款、调整房产税三个...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="http://www.cyzone.cn/article/825160.html" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">具身智能企业千寻智能连续完成近20亿元融资，云锋基金等参投。</div>
-                        <div class="source">创业邦</div>
+                    <a href="https://36kr.com/p/3698417555976071?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">八年积淀，中国人工智能迎来自主的世界级学术主场WAICA</div>
+                            <div class="summary">WAICA 2026正式启动：姚期智任主席，首创“人工智能+大众+专家”协同评审 当全球人工智能学术界苦于审稿失真、复现乏力、青年学者上升通道收窄之时，一场以“重塑规则”为使命的学术会议在上海正式启航...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3698117482212997?f=rss" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">AI光伏粉体材料商新川电子获近亿元pre-IPO轮融资。</div>
-                        <div class="source">36Kr科技</div>
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">AI光伏领域粉体需求爆发，业绩持续增长，「新川电子」获近亿元pre-IPO轮融资 | 36氪首发</div>
+                            <div class="summary">文&nbsp;|&nbsp;张冰冰 编辑&nbsp;|&nbsp;阿至 36氪获悉，杭州新川电子材料股份有限公司（简称「新川电子」）近期宣布完成近亿元pre-IPO轮融资，由杭州城投，联想投资、富浙科...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3697538397744775?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">华为哈勃与中发展投了家热控材料公司，创始人曾造出国内首块金属基复合材料｜36氪首发</div>
+                            <div class="summary">作者丨欧雪 编辑丨袁斯来 硬氪获悉，金属基热管理材料企业——哈尔滨市一盛新材料科技有限公司（下称“一盛新材料”）近日完成数千万A轮融资，投资方为华为哈勃与中关村发展集团启航投资。本轮融资主要用于产线设...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3698026314870659?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">国内水下感知与声学装备头部企业完成新一轮融资，加速拓展民用市场｜硬氪首发</div>
+                            <div class="summary">作者&nbsp;|&nbsp;乔钰杰 编辑&nbsp;|&nbsp;袁斯来 硬氪获悉，北京神州普惠科技股份有限公司（下称“神州普惠”）近日完成B轮融资，本轮由北京市先进制造和智能装备产业投资基金投资。...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3697959369273217?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">8点1氪丨凌晨3点候补成功致千元车票作废，12306回应；油价迎来年内第三次上涨；大疆起诉美国联邦通信委员会</div>
+                            <div class="summary">今日热点导览 宝马7系降价约27万，新年BBA车价大降 今年春节假期新能源汽车出行创新高 周大福黄金3月涨价，一条金手链将涨18000元 部分Mac Mini生产或转移到美国，苹果供应链再调整 iPh...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/p/3679778295197314?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">2026医疗展望：百家公司港股排队，医疗板块能否再创「神话」</div>
+                            <div class="summary">文 | 胡香赟 海若镜 编辑 | 海若镜 2026开年，医疗赛道颇为热闹，“爆火”与“遇冷”同时在市场上演。 精锋医疗、北芯生命等医疗器械股接连上市，涨势颇佳；脑机接口引发一二级市场集体狂欢，博睿康、...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698611707244169?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">四川黄金：股东北京金阳拟减持不超2.12%股份</div>
+                            <div class="summary">36氪获悉，四川黄金公告，持股5%以上股东北京金阳矿业投资有限责任公司计划自公告披露之日起15个交易日后的3个月内，以集中竞价或大宗交易方式合计减持不超过890.00万股，占公司总股本比例不超2.11...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698625104179074?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">2026年2月总票房破70亿</div>
+                            <div class="summary">36氪获悉，据灯塔专业版数据，截至2月25日，2026年2月总票房（含预售）破70亿。 ​​​</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698608974409607?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">*ST仁东：股价连续3日涨幅偏离值超12%，提示多项风险</div>
+                            <div class="summary">36氪获悉，*ST仁东公告，公司股票交易价格连续3个交易日（2026年2月13日、2月24日、2月25日）收盘价格涨幅偏离值累计超12%，属异常波动。公司核实后表示，前期披露信息无更正或补充，未发现影...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698611103002242?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">智洋创新：终止重大资产重组，股票2月26日起复牌</div>
+                            <div class="summary">36氪获悉，智洋创新公告，公司原筹划以发行股份等方式购买灵明光子控股权并募集配套资金，预计构成重大资产重组和关联交易，不会导致控制权变更。因市场环境变化，交易双方未就核心条款达成一致，公司决定终止筹划...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698607870684802?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">雅居乐集团：香港高等法院颁令将清盘呈请聆讯延期至3月2日</div>
+                            <div class="summary">36氪获悉，雅居乐集团在港交所公告称，香港高等法院颁令将清盘呈请聆讯延期至2026年3月2日。</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698610703609481?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">胜宏科技：已向香港联交所更新递交H股发行申请</div>
+                            <div class="summary">36氪获悉，胜宏科技公告，公司正在进行申请发行境外上市外资股（H股）并在香港联交所主板上市的相关工作。公司已于2025年8月20日向香港联交所递交了本次发行的申请，并于同日在香港联交所网站刊登了本次发...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698591798013577?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">机构今日买入通源石油等26股，卖出翔鹭钨业3.4亿元</div>
+                            <div class="summary">盘后数据显示，2月25日龙虎榜中，共35只个股出现了机构的身影，有26只股票呈现机构净买入，9只股票呈现机构净卖出。当天机构净买入前三的股票分别是通源石油、建设机械、中钨高新，净买入金额分别是3.85...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698591278132865?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">中汽协：1月销量排名前十位的SUV生产企业共销售73.4万辆</div>
+                            <div class="summary">36氪获悉，据中国汽车工业协会统计分析，2026年1月，销量排名前十位的SUV生产企业共销售73.4万辆，占SUV销售总量的63.9%。在上述十家企业中，与去年同期相比，除小米汽车同期没有数据外，长城...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698587001319300?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">珩湾科技：寻求分拆实体在纳斯达克独立上市</div>
+                            <div class="summary">36氪获悉，珩湾科技在港交所发布公告，公司正在寻求将分拆实体分拆并在纳斯达克独立上市。公司已根据第15项应用指引向联交所提交有关拟议分拆的提案，且联交所已批准公司可进行拟议分拆。</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3698586380234628?f=rss" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">科技</span>
+                            <div class="title">牧原股份：拟变更公司名称为牧原食品集团股份有限公司</div>
+                            <div class="summary">36氪获悉，牧原股份公告，公司于2月25日召开董事会，审议通过变更公司名称议案，该议案尚需股东会批准，且不涉及证券简称及代码变更。公司拟将中文名称由“牧原食品股份有限公司”变更为“牧原食品集团股份有限...</div>
+                            <div class="source">36Kr科技</div>
+                        </div>
+                    </a>
+                </div></div></div><div class="news-section show-all" data-category="创投"><div class="news-grid"><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">揭秘刘强东游艇品牌关联公司</div>
+                            <div class="summary">据报道，2月24日，刘强东新创立的游艇独立品牌Sea Expandary与深圳、珠海等地政府签署了战略合作协议。官网信息显示，Sea Expandary关联公司为深圳市探海游艇产业发展有限公司。天眼查...</div>
+                            <div class="source">创业邦</div>
+                        </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">刘强东新创游艇品牌关联公司曝光，并与深圳、珠海政府签约。</div>
-                        <div class="source">创业邦</div>
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">2026电影经济促进年启幕，现存电影相关企业超168万家</div>
+                            <div class="summary">2026年春节档电影热度颇高，截至目前预售票房已突破1.6亿元，《惊蛰无声》《镖人：风起大漠》等多部影片纷纷锁定该档期，为观众带来丰富选择。近日，“2026电影经济促进年”在北京正式启动，活动由国家电...</div>
+                            <div class="source">创业邦</div>
+                        </div>
                     </a>
-                </div></div>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">杨紫方发布维权进展</div>
+                            <div class="summary">近日，杨紫委托律师发布维权进展。针对杨紫诉微博用户“王***ieve”（UID：381***49）一案，北京互联网法院一审认定被告侵权，并判决被告承担赔偿损失、赔礼道歉的法律责任；后被告上诉，北京市第...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/825197.html" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">超募设立！静水湖创投旗下新一期S接续基金顺利完成全部实缴和投资交割</div>
+                            <div class="summary">近日，静水湖创投旗下新一期S接续基金——苏州工业园区静水湖赛瑞创业投资合伙企业（有限合伙）（简称“静水湖赛瑞”）实现超募设立并顺利完成全部实缴和投资交割。这是静水湖创投近期设立的第二支S接续基金，该支...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/825165.html" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">融资丨智平方宣布完成B轮融资，融资规模超10亿元</div>
+                            <div class="summary">马年第一响！2026年2月23日，全球机器人基础模型龙头企业智平方（AI²&nbsp;Robotics）宣布完成B轮融资，融资规模超10亿元人民币，公司估值正式超过百亿，稳居中国具身智能企业第一梯队。...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/825160.html" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">融资丨千寻智能完成近20亿融资</div>
+                            <div class="summary">近日，具身智能头部企业千寻智能连续完成两轮融资近 20 亿元，为行业发展注入强劲动能。本轮融资阵容堪称行业资本的集中亮相：云锋基金、某头部国资机构、混沌投资（葛卫东）、红杉中国等超一线机构重磅入局；S...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">云南省国有资本运营公司增资至199亿 增幅约12%</div>
+                            <div class="summary">天眼查App显示，近日，云南省国有资本运营有限公司发生工商变更，注册资本由约177.6亿人民币增至约199.1亿人民币，增幅约12%。该公司成立于2011年8月，法定代表人为薛琳，经营范围为作为战略投...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">寒假亲子冰雪热，全国现存冰雪经济相关企业超2.6万家</div>
+                            <div class="summary">寒假期间，冰雪场地“升温”，带娃玩雪成“新刚需”。家长消费观念转变，孩子参与冰雪培训低龄化趋势明显，冰雪运动渐成孩子成长“必备技能”。“雪假”、寒假与春节时间叠加，催生冰雪亲子消费热潮，多地发放消费券...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">肥胖增感染重症风险三倍，现存健身相关企业超167.5万家</div>
+                            <div class="summary">芬兰、英国等国研究人员合作开展的一项研究发现，肥胖会显著增加因常见感染住院甚至死亡的风险。该研究覆盖超54万人，平均随访13至14年，涉及流感、肺炎等多种常见感染。研究以身体质量指数（BMI）衡量肥胖...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">9岁男孩拍短剧日挣2000元，现存短视频相关企业超51万家</div>
+                            <div class="summary">杭州9岁男孩李星澄，因在短剧中出色表现火出圈。他上午还在学校参加休业式，下午就赶到片场变身“男一”。李星澄的演艺之路始于写真拍摄，因镜头感强被签约，后凭借广告试镜成功进入演艺圈。两年多来，他拍了近20...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">高铁宠物托运升级，现存宠物相关企业超537万家</div>
+                            <div class="summary">今年春节，高铁宠物托运服务迎来大升级。能办理该业务的高铁站增至110个，相关高铁列车也从54趟增加到170趟，让更多宠物能和主人一起踏上回家之旅。像从杭州东站出发，宠物托运可抵达北京南、桂林北等30个...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">黄金以旧换新国标出台，现存黄金相关企业超14万家</div>
+                            <div class="summary">我国首个《黄金以旧换新经营服务规范》团体标准于2025年12月发布，填补了行业空白。该标准明确企业准入门槛，要求合法资质与反洗钱义务并重；强化人员专业性，确保服务诚信；同时保障消费者知情权，商家需明示...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">最长春节档来袭，现存电影相关企业超168万家</div>
+                            <div class="summary">2026年“史上最长春节档”来袭，从大年初一到正月十五，每日都有新片上映，预售票房截至2月10日已突破1亿元。科幻、喜剧、动画、文艺等多种类型影片百花齐放，满足不同观众需求，这不仅是一场票房较量，更是...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">烟花爆竹是春运重点禁限品，现存相关企业超94.6万家</div>
+                            <div class="summary">春运期间，铁路公安正在加强安检，目前仅北京方面就已查获42000余起危险品，其中8人因携带烟花爆竹进站被罚。天津塘沽站旅客赵某携带1310响鞭炮，被罚款500元；河北石家庄站旅客孙某携带422响鞭炮，...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">春节前家政市场&ldquo;一工难求&rdquo;，现存家政相关企业超304万家</div>
+                            <div class="summary">春节临近，家政市场用工需求剧增。在全国大中城市的家政市场里，各店铺招聘字样随处可见。春节“替班”阿姨最难找，多数阿姨回家过年，年前大多无法上岗，市场需求大却供不应求。市场短缺推高了阿姨薪资。正常住家阿...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">情人节经济：情感驱动下的消费升级与产业革新</div>
+                            <div class="summary">2026年情人节将至，情人节作为承载爱意与情感表达的重要节日，正推动相关消费市场从单纯的商品交易，向情感价值传递与生活品质追求的方向深度转型。如今的情人节经济，早已超越单一的节日消费范畴，演变成为折射...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/824599.html" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">融资丨蔚能完成10亿元C3轮融资</div>
+                            <div class="summary">2026年2月13日，蔚能宣布完成C3轮股权融资，本轮融资金额为10亿元，截至目前蔚能C轮累计融资金额达近20亿元。在创始股东追加投资，引入海宁经开、海南澄迈、眉山东坡数家国有资本股东的基础上，公司在...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/824598.html" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">蚂蚁集团开源Ring-2.5-1T，全球首个混合线性架构万亿参数思考模型来了</div>
+                            <div class="summary">2月13日，蚂蚁集团开源发布全球首个基于混合线性架构的万亿参数思考模型&nbsp;Ring-2.5-1T，在长文本生成、数学推理与智能体任务执行上达到开源领先水平，为智能体（Agent）时代的复杂任务...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/824596.html" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">融资丨览锐光电完成数亿元C轮融资</div>
+                            <div class="summary">近日，国内电致变色领域标杆企业览锐光电完成数亿元C轮融资。本轮融资由广州越秀产业投资基金管理股份有限公司领投，浙江浙建产投发展有限公司、宁波市海曙产业投资发展有限公司、常州市政府投资基金管理有限公司等...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/824593.html" target="_blank">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <span class="category">创投</span>
+                            <div class="title">融资丨红杉中国领投数亿元融资，觅蜂科技打造具身智能数据基础设施</div>
+                            <div class="summary">近日，具身智能数据平台觅蜂科技（Maniformer）宣布完成数亿元种子轮与天使轮融资，本轮融资由红杉中国领投，鼎晖VGC、BV百度风投、云锋基金、慕华科创等顶级资本跟投，均普智能、灵初智能等产业机构...</div>
+                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div></div></div>
         </div>
         
         <div class="history-section">
@@ -231,9 +714,9 @@
         </div><div class="history-item">
             <a href="report_2026-02-25.html">2026-02-25 (14条)</a>
         </div><div class="history-item">
-            <a href="report_2026-02-25.html">2026-02-25 (9条)</a>
+            <a href="report_2026-02-24.html">2026-02-24 (15条)</a>
         </div><div class="history-item">
-            <a href="report_2026-02-24.html">2026-02-24 (12条)</a>
+            <a href="report_2026-02-23.html">2026-02-23 (15条)</a>
         </div>
             </div>
         </div>
@@ -254,7 +737,6 @@
             });
         }
         
-        // 初始化：默认显示全部
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.news-section').forEach(s => {
                 s.classList.add('show-all');
