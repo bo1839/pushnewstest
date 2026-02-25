@@ -27,4 +27,7 @@ jobs:
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
-        run: python main.py
+        run: |
+          echo "DEEPSEEK_API_KEY is set: ${{ secrets.DEEPSEEK_API_KEY != '' }}"
+          echo "FEISHU_WEBHOOK_URL is set: ${{ secrets.FEISHU_WEBHOOK_URL != '' }}"
+          python main.py

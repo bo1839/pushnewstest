@@ -20,33 +20,33 @@ import pytz
 load_dotenv()
 
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
-# 飞书 Webhook（直接从环境变量获取）
 FEISHU_WEBHOOK_URL = os.getenv("FEISHU_WEBHOOK_URL") or "https://open.feishu.cn/open-apis/bot/v2/hook/2ab18ec8-6c48-4c73-b24d-6d73b78b1b81"
 
-# 丰富的新闻源 - 全面覆盖
+# 简报网页地址（用户需要自己部署，可以GitHub Pages）
+REPORT_URL = os.getenv("REPORT_URL") or "https://bo1839.github.io/pushnewstest/"
+
+# 新闻源
 RSS_FEEDS = [
-    # 科技/IT (6个源)
     {"name": "36Kr科技", "url": "https://36kr.com/feed", "category": "科技"},
     {"name": "虎嗅", "url": "https://www.huxiu.com/rss", "category": "科技"},
     {"name": "IT之家", "url": "https://www.ithome.com/rss/rss_all.xml", "category": "科技"},
     {"name": "新浪科技", "url": "https://rss.sina.com.cn/tech/roll.xml", "category": "科技"},
-    {"name": "网易科技", "url": "https://tech.163.com/special/cm_yaowen20200513/", "category": "科技"},
-    {"name": "凤凰科技", "url": "https://tech.ifeng.com/rss.xml", "category": "科技"},
-    # 创投/金融 (5个源)
     {"name": "36Kr创投", "url": "https://36kr.com/information/VC/feed", "category": "创投"},
     {"name": "36Kr金融", "url": "https://36kr.com/information/financial/feed", "category": "创投"},
     {"name": "创业邦", "url": "https://www.cyzone.cn/rss/", "category": "创投"},
-    {"name": "投资界", "url": "https://www.pedaily.cn/rss/", "category": "创投"},
-    {"name": "铅笔道", "url": "https://www.pencilnews.cn/rss/", "category": "创投"},
-    # AI (4个源)
     {"name": "36KrAI", "url": "https://36kr.com/information/AI/feed", "category": "AI"},
-    {"name": "新智元", "url": "https://www.36kr.com/information/AI", "category": "AI"},
     {"name": "机器之心", "url": "https://www.jiqizhixin.com/rss", "category": "AI"},
-    {"name": "AI科技大本营", "url": "https://www.36kr.com/information/AI", "category": "AI"},
 ]
 
 BEIJING_TZ = pytz.timezone('Asia/Shanghai')
 
+# 存储目录
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), 'templates')
+
+def ensure_dir(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
 
 def clean_html(text):
     if not text:
@@ -55,34 +55,24 @@ def clean_html(text):
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
-
 def get_news_hash(title, url):
     return hashlib.md5(f"{title}_{url}".encode()).hexdigest()
 
-
 def is_recent(pub_date, hours=48):
     try:
-        parsed = None
         for fmt in ['%a, %d %b %Y %H:%M:%S %z', '%Y-%m-%dT%H:%M:%S%z', '%Y-%m-%d %H:%M:%S', '%Y-%m-%d']:
             try:
                 if '%z' in fmt:
                     parsed = datetime.strptime(pub_date, fmt)
                 else:
-                    parsed = datetime.strptime(pub_date, fmt)
-                    parsed = pytz.utc.localize(parsed)
-                break
+                    parsed = pytz.utc.localize(datetime.strptime(pub_date, fmt))
+                beijing_time = parsed.astimezone(BEIJING_TZ)
+                return datetime.now(BEIJING_TZ) - timedelta(hours=hours) < beijing_time
             except:
                 continue
-        if parsed is None:
-            return True
-        if parsed.tzinfo is None:
-            parsed = pytz.utc.localize(parsed)
-        beijing_time = parsed.astimezone(BEIJING_TZ)
-        now = datetime.now(BEIJING_TZ)
-        return now - timedelta(hours=hours) < beijing_time
+        return True
     except:
         return True
-
 
 def fetch_feed(feed_info):
     try:
@@ -99,7 +89,7 @@ def fetch_feed(feed_info):
             article = {
                 'title': title,
                 'link': link,
-                'summary': summary[:200] if summary else '',
+                'summary': summary[:300] if summary else '',
                 'pub_date': pub_date,
                 'category': feed_info['category'],
                 'source': feed_info['name'],
@@ -111,7 +101,6 @@ def fetch_feed(feed_info):
     except Exception as e:
         print(f"   ❌ 获取失败: {e}")
         return []
-
 
 def fetch_all_news():
     all_articles = []
@@ -126,34 +115,35 @@ def fetch_all_news():
     print(f"\n📊 共获取 {len(all_articles)} 篇新闻")
     return all_articles
 
-
 def categorize_news(articles):
     categories = {'AI': [], '科技': [], '创投': []}
     for article in articles:
-        cat = article.get('category', 'IT')
+        cat = article.get('category', '科技')
         if cat in categories:
             categories[cat].append(article)
         else:
             categories['科技'].append(article)
     return categories
 
-
 def build_prompt(articles):
+    """构建提示词，包含链接"""
     categories = categorize_news(articles)
     prompt_parts = ["# 今日新闻:\n"]
     for cat_name, cat_articles in categories.items():
         if cat_articles:
             prompt_parts.append(f"\n## {cat_name} ({len(cat_articles)}条):\n")
-            for i, article in enumerate(cat_articles[:10], 1):
+            for i, article in enumerate(cat_articles[:15], 1):
                 prompt_parts.append(f"{i}. 【{article['source']}】{article['title']}\n")
+                prompt_parts.append(f"   链接: {article['link']}\n")
                 if article['summary']:
-                    prompt_parts.append(f"   {article['summary']}\n")
+                    prompt_parts.append(f"   摘要: {article['summary'][:150]}...\n")
+                prompt_parts.append("\n")
     prompt = "".join(prompt_parts)
     prompt += """
 ---
-请筛选今天最重要的10条科技/AI/创投新闻，每条用一句话总结，每条后面必须跟原文链接。
+请筛选今天最重要的新闻，每类5条，每条用简洁的中文总结（不超过40字），每条后面必须跟原文链接。
 
-输出格式:
+输出格式（Markdown）:
 ### 🤖 AI & 大模型
 - 总结1
   原文: 链接1
@@ -161,10 +151,6 @@ def build_prompt(articles):
   原文: 链接2
 - 总结3
   原文: 链接3
-- 总结4
-  原文: 链接4
-- 总结5
-  原文: 链接5
 
 ### 💻 科技前沿
 - 总结1
@@ -173,10 +159,6 @@ def build_prompt(articles):
   原文: 链接2
 - 总结3
   原文: 链接3
-- 总结4
-  原文: 链接4
-- 总结5
-  原文: 链接5
 
 ### 💰 创投动态
 - 总结1
@@ -185,15 +167,10 @@ def build_prompt(articles):
   原文: 链接2
 - 总结3
   原文: 链接3
-- 总结4
-  原文: 链接4
-- 总结5
-  原文: 链接5
 
-要求：用中文，每条不超过40字，必须附原文链接
+要求：每条新闻必须附原文链接，格式如"原文: xxx"
 """
     return prompt
-
 
 def call_deepseek(prompt):
     if not DEEPSEEK_API_KEY:
@@ -204,7 +181,7 @@ def call_deepseek(prompt):
     data = {
         "model": "deepseek-chat",
         "messages": [
-            {"role": "system", "content": "你是科技财经新闻分析师，擅长简洁总结。"},
+            {"role": "system", "content": "你是科技财经新闻分析师，擅长简洁总结，每条新闻后必须附原文链接。"},
             {"role": "user", "content": prompt}
         ],
         "temperature": 0.7,
@@ -223,21 +200,214 @@ def call_deepseek(prompt):
         print(f"   ❌ DeepSeek API 调用失败: {e}")
         raise
 
+def parse_summary_with_links(summary_text):
+    """解析AI总结，提取每条新闻和链接"""
+    news_items = []
+    current_category = ""
+    
+    lines = summary_text.split('\n')
+    for line in lines:
+        line = line.strip()
+        # 检测分类标题
+        if '🤖' in line or 'AI' in line:
+            current_category = "AI"
+            continue
+        elif '💻' in line or '科技' in line:
+            current_category = "科技"
+            continue
+        elif '💰' in line or '创投' in line:
+            current_category = "创投"
+            continue
+        
+        # 提取新闻和链接
+        if line.startswith('- ') or line.startswith('• '):
+            content = line[2:].strip()
+            # 查找原文链接
+            link = ""
+            if '原文:' in content:
+                parts = content.rsplit('原文:', 1)
+                content = parts[0].strip()
+                link = parts[1].strip() if len(parts) > 1 else ""
+            
+            if content and current_category:
+                news_items.append({
+                    'category': current_category,
+                    'title': content,
+                    'link': link
+                })
+    
+    return news_items
 
-def send_to_feishu(content, date_str):
+def generate_html_report(date_str, news_items, all_articles):
+    """生成HTML简报"""
+    # 读取模板
+    template_path = os.path.join(TEMPLATE_DIR, 'report.html')
+    if os.path.exists(template_path):
+        with open(template_path, 'r', encoding='utf-8') as f:
+            template = f.read()
+    else:
+        # 使用默认模板
+        template = """<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>每日新闻简报</title>
+<style>body{font-family:sans-serif;background:#1a1a2e;color:#fff;padding:20px}
+.news-card{background:rgba(255,255,255,0.1);margin:10px 0;padding:15px;border-radius:10px}
+.category{background:linear-gradient(90deg,#00d2ff,#3a7bd5);padding:3px 10px;border-radius:10px;font-size:12px}
+a{color:#00d2ff}</style></head><body>
+<h1>📰 每日新闻简报 | {date}</h1>
+{news_html}
+</body></html>"""
+    
+    # 生成新闻HTML
+    category_names = {'AI': '🤖 AI & 大模型', '科技': '💻 科技前沿', '创投': '💰 创投动态'}
+    news_html = ""
+    
+    # 按分类分组
+    grouped = {'AI': [], '科技': [], '创投': []}
+    for item in news_items:
+        if item['category'] in grouped:
+            grouped[item['category']].append(item)
+    
+    for cat, items in grouped.items():
+        if items:
+            news_html += f'<h2>{category_names.get(cat, cat)}</h2>'
+            for item in items:
+                news_html += f'''<div class="news-card">
+                    <span class="category">{cat}</span>
+                    <h3><a href="{item['link']}" target="_blank">{item['title']}</a></h3>
+                </div>'''
+    
+    # 填充模板
+    html = template.replace('{date}', date_str)
+    html = html.replace('{count}', str(len(news_items)))
+    html = html.replace('{news_html}', news_html)
+    html = html.replace('{news_html}', news_items and news_html or '<p>暂无新闻</p>')
+    html = html.replace('{history_html}', '<p>历史功能开发中...</p>')
+    
+    return html
+
+def save_report(date_str, summary, news_items, all_articles):
+    """保存简报到文件"""
+    ensure_dir(DATA_DIR)
+    
+    # 保存JSON数据
+    report_data = {
+        'date': date_str,
+        'summary': summary,
+        'news_items': news_items,
+        'total_articles': len(all_articles),
+        'generated_at': datetime.now(BEIJING_TZ).isoformat()
+    }
+    
+    json_path = os.path.join(DATA_DIR, f'report_{date_str}.json')
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump(report_data, f, ensure_ascii=False, indent=2)
+    
+    # 生成HTML
+    html = generate_html_report(date_str, news_items, all_articles)
+    html_path = os.path.join(DATA_DIR, f'report_{date_str}.html')
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+    
+    # 更新历史索引
+    index_path = os.path.join(DATA_DIR, 'index.json')
+    if os.path.exists(index_path):
+        with open(index_path, 'r', encoding='utf-8') as f:
+            history = json.load(f)
+    else:
+        history = []
+    
+    # 添加新记录
+    history.insert(0, {
+        'date': date_str,
+        'count': len(news_items),
+        'url': f'report_{date_str}.html'
+    })
+    
+    # 保留最近30天
+    history = history[:30]
+    
+    with open(index_path, 'w', encoding='utf-8') as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+    
+    print(f"   💾 已保存简报到 {json_path}")
+    return json_path, html_path
+
+def send_to_feishu(summary, date_str, news_items):
+    """发送到飞书 - 美化版本，去掉原文链接"""
     if not FEISHU_WEBHOOK_URL:
         raise ValueError("未配置 FEISHU_WEBHOOK_URL")
     print("📤 正在推送到飞书...")
+    
+    # 转换总结为飞书卡片格式（不带链接）
+    content_lines = []
+    current_section = ""
+    
+    for line in summary.split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+        
+        # 检测分类
+        if 'AI' in line and '大模型' in line:
+            current_section = 'AI'
+            content_lines.append("**🤖 AI & 大模型**\n")
+            continue
+        elif '科技' in line:
+            current_section = '科技'
+            content_lines.append("**💻 科技前沿**\n")
+            continue
+        elif '创投' in line or '金融' in line:
+            current_section = '创投'
+            content_lines.append("**💰 创投动态**\n")
+            continue
+        
+        # 提取新闻内容，去掉"原文:"部分
+        if line.startswith('- ') or line.startswith('• '):
+            content = line[2:].strip()
+            # 去掉原文链接部分
+            if '原文:' in content:
+                content = content.split('原文:')[0].strip()
+            if content:
+                content_lines.append(f"• {content}")
+    
+    content = "\n".join(content_lines)
+    
+    # 构建飞书卡片 - 带按钮
     card = {
         "msg_type": "interactive",
         "card": {
-            "header": {"template": "blue", "title": {"content": f"📰 每日新闻简报 | {date_str}", "tag": "plain_text"}},
+            "header": {
+                "template": "blue",
+                "title": {
+                    "content": f"📰 每日新闻简报 | {date_str}",
+                    "tag": "plain_text"
+                }
+            },
             "elements": [
-                {"tag": "markdown", "content": content},
-                {"tag": "div", "text": {"content": f"🤖 Powered by DeepSeek • {date_str}", "tag": "lark_md"}}
+                {
+                    "tag": "markdown",
+                    "content": content
+                },
+                {"tag": "hr"},
+                {
+                    "tag": "action",
+                    "actions": [
+                        {
+                            "tag": "button",
+                            "text": {
+                                "content": "🔗 查看完整简报（含原文链接）",
+                                "tag": "plain_text"
+                            },
+                            "url": REPORT_URL,
+                            "type": "primary"
+                        }
+                    ]
+                },
+                {"tag": "div", "text": {"content": f"🤖 Powered by DeepSeek • {len(RSS_FEEDS)}个新闻源", "tag": "lark_md"}}
             ]
         }
     }
+    
     try:
         response = requests.post(FEISHU_WEBHOOK_URL, headers={"Content-Type": "application/json"}, data=json.dumps(card), timeout=30)
         result = response.json()
@@ -251,50 +421,90 @@ def send_to_feishu(content, date_str):
         print(f"   ❌ 推送异常: {e}")
         return False
 
-
 def send_fallback(articles, date_str):
-    print("📤 发送原始新闻列表...")
+    """发送原始新闻列表"""
+    print("📤 AI总结失败，发送原始新闻列表...")
     categories = categorize_news(articles)
-    content_lines = [f"# 每日新闻简报 | {date_str}\n"]
+    
+    content_lines = [f"📰 **每日新闻简报** | {date_str}\n"]
+    content_lines.append(f"共获取 **{len(articles)}** 篇新闻\n")
+    
     for cat_name, cat_articles in categories.items():
         if cat_articles:
-            content_lines.append(f"\n## {cat_name}")
+            content_lines.append(f"\n**{cat_name}**\n")
             for i, article in enumerate(cat_articles[:5], 1):
                 content_lines.append(f"{i}. {article['title']}")
-    content = "\n".join(content_lines[:20])
-    return send_to_feishu(content, date_str)
-
+    
+    content = "\n".join(content_lines[:25])
+    
+    card = {
+        "msg_type": "interactive",
+        "card": {
+            "header": {"template": "red", "title": {"content": f"📰 每日新闻 | {date_str}", "tag": "plain_text"}},
+            "elements": [
+                {"tag": "markdown", "content": content},
+                {"tag": "action", "actions": [{"tag": "button", "text": {"content": "🔗 查看完整简报", "tag": "plain_text"}, "url": REPORT_URL, "type": "primary"}]},
+                {"tag": "div", "text": {"content": f"🤖 DeepSeek", "tag": "lark_md"}}
+            ]
+        }
+    }
+    
+    try:
+        response = requests.post(FEISHU_WEBHOOK_URL, headers={"Content-Type": "application/json"}, data=json.dumps(card), timeout=30)
+        result = response.json()
+        if result.get("code") == 0:
+            print("   ✅ 推送成功!")
+            return True
+        return False
+    except Exception as e:
+        print(f"   ❌ 推送异常: {e}")
+        return False
 
 def main():
     print("=" * 50)
     print("🚀 Feishu News Bot 启动")
     print(f"⏰ 运行时间: {datetime.now(BEIJING_TZ).strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"📡 新闻源数量: {len(RSS_FEEDS)}")
+    print(f"🔗 简报地址: {REPORT_URL}")
     print("=" * 50)
+    
     if not DEEPSEEK_API_KEY:
         print("❌ 错误: 请配置 DEEPSEEK_API_KEY")
         return
     if not FEISHU_WEBHOOK_URL:
         print("❌ 错误: 请配置 FEISHU_WEBHOOK_URL")
         return
+    
     try:
         articles = fetch_all_news()
         if not articles:
             print("⚠️ 未能获取到新闻")
             return
+        
+        date_str = datetime.now(BEIJING_TZ).strftime('%Y-%m-%d')
+        
         try:
+            # 获取AI总结
             prompt = build_prompt(articles)
             summary = call_deepseek(prompt)
-            date_str = datetime.now(BEIJING_TZ).strftime('%Y-%m-%d')
-            send_to_feishu(summary, date_str)
+            
+            # 解析出新闻和链接
+            news_items = parse_summary_with_links(summary)
+            
+            # 保存简报
+            save_report(date_str, summary, news_items, articles)
+            
+            # 发送飞书（不带链接）
+            send_to_feishu(summary, date_str, news_items)
+            
         except Exception as e:
             print(f"⚠️ AI总结失败: {e}")
-            date_str = datetime.now(BEIJING_TZ).strftime('%Y-%m-%d')
             send_fallback(articles, date_str)
+        
         print("\n🎉 任务完成!")
     except Exception as e:
         print(f"\n💥 发生错误: {e}")
         raise
-
 
 if __name__ == "__main__":
     main()
