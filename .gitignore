@@ -1,22 +1,4 @@
-# Python
+data/thumbnails/
+*.pyc
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
 .env
-venv/
-env/
-.venv/
-
-# macOS
-.DS_Store
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Backup files
-*.bak

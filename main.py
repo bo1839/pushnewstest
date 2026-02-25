@@ -54,11 +54,15 @@ BEIJING_TZ = pytz.timezone('Asia/Shanghai')
 
 # 存储目录
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+THUMBNAIL_DIR = os.path.join(DATA_DIR, 'thumbnails')
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), 'templates')
 
 def ensure_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
+
+# 确保缩略图目录存在
+ensure_dir(THUMBNAIL_DIR)
 
 def clean_html(text):
     if not text:
@@ -134,8 +138,39 @@ def fetch_feed(feed_info):
         print(f"   ❌ 获取失败：{e}")
         return []
 
-def fetch_article_thumbnail(url):
-    """爬取文章网页，提取第一张或第二张有效图片作为缩略图"""
+def download_thumbnail(img_url, article_hash):
+    """下载图片到本地缩略图目录，返回本地路径"""
+    try:
+        # 检查是否已下载
+        for ext in ['.jpg', '.png', '.webp', '.jpeg']:
+            local_path = os.path.join(THUMBNAIL_DIR, f"{article_hash}{ext}")
+            if os.path.exists(local_path):
+                return f"thumbnails/{article_hash}{ext}"
+        
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+            'Referer': 'https://www.jiqizhixin.com/',
+        }
+        resp = requests.get(img_url, headers=headers, timeout=15)
+        if resp.status_code == 200 and len(resp.content) > 1000:
+            # 根据内容判断格式
+            content_type = resp.headers.get('Content-Type', '').lower()
+            ext = '.jpg'
+            if 'png' in content_type:
+                ext = '.png'
+            elif 'webp' in content_type:
+                ext = '.webp'
+            
+            local_path = os.path.join(THUMBNAIL_DIR, f"{article_hash}{ext}")
+            with open(local_path, 'wb') as f:
+                f.write(resp.content)
+            return f"thumbnails/{article_hash}{ext}"
+    except:
+        pass
+    return None
+
+def fetch_article_thumbnail(url, article_hash=None):
+    """爬取文章网页，提取第一张或第二张有效图片作为缩略图，并下载到本地"""
     if url in THUMBNAIL_CACHE:
         return THUMBNAIL_CACHE[url]
     
@@ -166,6 +201,12 @@ def fetch_article_thumbnail(url):
                     data = resp.json()
                     cover_url = data.get('cover_image_url')
                     if cover_url and is_valid_image(cover_url):
+                        # 下载到本地
+                        if article_hash:
+                            local_path = download_thumbnail(cover_url, article_hash)
+                            if local_path:
+                                THUMBNAIL_CACHE[url] = local_path
+                                return local_path
                         THUMBNAIL_CACHE[url] = cover_url
                         return cover_url
             except:
@@ -209,6 +250,11 @@ def fetch_article_thumbnail(url):
             if og_match:
                 img_url = og_match.group(1)
                 if is_valid_image(img_url):
+                    if article_hash:
+                        local_path = download_thumbnail(img_url, article_hash)
+                        if local_path:
+                            THUMBNAIL_CACHE[url] = local_path
+                            return local_path
                     THUMBNAIL_CACHE[url] = img_url
                     return img_url
         
@@ -270,13 +316,23 @@ def fetch_article_thumbnail(url):
             
             # 返回第一张或第二张图片
             if len(unique_images) >= 2:
-                # 对于某些网站，第一张可能是 logo，尝试第二张
                 selected = unique_images[1]
+                if article_hash:
+                    local_path = download_thumbnail(selected, article_hash)
+                    if local_path:
+                        THUMBNAIL_CACHE[url] = local_path
+                        return local_path
                 THUMBNAIL_CACHE[url] = selected
                 return selected
             elif unique_images:
-                THUMBNAIL_CACHE[url] = unique_images[0]
-                return unique_images[0]
+                img_url = unique_images[0]
+                if article_hash:
+                    local_path = download_thumbnail(img_url, article_hash)
+                    if local_path:
+                        THUMBNAIL_CACHE[url] = local_path
+                        return local_path
+                THUMBNAIL_CACHE[url] = img_url
+                return img_url
         
         return None
     except Exception:
@@ -293,11 +349,11 @@ def fetch_all_news():
                 if is_recent(article['pub_date'], 48):
                     all_articles.append(article)
     
-    # 爬取每篇文章的第一张图片
+    # 爬取每篇文章的第一张图片并下载到本地
     print(f"\n🖼️ 正在获取文章缩略图...")
     for i, article in enumerate(all_articles):
         if not article.get('thumbnail'):
-            thumbnail = fetch_article_thumbnail(article['link'])
+            thumbnail = fetch_article_thumbnail(article['link'], article.get('hash'))
             if thumbnail:
                 article['thumbnail'] = thumbnail
             if (i + 1) % 10 == 0:
@@ -787,13 +843,20 @@ def generate_index_html(history, latest_news_items, all_articles):
             cat_thumbnail = CATEGORY_THUMBNAILS.get(cat, DEFAULT_THUMBNAIL)
             index_html += f'<div class="news-section show-all" data-category="{cat}"><div class="news-grid">'
             for item in items[:20]:  # 每类最多 20 条
-                thumbnail = item.get('thumbnail') or cat_thumbnail
+                thumbnail = item.get('thumbnail')
+                # 如果是本地路径，加上 data 目录前缀
+                if thumbnail and thumbnail.startswith('thumbnails/'):
+                    thumbnail = 'data/' + thumbnail
+                    fallback = cat_thumbnail
+                else:
+                    fallback = thumbnail or cat_thumbnail
+                    thumbnail = fallback
                 summary = item.get('summary', '')
                 if len(summary) > 100:
                     summary = summary[:100] + '...'
                 index_html += f'''<div class="news-card">
                     <a href="{item['link']}" target="_blank">
-                        <img class="thumbnail" src="{thumbnail}" alt="" onerror="this.src='{cat_thumbnail}'">
+                        <img class="thumbnail" src="{thumbnail}" alt="" onerror="this.src='{fallback}'">
                         <div class="content">
                             <span class="category">{cat}</span>
                             <div class="title">{item['title']}</div>
