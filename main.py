@@ -70,6 +70,24 @@ def clean_html(text):
 def get_news_hash(title, url):
     return hashlib.md5(f"{title}_{url}".encode()).hexdigest()
 
+def is_today(pub_date):
+    """检查新闻是否是今天发布的"""
+    try:
+        for fmt in ['%a, %d %b %Y %H:%M:%S %z', '%Y-%m-%dT%H:%M:%S%z', '%Y-%m-%d %H:%M:%S', '%Y-%m-%d']:
+            try:
+                if '%z' in fmt:
+                    parsed = datetime.strptime(pub_date, fmt)
+                else:
+                    parsed = pytz.utc.localize(datetime.strptime(pub_date, fmt))
+                beijing_time = parsed.astimezone(BEIJING_TZ)
+                today = datetime.now(BEIJING_TZ).date()
+                return beijing_time.date() == today
+            except:
+                continue
+        return True
+    except:
+        return True
+
 def is_recent(pub_date, hours=48):
     try:
         for fmt in ['%a, %d %b %Y %H:%M:%S %z', '%Y-%m-%dT%H:%M:%S%z', '%Y-%m-%d %H:%M:%S', '%Y-%m-%d']:
@@ -216,7 +234,7 @@ def fetch_all_news():
         for article in articles:
             if article['hash'] not in seen_hashes:
                 seen_hashes.add(article['hash'])
-                if is_recent(article['pub_date'], 48):
+                if is_today(article['pub_date']):
                     all_articles.append(article)
     
     # 爬取每篇文章的第一张图片
