@@ -1,25 +1,7 @@
 {
   "date": "2026-02-27",
-  "summary": "### 🤖 AI & 大模型\n- 抖音上线长图文功能，由AI驱动，扶持深度内容创作。\n  原文: https://36kr.com/p/3700444303814536?f=rss\n- 具身智能公司“中科第五纪”获数亿元融资，为宇树机器人提供“大脑”。\n  原文: https://36kr.com/p/3700919151538052?f=rss\n- 千问AI春节期间DAU峰值达7352万，创下新高。\n  原文: https://36kr.com/newsflashes/3701027094622084?f=rss\n- 智平方完成超10亿元B轮融资，估值超百亿，成具身智能头部企业。\n  原文: http://www.cyzone.cn/article/825165.html\n- 千寻智能完成近20亿元融资，云锋基金、红杉中国等参投。\n  原文: http://www.cyzone.cn/article/825160.html\n\n### 💻 科技前沿\n- 德国总理默茨参访宇树科技，关注中国机器人技术发展。\n  原文: https://36kr.com/p/3700794963193734?f=rss\n- AWE2026将设“创新科技展区”，聚焦家电与消费电子产业升级。\n  原文: https://36kr.com/p/3700996120915848?f=rss\n- 日本政府将向芯片制造商Rapidus注资2500亿日元，以推进2纳米芯片生产。\n  原文: https://36kr.com/newsflashes/3700997560758149?f=rss\n- 云耀深维完成数千万元融资，专注高精度金属3D打印技术。\n  原文: https://36kr.com/p/3700876701642374?f=rss\n- 魅族手机业务被曝实质性停摆，或将于3月正式退市。\n  原文: https://36kr.com/p/3699924181134984?f=rss\n\n### 💰 创投动态\n- 携程集团总裁范敏、董事季琦双双辞职，公司高层变动。\n  原文: http://\n- 静水湖创投新一期S接续基金超募设立并完成交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- 云南省国有资本运营公司增资至199亿元，增幅约12%。\n  原文: http://\n- 刘强东创立游艇品牌Sea Expandary，已与多地政府签署合作协议。\n  原文: http://\n- “2026电影经济促进年”启动，全年预计投放不低于500亿元消费信贷。\n  原文: http://",
+  "summary": "### 🤖 AI & 大模型\n- 智平方完成超10亿元B轮融资，估值超百亿，成具身智能头部企业。\n  原文: http://www.cyzone.cn/article/825165.html\n- 千寻智能完成近20亿元融资，云锋基金、红杉中国等多家头部机构入局。\n  原文: http://www.cyzone.cn/article/825160.html\n\n### 💰 创投动态\n- 携程高管变动：范敏辞任董事兼总裁，季琦辞任董事，新增两名独董。\n  原文: http://\n- 静水湖创投新一期S接续基金超募设立并完成全部实缴和投资交割。\n  原文: http://www.cyzone.cn/article/825197.html\n- 云南省国有资本运营公司注册资本增至约199亿元，增幅约12%。\n  原文: http://\n- 小米起诉自媒体索赔500万，蔚来回应称账号主体与李斌已无关联。\n  原文: http://\n- 刘强东创立游艇品牌Sea Expandary，关联公司已与深珠政府签约。\n  原文: http://",
   "news_items": [
-    {
-      "category": "AI",
-      "title": "抖音上线长图文功能，由AI驱动，扶持深度内容创作。",
-      "link": "",
-      "source": ""
-    },
-    {
-      "category": "AI",
-      "title": "具身智能公司“中科第五纪”获数亿元融资，为宇树机器人提供“大脑”。",
-      "link": "https://36kr.com/p/3700919151538052?f=rss",
-      "source": "36Kr科技"
-    },
-    {
-      "category": "AI",
-      "title": "千问AI春节期间DAU峰值达7352万，创下新高。",
-      "link": "https://36kr.com/newsflashes/3701027094622084?f=rss",
-      "source": "36Kr科技"
-    },
     {
       "category": "AI",
       "title": "智平方完成超10亿元B轮融资，估值超百亿，成具身智能头部企业。",
@@ -28,53 +10,35 @@
     },
     {
       "category": "AI",
-      "title": "千寻智能完成近20亿元融资，云锋基金、红杉中国等参投。",
+      "title": "千寻智能完成近20亿元融资，云锋基金、红杉中国等多家头部机构入局。",
       "link": "http://www.cyzone.cn/article/825160.html",
       "source": "创业邦"
     },
     {
-      "category": "科技",
-      "title": "日本政府将向芯片制造商Rapidus注资2500亿日元，以推进2纳米芯片生产。",
-      "link": "https://36kr.com/newsflashes/3700997560758149?f=rss",
-      "source": "36Kr科技"
-    },
-    {
-      "category": "科技",
-      "title": "云耀深维完成数千万元融资，专注高精度金属3D打印技术。",
-      "link": "https://36kr.com/p/3700876701642374?f=rss",
-      "source": "36Kr科技"
-    },
-    {
-      "category": "科技",
-      "title": "魅族手机业务被曝实质性停摆，或将于3月正式退市。",
-      "link": "https://36kr.com/p/3699924181134984?f=rss",
-      "source": "36Kr科技"
-    },
-    {
       "category": "创投",
-      "title": "携程集团总裁范敏、董事季琦双双辞职，公司高层变动。",
-      "link": "",
-      "source": ""
-    },
-    {
-      "category": "创投",
-      "title": "云南省国有资本运营公司增资至199亿元，增幅约12%。",
+      "title": "携程高管变动：范敏辞任董事兼总裁，季琦辞任董事，新增两名独董。",
       "link": "http://",
       "source": "创业邦"
     },
     {
       "category": "创投",
-      "title": "刘强东创立游艇品牌Sea Expandary，已与多地政府签署合作协议。",
-      "link": "",
-      "source": ""
+      "title": "云南省国有资本运营公司注册资本增至约199亿元，增幅约12%。",
+      "link": "http://",
+      "source": "创业邦"
     },
     {
       "category": "创投",
-      "title": "“2026电影经济促进年”启动，全年预计投放不低于500亿元消费信贷。",
+      "title": "小米起诉自媒体索赔500万，蔚来回应称账号主体与李斌已无关联。",
+      "link": "http://",
+      "source": "创业邦"
+    },
+    {
+      "category": "创投",
+      "title": "刘强东创立游艇品牌Sea Expandary，关联公司已与深珠政府签约。",
       "link": "http://",
       "source": "创业邦"
     }
   ],
-  "total_articles": 60,
-  "generated_at": "2026-02-27T12:08:05.267379+08:00"
+  "total_articles": 30,
+  "generated_at": "2026-02-27T12:18:27.137729+08:00"
 }
