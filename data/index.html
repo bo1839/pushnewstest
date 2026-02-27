@@ -55,76 +55,87 @@
         /* 瀑布流布局 */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 16px;
         }
         
         .news-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.08);
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            padding: 0;
         }
         .news-card:hover {
-            transform: translateY(-4px);
             border-color: rgba(0,210,255,0.3);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.06);
         }
         .news-card a {
             text-decoration: none;
             color: inherit;
-            display: block;
-            flex: 1;
             display: flex;
-            flex-direction: column;
+            flex: 1;
+            flex-direction: row;
         }
         .news-card .thumbnail {
-            width: 100%;
-            height: 180px;
+            width: 100px;
+            height: 70px;
             object-fit: cover;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.3);
+            flex-shrink: 0;
         }
         .news-card .content {
-            padding: 16px;
+            padding: 8px 12px;
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
+            justify-content: center;
+        }
+        .news-card .meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
         }
         .news-card .category {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 2px 6px;
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
-            border-radius: 12px;
-            font-size: 12px;
+            border-radius: 4px;
+            font-size: 10px;
             color: white;
-            margin-bottom: 12px;
-            align-self: flex-start;
+        }
+        .news-card .pub-date {
+            font-size: 10px;
+            color: #666;
         }
         .news-card .title {
-            font-size: 16px;
+            font-size: 13px;
             color: white;
-            line-height: 1.5;
-            margin-bottom: 12px;
+            line-height: 1.3;
+            margin-bottom: 3px;
             font-weight: 500;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .news-card .summary {
-            font-size: 14px;
-            color: #aaa;
-            line-height: 1.6;
-            margin-bottom: 12px;
+            font-size: 11px;
+            color: #888;
+            line-height: 1.3;
             flex: 1;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
         .news-card .source {
-            font-size: 12px;
-            color: #666;
-            margin-top: auto;
+            display: none;
         }
         
         .history-section {
@@ -187,400 +198,480 @@
                     <a href="https://36kr.com/p/3700444303814536?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 11:48:42  +0800</span>
+                            </div>
                             <div class="title">从短视频到长文：当抖音把资讯也交给AI</div>
                             <div class="summary">作者&nbsp;|&nbsp;肖思佳 编辑&nbsp;|&nbsp;乔芊 在抖音引爆短视频行业10年后，曾被视作低效、过时的长文，却重新受到关注。 2025年底，抖音上线长图文功能，向素人创作者和媒体...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3700996120915848?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 11:30:50  +0800</span>
+                            </div>
                             <div class="title">创新“新特区”，AWE2026上海新国际博览中心W3馆创新科技展区正式亮相</div>
                             <div class="summary">在中国家电与消费电子产业规模优势持续巩固的背景下，行业正站在向结构升级和技术跃迁转变的关键节点。AWE2026选择在上海新国际博览中心这一高度成熟、产业密度最高的核心展区内，开辟一个全新的“特区型”板...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3700919151538052?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 10:11:09  +0800</span>
+                            </div>
                             <div class="title">给宇树做“大脑”的具身智能公司，融资数亿元，红杉中国投了</div>
                             <div class="summary">文｜富充 编辑｜苏建勋 在我们访谈具身智能公司“中科第五纪”期间，两件事情先后发生。 第一件事，是2026年1月，中科第五纪获得宇树科技“核心生态合作伙伴”称号。在To B及工业场景，中科第五纪目前作...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3700876701642374?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 09:37:02  +0800</span>
+                            </div>
                             <div class="title">去年出货10万件、降低打印成本80%，这家高精度金属3D打印公司连融两轮丨36氪首发</div>
                             <div class="summary">作者丨欧雪 编辑丨袁斯来 硬氪获悉，高精度微米级金属3D打印企业——云耀深维（江苏）科技有限公司（以下简称“云耀深维”）完成了天使轮及Pre-A轮数千万元融资。 其天使轮投资方为红杉种子基金、深圳高新...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3700794963193734?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 08:05:50  +0800</span>
+                            </div>
                             <div class="title">8点1氪丨玛莎拉蒂母公司全年净亏损1800亿元人民币；男童发育不良新药引爆股价，长春高新回应；德国总理默茨参访宇树科技</div>
                             <div class="summary">今日热点导览 德国总理默茨参访宇树科技 魅族被曝大量欠款成坏账 特斯拉中国官宣5年0息方案 携程集团总裁、董事双双辞职 微信上线新功能：同一文件多聊转发不重复占存储 TOP3大新闻 巨亏1800亿元，...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3699924181134984?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-26 17:23:30  +0800</span>
+                            </div>
                             <div class="title">氪星晚报 ｜魅族手机或将成为历史：业务实质性停摆，3月正式退市；英伟达黄仁勋：年内将寻机进行资本运作</div>
                             <div class="summary">大公司： 英伟达黄仁勋：年内将寻机进行资本运作 美东时间周三盘后，在英伟达财报电话会上，公司CEO黄仁勋表示，公司仍在持续开展股票回购和股息分红，并将在年内寻找合适的时机，把握独特的投资机会，推进相关...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3699717997031300?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-26 16:46:02  +0800</span>
+                            </div>
                             <div class="title">携程的变与不变</div>
                             <div class="summary">2月26日，携程集团公布了其2025年业绩公告。去年全年，该集团实现净收入624亿元，剔除投资收益的净利润为134亿。当市场习惯性地从营收、净利润等数字中探寻增长与衰退的线性轨迹时，这份报告却揭示了一...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3699776528854664?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-26 14:50:46  +0800</span>
+                            </div>
                             <div class="title">主题为科技与美学，2026亿邦新竞争力品牌大会定档四月</div>
                             <div class="summary">文丨亿邦动力 2026亿邦新竞争力品牌大会以“科技与美学”为主题，定于4月24日在上海外滩W酒店举办，著名漫画家蔡志忠、分众传媒董事局主席江南春、林清轩董事长孙来春、基诺浦董事长裴非、茵曼董事长方建华...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3699754370854786?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-26 14:29:20  +0800</span>
+                            </div>
                             <div class="title">以优质供给激发家电焕新需求 AWE2026将开展多场促消费活动</div>
                             <div class="summary">2026年3月12-15日，以“AI科技、慧享未来”为主题的2026年中国家电及消费电子博览会（AWE2026）将以“一展双区”的全新格局，在上海新国际博览中心与上海东方枢纽国际商务合作区两地同步举行...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3698585488764553?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-26 10:59:14  +0800</span>
+                            </div>
                             <div class="title">离开腾讯后，他想做一款能改变历史的三国游戏</div>
                             <div class="summary">文 | 贝果树 编辑 | 果脯 对于熟悉三国历史的玩家来说，《我的三国》的游玩体验，可能类似于主角拿到剧本的穿越文学。 公元264年，离陈寿写下《三国志》还有十余年，这时的陈寿，在官场上还资历尚浅。但...</div>
-                            <div class="source">36Kr科技</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701141264445065?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701038447046536?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">瑞银集团董事会变动</div>
-                            <div class="summary">Agustín Carstens和Luca Maestri获得提名，将于4月份举行的2026年年度股东大会上竞选瑞银集团及瑞银股份董事会成员。William C. Dudley和Jeanette Wo...</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 12:23:54  +0800</span>
+                            </div>
+                            <div class="title">沃尔核材：目前公司已拥有16台进口发泡芯线挤出机，高速线整体产能已得到较大提升</div>
+                            <div class="summary">36氪获悉，沃尔核材在互动平台表示，目前公司已拥有16台进口发泡芯线挤出机，其中部分设备正有序安装调试，高速线整体产能已得到较大提升，后续公司将结合市场需求情况合理安排已调试好的设备投入使用；2026...</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701135795498882?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701035763838597?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">研究称AI资本支出占美国第四季度GDP增幅的近五分之一</div>
-                            <div class="summary">根据潘森宏观经济公司（Pantheon Macroeconomics）的一份新分析报告，美国国内生产总值（GDP）的增长中，越来越多的份额来自于人工智能领域的资本支出以及科技股上涨对消费者支出的“财富...</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 12:19:12  +0800</span>
+                            </div>
+                            <div class="title">万祥科技：公司生产的精密结构件已在手机端有所应用</div>
+                            <div class="summary">36氪获悉，万祥科技在互动平台表示，公司生产的精密结构件已在手机端有所应用，同时公司生产的数电传控集成组件和柔性功能零组件的手机端应用正处于研发开拓阶段。</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701124948668039?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701034801671814?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">协鑫能科旗下能源科技公司增至约11.8亿元</div>
-                            <div class="summary">36氪获悉，爱企查App显示，近日，协鑫焕动能源科技（绍兴）有限公司发生工商变更，注册资本由约5.7亿元人民币增至约11.8亿元人民币，增幅约107%，同时，多位高管发生变更。该公司成立于2022年6...</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 12:15:12  +0800</span>
+                            </div>
+                            <div class="title">天融信：暂未向字节跳动Seedance 2.0提供安全防护</div>
+                            <div class="summary">36氪获悉，天融信在互动平台表示，公司暂未向字节跳动Seedance 2.0提供安全防护。</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701119798521734?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701042411663236?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">中共中央政治局会议：实施更加积极有为的宏观政策，持续扩大内需、优化供给</div>
-                            <div class="summary">中共中央政治局2月27日召开会议，讨论国务院拟提请第十四届全国人民代表大会第四次会议审查的中华人民共和国国民经济和社会发展第十五个五年规划纲要草案稿和审议的《政府工作报告》稿。会议指出，做好今年政府工...</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 12:15:01  +0800</span>
+                            </div>
+                            <div class="title">豆包手机回应存在安全漏洞：针对视频演示的攻击方法，豆包手机助手已升级了相应的防护措施</div>
+                            <div class="summary">36氪获悉，豆包手机发布关于恶意炒作“豆包手机助手漏洞”黑公关行为的严正声明，其中提到，字节跳动高度重视用户信息安全，设有公开的安全漏洞响应平台，为漏洞报告者提供丰厚奖励。截至目前，我方并未收到豆包手...</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701117601853314?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701040036851585?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">中共中央政治局会议：要继续实施更加积极的财政政策和适度宽松的货币政策，强化改革举措与宏观政策协同</div>
-                            <div class="summary">中共中央政治局2月27日召开会议，讨论国务院拟提请第十四届全国人民代表大会第四次会议审查的中华人民共和国国民经济和社会发展第十五个五年规划纲要草案稿和审议的《政府工作报告》稿。会议强调，要继续实施更加...</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 12:12:36  +0800</span>
+                            </div>
+                            <div class="title">字节跳动支持的懂车帝据悉正在考虑香港IPO</div>
+                            <div class="summary">字节跳动支持的懂车帝据悉正在考虑香港IPO。（新浪财经）</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701113103134339?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701030151990919?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">中共中央政治局召开会议，讨论“十五五”规划纲要草案和政府工作报告</div>
-                            <div class="summary">中共中央政治局2月27日召开会议，讨论国务院拟提请第十四届全国人民代表大会第四次会议审查的中华人民共和国国民经济和社会发展第十五个五年规划纲要草案稿和审议的《政府工作报告》稿。（新华社）</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 12:02:33  +0800</span>
+                            </div>
+                            <div class="title">恒指午间休盘涨0.75%，恒生科技指数涨1.04%</div>
+                            <div class="summary">36氪获悉，恒指午间休盘涨0.75%，恒生科技指数涨1.04%；科技、汽车板块领涨，金山云涨超9%，小马智行、商汤涨超6%，哔哩哔哩涨超3%；半导体、电气设备板块跌幅居前，兆易创新跌超6%，澜起科技、...</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701101522972296?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701027094622084?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">《华盛顿邮报》据悉2025年亏损超1亿美元，财务困境导致裁员30%</div>
-                            <div class="summary">据报道，《华盛顿邮报》去年亏损超过1亿美元，这一财务困境促使该公司在本月早些时候决定裁员30%。（界面）</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 11:59:27  +0800</span>
+                            </div>
+                            <div class="title">QuestMobile：千问春节期间DAU创新高</div>
+                            <div class="summary">2月26日，QuestMobile数据显示，春节期间，千问的DAU创下新高，峰值为7352万，最高增幅达940%。千问“春节请客计划”活动首日（2月6日）即吸引1475万用户参与，次日参与人数接近20...</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701073118703493?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701013809278592?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">机器人租赁火出圈，有企业机器人租赁订单排到3月底</div>
-                            <div class="summary">随着机器人应用进入更多新场景，节后机器人租赁市场持续升温。在浙江杭州钱塘区的一家机器人公司，技术人员正在抓紧为机器人编制最新舞蹈动作，当地一家企业为下个月举办的活动专门租下了这批机器人，它们的舞蹈动作...</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 11:53:50  +0800</span>
+                            </div>
+                            <div class="title">半日主力资金加仓计算机板块，抛售电子板块</div>
+                            <div class="summary">主力资金早间净流入计算机、有色金属等板块，净流电子、建筑材料等板块。具体到个股来看，华胜天成、包钢股份、拓维信息获净流入47.09亿元、25.99亿元、22.41亿元。净流出方面，新易盛、中际旭创、胜...</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701049018216068?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3701006513303176?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">太力科技：公司相关材料技术暂未应用于柔性光伏、太空光伏领域</div>
-                            <div class="summary">36氪获悉，太力科技在互动平台表示，公司相关材料技术暂未应用于柔性光伏、太空光伏领域，公司会持续关注材料应用的新领域和新机会，若有相关业务拓展，将及时依规披露。</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 11:45:27  +0800</span>
+                            </div>
+                            <div class="title">上海黄金饰品行业协会：春节期间上海黄金珠宝市场销售额达7.2亿元，同比增长5%</div>
+                            <div class="summary">36氪获悉，上海黄金饰品行业协会的统计数据显示，春节期间，上海黄金珠宝市场销售额达7.2亿元，实现同比5%增长。值得注意的是，在产品结构上协会了解到部分品牌主动优化调整，加大对钻石及黄金镶钻产品的推新...</div>
                         </div>
                     </a>
                 </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701078835605127?f=rss" target="_blank">
+                    <a href="https://36kr.com/newsflashes/3700997560758149?f=rss" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">科技</span>
-                            <div class="title">万达继续出售资产，20亿元转让上海颛桥万达广场</div>
-                            <div class="summary">从独立信源处获悉，万达以20.48亿元的价格出售了旗下位于上海的颛桥万达广场。（财联社）</div>
-                            <div class="source">36Kr科技</div>
+                            <div class="meta">
+                                <span class="category">科技</span>
+                                <span class="pub-date">2026-02-27 11:39:20  +0800</span>
+                            </div>
+                            <div class="title">日本政府将向芯片制造商Rapidus提供2500亿日元新资金</div>
+                            <div class="summary">日本政府将向有芯片制造商Rapidus注资2500亿日元（约合16亿美元）。这笔新资金将在未来两个财政年度到位，这将使日本更接近其提供总计3万亿日元支持的目标，以帮助Rapidus大规模生产尖端2纳米...</div>
                         </div>
                     </a>
                 </div></div></div><div class="news-section show-all" data-category="创投"><div class="news-grid"><div class="news-card">
-                    <a href="http://www.cyzone.cn/article/825479.html" target="_blank">
-                        <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
-                        <div class="content">
-                            <span class="category">创投</span>
-                            <div class="title">丰泊国际CEO孙慧来：科技金融不看&ldquo;后视镜&rdquo;，只看&ldquo;导航&rdquo;</div>
-                            <div class="summary">16年前，那个普通话还说不利落、对大陆市场一无所知的孙慧来，或许没想到，这段用六箱充电宝等产品开始的创业试水，会在数年后催生出一家撬动亚洲跨境金融格局的科技公司——丰泊国际（FundPark）。丰泊国...</div>
-                            <div class="source">创业邦</div>
-                        </div>
-                    </a>
-                </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Thu, 26 Feb 2026 07:55:59 GMT</span>
+                            </div>
                             <div class="title">盘点携程前高管范敏季琦商业版图</div>
                             <div class="summary">据媒体报道，2月26日，携程集团公告，范敏已辞任公司董事兼总裁职务，季琦已辞任公司董事职务。同时，公司宣布任命吴亦泓及萧杨为新任独立董事。公开资料显示，范敏2013年任携程董事会副主席兼总裁。季琦是携...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Thu, 26 Feb 2026 01:28:22 GMT</span>
+                            </div>
                             <div class="title">揭秘被小米索赔500万账号关联公司</div>
                             <div class="summary">据媒体报道，2月25日，针对有媒体报道小米起诉自媒体索赔500万，账号主体实控人为蔚来汽车创始人、董事长兼CEO李斌一事，蔚来汽车相关人士回应界面新闻称，涉诉账号由北京易车信息科技有限公司100%控股...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Wed, 25 Feb 2026 05:47:18 GMT</span>
+                            </div>
                             <div class="title">揭秘刘强东游艇品牌关联公司</div>
                             <div class="summary">据报道，2月24日，刘强东新创立的游艇独立品牌Sea Expandary与深圳、珠海等地政府签署了战略合作协议。官网信息显示，Sea Expandary关联公司为深圳市探海游艇产业发展有限公司。天眼查...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Wed, 25 Feb 2026 02:45:10 GMT</span>
+                            </div>
                             <div class="title">2026电影经济促进年启幕，现存电影相关企业超168万家</div>
                             <div class="summary">2026年春节档电影热度颇高，截至目前预售票房已突破1.6亿元，《惊蛰无声》《镖人：风起大漠》等多部影片纷纷锁定该档期，为观众带来丰富选择。近日，“2026电影经济促进年”在北京正式启动，活动由国家电...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Tue, 24 Feb 2026 06:48:24 GMT</span>
+                            </div>
                             <div class="title">杨紫方发布维权进展</div>
                             <div class="summary">近日，杨紫委托律师发布维权进展。针对杨紫诉微博用户“王***ieve”（UID：381***49）一案，北京互联网法院一审认定被告侵权，并判决被告承担赔偿损失、赔礼道歉的法律责任；后被告上诉，北京市第...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://www.cyzone.cn/article/825197.html" target="_blank">
-                        <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
+                        <img class="thumbnail" src="thumbnails/c5545f295b49707768a48faf3195f870.jpg" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Tue, 24 Feb 2026 03:39:55 GMT</span>
+                            </div>
                             <div class="title">超募设立！静水湖创投旗下新一期S接续基金顺利完成全部实缴和投资交割</div>
                             <div class="summary">近日，静水湖创投旗下新一期S接续基金——苏州工业园区静水湖赛瑞创业投资合伙企业（有限合伙）（简称“静水湖赛瑞”）实现超募设立并顺利完成全部实缴和投资交割。这是静水湖创投近期设立的第二支S接续基金，该支...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://www.cyzone.cn/article/825165.html" target="_blank">
-                        <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
+                        <img class="thumbnail" src="thumbnails/2ec308f0f20bf9cc2a4f69a8ae536a8b.jpg" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Tue, 24 Feb 2026 02:32:56 GMT</span>
+                            </div>
                             <div class="title">融资丨智平方宣布完成B轮融资，融资规模超10亿元</div>
                             <div class="summary">马年第一响！2026年2月23日，全球机器人基础模型龙头企业智平方（AI²&nbsp;Robotics）宣布完成B轮融资，融资规模超10亿元人民币，公司估值正式超过百亿，稳居中国具身智能企业第一梯队。...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://www.cyzone.cn/article/825160.html" target="_blank">
-                        <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
+                        <img class="thumbnail" src="thumbnails/b1c1d86e6267aeba1372a3cf838f0d02.jpg" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Tue, 24 Feb 2026 01:40:25 GMT</span>
+                            </div>
                             <div class="title">融资丨千寻智能完成近20亿融资</div>
                             <div class="summary">近日，具身智能头部企业千寻智能连续完成两轮融资近 20 亿元，为行业发展注入强劲动能。本轮融资阵容堪称行业资本的集中亮相：云锋基金、某头部国资机构、混沌投资（葛卫东）、红杉中国等超一线机构重磅入局；S...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Tue, 24 Feb 2026 01:38:30 GMT</span>
+                            </div>
                             <div class="title">云南省国有资本运营公司增资至199亿 增幅约12%</div>
                             <div class="summary">天眼查App显示，近日，云南省国有资本运营有限公司发生工商变更，注册资本由约177.6亿人民币增至约199.1亿人民币，增幅约12%。该公司成立于2011年8月，法定代表人为薛琳，经营范围为作为战略投...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Mon, 23 Feb 2026 01:45:43 GMT</span>
+                            </div>
                             <div class="title">寒假亲子冰雪热，全国现存冰雪经济相关企业超2.6万家</div>
                             <div class="summary">寒假期间，冰雪场地“升温”，带娃玩雪成“新刚需”。家长消费观念转变，孩子参与冰雪培训低龄化趋势明显，冰雪运动渐成孩子成长“必备技能”。“雪假”、寒假与春节时间叠加，催生冰雪亲子消费热潮，多地发放消费券...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Mon, 23 Feb 2026 01:44:51 GMT</span>
+                            </div>
                             <div class="title">肥胖增感染重症风险三倍，现存健身相关企业超167.5万家</div>
                             <div class="summary">芬兰、英国等国研究人员合作开展的一项研究发现，肥胖会显著增加因常见感染住院甚至死亡的风险。该研究覆盖超54万人，平均随访13至14年，涉及流感、肺炎等多种常见感染。研究以身体质量指数（BMI）衡量肥胖...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Thu, 19 Feb 2026 08:47:56 GMT</span>
+                            </div>
                             <div class="title">9岁男孩拍短剧日挣2000元，现存短视频相关企业超51万家</div>
                             <div class="summary">杭州9岁男孩李星澄，因在短剧中出色表现火出圈。他上午还在学校参加休业式，下午就赶到片场变身“男一”。李星澄的演艺之路始于写真拍摄，因镜头感强被签约，后凭借广告试镜成功进入演艺圈。两年多来，他拍了近20...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Thu, 19 Feb 2026 08:46:51 GMT</span>
+                            </div>
                             <div class="title">高铁宠物托运升级，现存宠物相关企业超537万家</div>
                             <div class="summary">今年春节，高铁宠物托运服务迎来大升级。能办理该业务的高铁站增至110个，相关高铁列车也从54趟增加到170趟，让更多宠物能和主人一起踏上回家之旅。像从杭州东站出发，宠物托运可抵达北京南、桂林北等30个...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Wed, 18 Feb 2026 08:02:33 GMT</span>
+                            </div>
                             <div class="title">黄金以旧换新国标出台，现存黄金相关企业超14万家</div>
                             <div class="summary">我国首个《黄金以旧换新经营服务规范》团体标准于2025年12月发布，填补了行业空白。该标准明确企业准入门槛，要求合法资质与反洗钱义务并重；强化人员专业性，确保服务诚信；同时保障消费者知情权，商家需明示...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Wed, 18 Feb 2026 08:00:57 GMT</span>
+                            </div>
                             <div class="title">最长春节档来袭，现存电影相关企业超168万家</div>
                             <div class="summary">2026年“史上最长春节档”来袭，从大年初一到正月十五，每日都有新片上映，预售票房截至2月10日已突破1亿元。科幻、喜剧、动画、文艺等多种类型影片百花齐放，满足不同观众需求，这不仅是一场票房较量，更是...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Mon, 16 Feb 2026 07:45:39 GMT</span>
+                            </div>
                             <div class="title">烟花爆竹是春运重点禁限品，现存相关企业超94.6万家</div>
                             <div class="summary">春运期间，铁路公安正在加强安检，目前仅北京方面就已查获42000余起危险品，其中8人因携带烟花爆竹进站被罚。天津塘沽站旅客赵某携带1310响鞭炮，被罚款500元；河北石家庄站旅客孙某携带422响鞭炮，...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Mon, 16 Feb 2026 07:44:47 GMT</span>
+                            </div>
                             <div class="title">春节前家政市场&ldquo;一工难求&rdquo;，现存家政相关企业超304万家</div>
                             <div class="summary">春节临近，家政市场用工需求剧增。在全国大中城市的家政市场里，各店铺招聘字样随处可见。春节“替班”阿姨最难找，多数阿姨回家过年，年前大多无法上岗，市场需求大却供不应求。市场短缺推高了阿姨薪资。正常住家阿...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
                         <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Fri, 13 Feb 2026 08:15:12 GMT</span>
+                            </div>
                             <div class="title">情人节经济：情感驱动下的消费升级与产业革新</div>
                             <div class="summary">2026年情人节将至，情人节作为承载爱意与情感表达的重要节日，正推动相关消费市场从单纯的商品交易，向情感价值传递与生活品质追求的方向深度转型。如今的情人节经济，早已超越单一的节日消费范畴，演变成为折射...</div>
-                            <div class="source">创业邦</div>
                         </div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://www.cyzone.cn/article/824599.html" target="_blank">
-                        <img class="thumbnail" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
+                        <img class="thumbnail" src="thumbnails/ad2879f42330218016e3114ed3470eb2.jpg" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
                         <div class="content">
-                            <span class="category">创投</span>
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Fri, 13 Feb 2026 05:25:42 GMT</span>
+                            </div>
                             <div class="title">融资丨蔚能完成10亿元C3轮融资</div>
                             <div class="summary">2026年2月13日，蔚能宣布完成C3轮股权融资，本轮融资金额为10亿元，截至目前蔚能C轮累计融资金额达近20亿元。在创始股东追加投资，引入海宁经开、海南澄迈、眉山东坡数家国有资本股东的基础上，公司在...</div>
-                            <div class="source">创业邦</div>
+                        </div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/824598.html" target="_blank">
+                        <img class="thumbnail" src="thumbnails/a6bd2dd0b3d43e36b13a57ecf2717bae.jpg" alt="" onerror="this.src='https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop'">
+                        <div class="content">
+                            <div class="meta">
+                                <span class="category">创投</span>
+                                <span class="pub-date">Fri, 13 Feb 2026 04:30:56 GMT</span>
+                            </div>
+                            <div class="title">蚂蚁集团开源Ring-2.5-1T，全球首个混合线性架构万亿参数思考模型来了</div>
+                            <div class="summary">2月13日，蚂蚁集团开源发布全球首个基于混合线性架构的万亿参数思考模型&nbsp;Ring-2.5-1T，在长文本生成、数学推理与智能体任务执行上达到开源领先水平，为智能体（Agent）时代的复杂任务...</div>
                         </div>
                     </a>
                 </div></div></div>
@@ -590,7 +681,7 @@
             <h3>📚 历史消息</h3>
             <div class="history-list">
                 <div class="history-item">
-            <a href="report_2026-02-27.html">2026-02-27 (10条)</a>
+            <a href="report_2026-02-27.html">2026-02-27 (12条)</a>
         </div><div class="history-item">
             <a href="report_2026-02-25.html">2026-02-25 (14条)</a>
         </div><div class="history-item">
