@@ -46,8 +46,8 @@ RSS_FEEDS = [
     {"name": "36Kr创投", "url": "https://36kr.com/information/VC/feed", "category": "创投"},
     {"name": "36Kr金融", "url": "https://36kr.com/information/financial/feed", "category": "创投"},
     {"name": "创业邦", "url": "https://www.cyzone.cn/rss/", "category": "创投"},
-    {"name": "36KrAI", "url": "https://36kr.com/information/AI/feed", "category": "AI"},
-    {"name": "机器之心", "url": "https://www.jiqizhixin.com/rss", "category": "AI"},
+    {"name": "品玩", "url": "https://www.pingwest.com/feed", "category": "科技"},
+    {"name": "虎嗅AI", "url": "https://www.huxiu.com/channel/1034001", "category": "AI"},
 ]
 
 BEIJING_TZ = pytz.timezone('Asia/Shanghai')
@@ -70,8 +70,8 @@ def clean_html(text):
 def get_news_hash(title, url):
     return hashlib.md5(f"{title}_{url}".encode()).hexdigest()
 
-def is_today(pub_date):
-    """检查新闻是否是今天发布的"""
+def is_recent_news(pub_date, hours=36):
+    """检查新闻是否是最近发布的（默认36小时）"""
     try:
         for fmt in ['%a, %d %b %Y %H:%M:%S %z', '%Y-%m-%dT%H:%M:%S%z', '%Y-%m-%d %H:%M:%S', '%Y-%m-%d']:
             try:
@@ -80,8 +80,7 @@ def is_today(pub_date):
                 else:
                     parsed = pytz.utc.localize(datetime.strptime(pub_date, fmt))
                 beijing_time = parsed.astimezone(BEIJING_TZ)
-                today = datetime.now(BEIJING_TZ).date()
-                return beijing_time.date() == today
+                return datetime.now(BEIJING_TZ) - timedelta(hours=hours) < beijing_time
             except:
                 continue
         return True
@@ -234,7 +233,7 @@ def fetch_all_news():
         for article in articles:
             if article['hash'] not in seen_hashes:
                 seen_hashes.add(article['hash'])
-                if is_today(article['pub_date']):
+                if is_recent_news(article['pub_date']):
                     all_articles.append(article)
     
     # 爬取每篇文章的第一张图片

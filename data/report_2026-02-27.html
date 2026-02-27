@@ -1,165 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日新闻简报 | 2026-02-27</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container { max-width: 800px; margin: 0 auto; }
-        
-        /* 头部 */
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            color: white;
-        }
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .header .date { color: #888; font-size: 14px; }
-        
-        /* 标签导航 */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .tab {
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            color: #888;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            font-size: 14px;
-        }
-        .tab.active {
-            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
-            color: white;
-        }
-        
-        /* 新闻卡片 */
-        .news-section { display: none; }
-        .news-section.active, .news-section.show-all { display: block; }
-        
-        .news-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .news-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(0,210,255,0.3);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-        .news-card a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .news-card .category {
-            display: inline-block;
-            padding: 4px 12px;
-            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
-            border-radius: 12px;
-            font-size: 12px;
-            color: white;
-            margin-bottom: 12px;
-        }
-        .news-card .title {
-            font-size: 18px;
-            color: white;
-            line-height: 1.5;
-            margin-bottom: 8px;
-        }
-        .news-card .source {
-            font-size: 12px;
-            color: #666;
-        }
-        
-        /* 历史记录 */
-        .history-section {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .history-section h3 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-        .history-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 12px;
-        }
-        .history-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .history-item:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        .history-item a {
-            text-decoration: none;
-            color: #888;
-            font-size: 14px;
-        }
-        
-        /* 底部 */
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: #444;
-            font-size: 12px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>📰 每日新闻简报</h1>
-            <p class="date">2026-02-27 • 共 12 条</p>
-        </div>
-        
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('all')">全部</button>
-            <button class="tab" onclick="showTab('AI')">🤖 AI</button>
-            <button class="tab" onclick="showTab('科技')">💻 科技</button>
-            <button class="tab" onclick="showTab('创投')">💰 创投</button>
-        </div>
-        
-        <div id="news-container">
-            <div class="news-section show-all" data-category="AI"><h2 style="color:white;margin:20px 0">🤖 AI & 大模型</h2><div class="news-card">
+<html><head><meta charset="UTF-8"><title>每日新闻简报</title>
+<style>body{font-family:sans-serif;background:#1a1a2e;color:#fff;padding:20px}
+.news-card{background:rgba(255,255,255,0.1);margin:10px 0;padding:15px;border-radius:10px}
+.category{background:linear-gradient(90deg,#00d2ff,#3a7bd5);padding:3px 10px;border-radius:10px;font-size:12px}
+a{color:#00d2ff}</style></head><body>
+<h1>📰 每日新闻简报 | 2026-02-27</h1>
+<div class="news-section show-all" data-category="AI"><h2 style="color:white;margin:20px 0">🤖 AI & 大模型</h2><div class="news-card">
                     <a href="" target="_blank">
                         <span class="category">AI</span>
-                        <div class="title">抖音上线长图文功能，由AI驱动内容创作，扶持深度内容。</div>
+                        <div class="title">抖音上线长图文功能，用AI辅助创作，并扶持优质内容。</div>
                         <div class="source"></div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3700919151538052?f=rss" target="_blank">
                         <span class="category">AI</span>
                         <div class="title">具身智能公司“中科第五纪”获数亿元融资，为宇树机器人提供“大脑”。</div>
+                        <div class="source">36Kr科技</div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3701135795498882?f=rss" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">研究称AI资本支出贡献了美国第四季度近五分之一的GDP增幅。</div>
                         <div class="source">36Kr科技</div>
                     </a>
                 </div><div class="news-card">
@@ -171,93 +32,38 @@
                 </div><div class="news-card">
                     <a href="http://www.cyzone.cn/article/825160.html" target="_blank">
                         <span class="category">AI</span>
-                        <div class="title">具身智能企业“千寻智能”完成近20亿元融资，云锋基金、红杉等参投。</div>
+                        <div class="title">具身智能企业“千寻智能”完成近20亿元融资，云锋基金、红杉中国等参投。</div>
                         <div class="source">创业邦</div>
-                    </a>
-                </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701042411663236?f=rss" target="_blank">
-                        <span class="category">AI</span>
-                        <div class="title">豆包手机回应安全漏洞传闻，称已升级防护并谴责黑公关行为。</div>
-                        <div class="source">36Kr科技</div>
                     </a>
                 </div></div><div class="news-section show-all" data-category="科技"><h2 style="color:white;margin:20px 0">💻 科技前沿</h2><div class="news-card">
                     <a href="https://36kr.com/p/3700876701642374?f=rss" target="_blank">
                         <span class="category">科技</span>
-                        <div class="title">高精度金属3D打印公司“云耀深维”连融两轮，用于技术研发与产能提升。</div>
-                        <div class="source">36Kr科技</div>
-                    </a>
-                </div><div class="news-card">
-                    <a href="https://36kr.com/newsflashes/3701040036851585?f=rss" target="_blank">
-                        <span class="category">科技</span>
-                        <div class="title">字节跳动旗下懂车帝据悉正考虑在香港进行IPO。</div>
+                        <div class="title">高精度金属3D打印公司“云耀深维”连融两轮，去年出货10万件。</div>
                         <div class="source">36Kr科技</div>
                     </a>
                 </div><div class="news-card">
                     <a href="https://36kr.com/p/3699924181134984?f=rss" target="_blank">
                         <span class="category">科技</span>
-                        <div class="title">魅族手机业务被曝实质性停摆，预计将于3月正式退市。</div>
+                        <div class="title">英伟达CEO黄仁勋称，年内将寻找时机进行资本运作和战略投资。</div>
                         <div class="source">36Kr科技</div>
-                    </a>
-                </div></div><div class="news-section show-all" data-category="创投"><h2 style="color:white;margin:20px 0">💰 创投动态</h2><div class="news-card">
-                    <a href="" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">携程集团总裁范敏、董事季琦双双辞职，公司任命新独立董事。</div>
-                        <div class="source"></div>
                     </a>
                 </div><div class="news-card">
                     <a href="" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">刘强东创立游艇品牌“Sea Expandary”，已与深圳、珠海政府签约。</div>
+                        <span class="category">科技</span>
+                        <div class="title">携程2025年业绩公布，净收入624亿元，显示平台角色深度转变。</div>
                         <div class="source"></div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="https://36kr.com/newsflashes/3701119798521734?f=rss" target="_blank">
+                        <span class="category">科技</span>
+                        <div class="title">中共中央政治局会议：实施更加积极有为的宏观政策，持续扩大内需。</div>
+                        <div class="source">36Kr科技</div>
                     </a>
                 </div><div class="news-card">
                     <a href="http://" target="_blank">
-                        <span class="category">创投</span>
+                        <span class="category">科技</span>
                         <div class="title">云南省国有资本运营公司增资至199亿元，增幅约12%。</div>
                         <div class="source">创业邦</div>
                     </a>
-                </div><div class="news-card">
-                    <a href="http://" target="_blank">
-                        <span class="category">创投</span>
-                        <div class="title">2026电影经济促进年启动，全年预计投放不低于300亿元消费信贷。</div>
-                        <div class="source">创业邦</div>
-                    </a>
                 </div></div>
-        </div>
-        
-        <div class="history-section">
-            <h3>📚 历史消息</h3>
-            <div class="history-list">
-                <p>历史功能开发中...</p>
-            </div>
-        </div>
-        
-        <div class="footer">
-            🤖 Powered by DeepSeek • 自动生成
-        </div>
-    </div>
-    
-    <script>
-        function showTab(category) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            document.querySelectorAll('.news-section').forEach(s => {
-                if (category === 'all') {
-                    s.classList.add('show-all');
-                } else {
-                    s.classList.remove('show-all');
-                    s.style.display = s.dataset.category === category ? 'block' : 'none';
-                }
-            });
-        }
-        
-        // 初始化：默认显示全部
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.news-section').forEach(s => {
-                s.classList.add('show-all');
-            });
-        });
-    </script>
-</body>
-</html>
+</body></html>
