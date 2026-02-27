@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日新闻简报 | 2026-02-27</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        /* 头部 */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .date { color: #888; font-size: 14px; }
+        
+        /* 标签导航 */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 14px;
+        }
+        .tab.active {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: white;
+        }
+        
+        /* 新闻卡片 */
+        .news-section { display: none; }
+        .news-section.active, .news-section.show-all { display: block; }
+        
+        .news-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .news-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0,210,255,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .news-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .news-card .category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            border-radius: 12px;
+            font-size: 12px;
+            color: white;
+            margin-bottom: 12px;
+        }
+        .news-card .title {
+            font-size: 18px;
+            color: white;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .news-card .source {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* 历史记录 */
+        .history-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .history-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .history-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+        .history-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .history-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .history-item a {
+            text-decoration: none;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #444;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 每日新闻简报</h1>
+            <p class="date">2026-02-27 • 共 6 条</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('all')">全部</button>
+            <button class="tab" onclick="showTab('AI')">🤖 AI</button>
+            <button class="tab" onclick="showTab('科技')">💻 科技</button>
+            <button class="tab" onclick="showTab('创投')">💰 创投</button>
+        </div>
+        
+        <div id="news-container">
+            <div class="news-section show-all" data-category="AI"><h2 style="color:white;margin:20px 0">🤖 AI & 大模型</h2><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/824599.html" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">智平方完成超10亿元B轮融资，估值超百亿，成具身智能头部企业。</div>
+                        <div class="source">创业邦</div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://www.cyzone.cn/article/825160.html" target="_blank">
+                        <span class="category">AI</span>
+                        <div class="title">千寻智能完成近20亿元融资，云锋基金、红杉中国等多家头部机构入局。</div>
+                        <div class="source">创业邦</div>
+                    </a>
+                </div></div><div class="news-section show-all" data-category="创投"><h2 style="color:white;margin:20px 0">💰 创投动态</h2><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">携程高管变动：范敏辞任董事兼总裁，季琦辞任董事，新增两名独董。</div>
+                        <div class="source">创业邦</div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">云南省国有资本运营公司注册资本增至约199亿元，增幅约12%。</div>
+                        <div class="source">创业邦</div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">小米起诉自媒体索赔500万，蔚来回应称账号主体与李斌已无关联。</div>
+                        <div class="source">创业邦</div>
+                    </a>
+                </div><div class="news-card">
+                    <a href="http://" target="_blank">
+                        <span class="category">创投</span>
+                        <div class="title">刘强东创立游艇品牌Sea Expandary，关联公司已与深珠政府签约。</div>
+                        <div class="source">创业邦</div>
+                    </a>
+                </div></div>
+        </div>
+        
+        <div class="history-section">
+            <h3>📚 历史消息</h3>
+            <div class="history-list">
+                <p>历史功能开发中...</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            🤖 Powered by DeepSeek • 自动生成
+        </div>
+    </div>
+    
+    <script>
+        function showTab(category) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.news-section').forEach(s => {
+                if (category === 'all') {
+                    s.classList.add('show-all');
+                } else {
+                    s.classList.remove('show-all');
+                    s.style.display = s.dataset.category === category ? 'block' : 'none';
+                }
+            });
+        }
+        
+        // 初始化：默认显示全部
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.news-section').forEach(s => {
+                s.classList.add('show-all');
+            });
+        });
+    </script>
+</body>
+</html>
